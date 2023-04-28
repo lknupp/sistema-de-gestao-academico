@@ -20,11 +20,13 @@
 
 + Oferta(**id_oferta**, **semestre**, **ano**, **id_disciplina**, id_sala, id_periodo);
 
-+ Periodo(**id_periodo**, _horario_)
++ Periodo(**id_periodo**);
+
++ Horario(**id_horario**, id_periodo, dia, hora_inicial, hora_final);
 
 + Sala(**id_sala**, predio, sala, capacidade);
 
-+ ModeloEquipamento(**id_modelo**, nome, marca)
++ ModeloEquipamento(**id_modelo**, nome, marca);
 
-+ Equipamento(**id_equipamento**, id_modelo, id_sala, data_aquisicao);
++ Equipamento(**id_equipamento**, id_modelo, id_sala, estado, data_aquisicao);
 
