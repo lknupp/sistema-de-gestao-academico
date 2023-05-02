@@ -21,12 +21,20 @@ package "persistence" {
     }
 
     Pessoa <|-- Professor
-    class Professor {
+    class Professor (
         - dataContratacao: Date
         - departamento: String
         - salario: float
         - idCurso: int
-    }
+        - getIdCurso(): int
+        - setIdCurso(id: int): boolean
+        - getSalario(): float
+        - setSalario(salario: float): boolean
+        - getDepartamento(): String
+        - setDepartamento(departamento: String): boolean
+        - getDataContratacao(): Date
+        - setDataContratacao(data: Date): boolean
+    )
 
     class Endereco {
         - idEndereco: int
@@ -45,29 +53,6 @@ package "persistence" {
         - numTelefone
     }
 
-    class Sala (
-        - idSala: int
-        - predio: String
-        - sala: String
-        - capacidade: int
-    )
-
-    class ModeloEquipamento(
-        - idModelo: int
-        - nome: String
-        - marca String
-    )
-
-
-    ModeloEquipamento <|-- Equipamento
-    class Equipamento (
-        - idEquipamento: int
-        - idModelo: int
-        - idSala: int
-        - estado: String
-        - data_aquisicao: Date
-    )
-
     class Disciplina {
         - idDisciplina: int
         - idCurso: int
@@ -84,6 +69,49 @@ package "persistence" {
         - horaFinal: String
     }
 
+    class Sala (
+        - idSala: int
+        - predio: String
+        - sala: String
+        - capacidade: int
+        - getIdSala(): int
+        - setIdSala(id: int): boolean
+        - getPredio(): String
+        - setPredio(predio: String): boolean
+        - getSala(): String
+        - setSala(sala: String): boolean
+        - getCapacidade(): int
+        - setCapacidade(capacidade: int): boolean
+    )
+
+    class ModeloEquipamento(
+        - idModelo: int
+        - nome: String
+        - marca String
+        - getIdModelo(): int
+        - setIdModelo(id: int): boolean
+        - getNome(): String
+        - setNome(nome: String): boolean
+        - getMarca(): String
+        - setMarca(marca: String): boolean
+    )
+
+    ModeloEquipamento <|-- Equipamento
+    class Equipamento (
+        - idEquipamento: int
+        - idModelo: int
+        - idSala: int
+        - estado: String
+        - data_aquisicao: Date
+        - getIdEquipamento(): int
+        - setIdEquipamento(id: int): boolean
+        - getIdModelo(): int
+        - setIdModelo(id: int): boolean
+        - getIdSala(): int
+        - setIdSala(id: int): boolean
+        - getDataAquisicao(): Date
+        - setDataAquisicao(data: Date): boolean
+    )
 }
 
 @enduml
