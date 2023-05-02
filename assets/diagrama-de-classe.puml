@@ -21,11 +21,12 @@ package "persistence" {
     }
 
     Pessoa <|-- Professor
-    class Professor (
+    class Professor {
         - dataContratacao: Date
         - departamento: String
         - salario: float
         - idCurso: int
+
         - getIdCurso(): int
         - setIdCurso(id: int): boolean
         - getSalario(): float
@@ -34,7 +35,7 @@ package "persistence" {
         - setDepartamento(departamento: String): boolean
         - getDataContratacao(): Date
         - setDataContratacao(data: Date): boolean
-    )
+    }
 
     class Endereco {
         - idEndereco: int
@@ -69,7 +70,7 @@ package "persistence" {
         - horaFinal: String
     }
 
-    class Sala (
+    class Sala {
         - idSala: int
         - predio: String
         - sala: String
@@ -82,9 +83,9 @@ package "persistence" {
         - setSala(sala: String): boolean
         - getCapacidade(): int
         - setCapacidade(capacidade: int): boolean
-    )
+    }
 
-    class ModeloEquipamento(
+    class ModeloEquipamento {
         - idModelo: int
         - nome: String
         - marca String
@@ -94,10 +95,10 @@ package "persistence" {
         - setNome(nome: String): boolean
         - getMarca(): String
         - setMarca(marca: String): boolean
-    )
+    }
 
     ModeloEquipamento <|-- Equipamento
-    class Equipamento (
+    class Equipamento {
         - idEquipamento: int
         - idModelo: int
         - idSala: int
@@ -111,7 +112,7 @@ package "persistence" {
         - setIdSala(id: int): boolean
         - getDataAquisicao(): Date
         - setDataAquisicao(data: Date): boolean
-    )
+    }
 }
 
 @enduml
