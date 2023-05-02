@@ -1,0 +1,89 @@
+@startuml
+
+package "persistence" {
+
+    class Pessoa {
+        - idPessoa: int
+        - nome: String
+        - sobrenome: String
+        - cpf: String
+        - endereco: Endereco
+        - telefone: Telefone
+        - sexo: String
+        - raca: String
+    }
+
+    Pessoa <|-- Aluno
+    class Aluno {
+        - idCurso: int
+        - dataIngresso: Date
+
+    }
+
+    Pessoa <|-- Professor
+    class Professor {
+        - dataContratacao: Date
+        - departamento: String
+        - salario: float
+        - idCurso: int
+    }
+
+    class Endereco {
+        - idEndereco: int
+        - logradouro: String
+        - local: String
+        - numero: int
+        - cep: String
+        - tipo: String
+    }
+
+    class Telefone {
+        - idTelefone: int
+        - idPessoa: int
+        - cod_pais: int
+        - ddd: String
+        - numTelefone
+    }
+
+    class Sala (
+        - idSala: int
+        - predio: String
+        - sala: String
+        - capacidade: int
+    )
+
+    class ModeloEquipamento(
+        - idModelo: int
+        - nome: String
+        - marca String
+    )
+
+
+    ModeloEquipamento <|-- Equipamento
+    class Equipamento (
+        - idEquipamento: int
+        - idModelo: int
+        - idSala: int
+        - estado: String
+        - data_aquisicao: Date
+    )
+
+    class Disciplina {
+        - idDisciplina: int
+        - idCurso: int
+        - nome: String
+        - descricao: String
+        - preRequisito: List < Disciplina >
+    }
+
+    class Horario {
+        - idHorario: int
+        - idPeriodo: int
+        - dia: String
+        - horaInicial: String
+        - horaFinal: String
+    }
+
+}
+
+@enduml
