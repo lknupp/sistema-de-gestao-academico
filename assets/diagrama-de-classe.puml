@@ -8,9 +8,26 @@ package "persistence" {
         - sobrenome: String
         - cpf: String
         - endereco: Endereco
-        - telefone: Telefone
+        - telefone: List<Telefone>
         - sexo: String
         - raca: String
+
+        getIdPessoa(): int
+        setIdPessoa(id: int): boolean
+        getNome(): String
+        setNome(nome: String): boolean
+        getSobrenome(): String
+        setSobrenome(sobrenome: String): boolean
+        getCpf(): String
+        setCpf(cpf: String): boolean
+        getEndereco(): Endereco
+        setEndereco(endereco: Endereco): boolean
+        getTelefones(): List<Telefone>
+        setTelefones(telefones: List<Telefone>): boolean
+        getSexo(): String
+        setSexo(sexo: String): boolean
+        getRaca(): String
+        setRaca(raca: String): boolean
     }
 
     Pessoa <|-- Aluno
@@ -18,6 +35,10 @@ package "persistence" {
         - idCurso: int
         - dataIngresso: Date
 
+        getIdCurso(): int
+        setIdCurso(id: int): boolean
+        getDataIngresso(): Date
+        setDataIngresso(data: Date): boolean
     }
 
     Pessoa <|-- Professor
@@ -44,6 +65,19 @@ package "persistence" {
         - numero: int
         - cep: String
         - tipo: String
+
+        getIdEndereco(): int
+        setIdEndereco(id: int): boolean
+        getLogradouro(): String
+        setLogradouro(logradouro: String): boolean
+        getLocal(): String
+        setLocal(local: String): boolean
+        getNumero(): int
+        setNumero(numero: int): boolean
+        getCep(): String
+        setCep(cep: String): boolean
+        getTipo(): String
+        setTipo(tipo: String): boolean
     }
 
     class Telefone {
@@ -52,6 +86,17 @@ package "persistence" {
         - cod_pais: int
         - ddd: String
         - numTelefone
+
+        getIdTelefone(): int
+        setIdTelefone(id: int): boolean
+        getIdPessoa(): int
+        setIdPessoa(id: int): boolean
+        getCodPais(): int
+        setCodPais(codPais: int): boolean
+        getDdd(): String
+        setDdd(ddd: String): boolean
+        getNumTelefone(): String
+        setNumTelefone(numTelefone: String): boolean
     }
 
     class Disciplina {
@@ -60,6 +105,17 @@ package "persistence" {
         - nome: String
         - descricao: String
         - preRequisito: List < Disciplina >
+
+        getIdDisciplina(): int
+        setIdDisciplina(id: int): boolean
+        getIdCurso(): int
+        setIdCurso(id: int): boolean
+        getNome(): String
+        setNome(nome: String): boolean
+        getDescricao(): String
+        setDescricao(descricao: String): boolean
+        getPreRequisito(): List<Disciplina>
+        setPreRequisito(preRequisito: List<Disciplina>): boolean
     }
 
     class Horario {
@@ -68,6 +124,17 @@ package "persistence" {
         - dia: String
         - horaInicial: String
         - horaFinal: String
+
+        getIdHorario(): int
+        setIdHorario(id: int): boolean
+        getIdPeriodo(): int
+        setIdPeriodo(id: int): boolean
+        getDia(): String
+        setDia(dia: String): boolean
+        getHoraInicial(): String
+        setHoraInicial(horaInicial: String): boolean
+        getHoraFinal(): String
+        setHoraFinal(horaFinal: String): boolean
     }
 
     class Sala {
@@ -75,26 +142,28 @@ package "persistence" {
         - predio: String
         - sala: String
         - capacidade: int
-        - getIdSala(): int
-        - setIdSala(id: int): boolean
-        - getPredio(): String
-        - setPredio(predio: String): boolean
-        - getSala(): String
-        - setSala(sala: String): boolean
-        - getCapacidade(): int
-        - setCapacidade(capacidade: int): boolean
+
+        getIdSala(): int
+        setIdSala(id: int): boolean
+        getPredio(): String
+        setPredio(predio: String): boolean
+        getSala(): String
+        setSala(sala: String): boolean
+        getCapacidade(): int
+        setCapacidade(capacidade: int): boolean
     }
 
     class ModeloEquipamento {
         - idModelo: int
         - nome: String
         - marca String
-        - getIdModelo(): int
-        - setIdModelo(id: int): boolean
-        - getNome(): String
-        - setNome(nome: String): boolean
-        - getMarca(): String
-        - setMarca(marca: String): boolean
+
+        getIdModelo(): int
+        setIdModelo(id: int): boolean
+        getNome(): String
+        setNome(nome: String): boolean
+        getMarca(): String
+        setMarca(marca: String): boolean
     }
 
     ModeloEquipamento <|-- Equipamento
@@ -104,14 +173,15 @@ package "persistence" {
         - idSala: int
         - estado: String
         - data_aquisicao: Date
-        - getIdEquipamento(): int
-        - setIdEquipamento(id: int): boolean
-        - getIdModelo(): int
-        - setIdModelo(id: int): boolean
-        - getIdSala(): int
-        - setIdSala(id: int): boolean
-        - getDataAquisicao(): Date
-        - setDataAquisicao(data: Date): boolean
+        
+        getIdEquipamento(): int
+        setIdEquipamento(id: int): boolean
+        getIdModelo(): int
+        setIdModelo(id: int): boolean
+        getIdSala(): int
+        setIdSala(id: int): boolean
+        getDataAquisicao(): Date
+        setDataAquisicao(data: Date): boolean
     }
 }
 
