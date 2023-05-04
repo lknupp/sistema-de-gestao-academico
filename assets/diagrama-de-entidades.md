@@ -12,7 +12,7 @@
 
 [//]: <> (Parte de matheus a seguir)
 
-+ Curso(**id_curso**, campus);
++ Curso(**id_curso**, nome, campus);
 
 + Disciplina(**id_disciplina**, id_curso, nome, descricao);
 
