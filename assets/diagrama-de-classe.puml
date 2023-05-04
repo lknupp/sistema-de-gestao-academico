@@ -1,4 +1,74 @@
-@startuml
+@startuml trabalho_engenharia
+
+package "DAO" {
+        class PessoaDAO {
+            - conexao: Connection
+    
+            + inserir(pessoa: Pessoa): boolean
+            + atualizar(pessoa: Pessoa): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Pessoa
+            + buscarTodos(): List<Pessoa>
+        }
+    
+        PessoaDAO <|-- AlunoDAO
+        class AlunoDAO {
+            + inserir(aluno: Aluno): boolean
+            + atualizar(aluno: Aluno): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Aluno
+            + buscarTodos(): List<Aluno>
+        }
+    
+        PessoaDAO <|-- ProfessorDAO
+        class ProfessorDAO {
+            + inserir(professor: Professor): boolean
+            + atualizar(professor: Professor): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Professor
+            + buscarTodos(): List<Professor>
+        }
+    
+        class EnderecoDAO {
+            + inserir(endereco: Endereco): boolean
+            + atualizar(endereco: Endereco): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Endereco
+            + buscarTodos(): List<Endereco>
+        }
+    
+        class TelefoneDAO {
+            + inserir(telefone: Telefone): boolean
+            + atualizar(telefone: Telefone): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Telefone
+            + buscarTodos(): List<Telefone>
+        }
+    
+        class DisciplinaDAO {
+            + inserir(disciplina: Disciplina): boolean
+            + atualizar(disciplina: Disciplina): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Disciplina
+            + buscarTodos(): List<Disciplina>
+        }
+    
+        class HorarioDAO {
+            + inserir(horario: Horario): boolean
+            + atualizar(horario: Horario): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Horario
+            + buscarTodos(): List<Horario>
+        }
+    
+        class SalaDAO {
+            + inserir(sala: Sala): boolean
+            + atualizar(sala: Sala): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Sala
+            + buscarTodos(): List<Sala>
+        }
+}
 
 package "persistence" {
 
@@ -12,22 +82,22 @@ package "persistence" {
         - sexo: String
         - raca: String
 
-        getIdPessoa(): int
-        setIdPessoa(id: int): boolean
-        getNome(): String
-        setNome(nome: String): boolean
-        getSobrenome(): String
-        setSobrenome(sobrenome: String): boolean
-        getCpf(): String
-        setCpf(cpf: String): boolean
-        getEndereco(): Endereco
-        setEndereco(endereco: Endereco): boolean
-        getTelefones(): List<Telefone>
-        setTelefones(telefones: List<Telefone>): boolean
-        getSexo(): String
-        setSexo(sexo: String): boolean
-        getRaca(): String
-        setRaca(raca: String): boolean
+        + getIdPessoa(): int
+        + setIdPessoa(id: int): boolean
+        + getNome(): String
+        + setNome(nome: String): boolean
+        + getSobrenome(): String
+        + setSobrenome(sobrenome: String): boolean
+        + getCpf(): String
+        + setCpf(cpf: String): boolean
+        + getEndereco(): Endereco
+        + setEndereco(endereco: Endereco): boolean
+        + getTelefones(): List<Telefone>
+        + setTelefones(telefones: List<Telefone>): boolean
+        + getSexo(): String
+        + setSexo(sexo: String): boolean
+        + getRaca(): String
+        + setRaca(raca: String): boolean
     }
 
     Pessoa <|-- Aluno
@@ -35,10 +105,10 @@ package "persistence" {
         - idCurso: int
         - dataIngresso: Date
 
-        getIdCurso(): int
-        setIdCurso(id: int): boolean
-        getDataIngresso(): Date
-        setDataIngresso(data: Date): boolean
+        + getIdCurso(): int
+        + setIdCurso(id: int): boolean
+        + getDataIngresso(): Date
+        + setDataIngresso(data: Date): boolean
     }
 
     Pessoa <|-- Professor
@@ -48,14 +118,14 @@ package "persistence" {
         - salario: float
         - idCurso: int
 
-        - getIdCurso(): int
-        - setIdCurso(id: int): boolean
-        - getSalario(): float
-        - setSalario(salario: float): boolean
-        - getDepartamento(): String
-        - setDepartamento(departamento: String): boolean
-        - getDataContratacao(): Date
-        - setDataContratacao(data: Date): boolean
+        + getIdCurso(): int
+        + setIdCurso(id: int): boolean
+        + getSalario(): float
+        + setSalario(salario: float): boolean
+        + getDepartamento(): String
+        + setDepartamento(departamento: String): boolean
+        + getDataContratacao(): Date
+        + setDataContratacao(data: Date): boolean
     }
 
     class Endereco {
@@ -66,18 +136,18 @@ package "persistence" {
         - cep: String
         - tipo: String
 
-        getIdEndereco(): int
-        setIdEndereco(id: int): boolean
-        getLogradouro(): String
-        setLogradouro(logradouro: String): boolean
-        getLocal(): String
-        setLocal(local: String): boolean
-        getNumero(): int
-        setNumero(numero: int): boolean
-        getCep(): String
-        setCep(cep: String): boolean
-        getTipo(): String
-        setTipo(tipo: String): boolean
+        + getIdEndereco(): int
+        + setIdEndereco(id: int): boolean
+        + getLogradouro(): String
+        + setLogradouro(logradouro: String): boolean
+        + getLocal(): String
+        + setLocal(local: String): boolean
+        + getNumero(): int
+        + setNumero(numero: int): boolean
+        + getCep(): String
+        + setCep(cep: String): boolean
+        + getTipo(): String
+        + setTipo(tipo: String): boolean
     }
 
     class Telefone {
@@ -87,16 +157,16 @@ package "persistence" {
         - ddd: String
         - numTelefone
 
-        getIdTelefone(): int
-        setIdTelefone(id: int): boolean
-        getIdPessoa(): int
-        setIdPessoa(id: int): boolean
-        getCodPais(): int
-        setCodPais(codPais: int): boolean
-        getDdd(): String
-        setDdd(ddd: String): boolean
-        getNumTelefone(): String
-        setNumTelefone(numTelefone: String): boolean
+        + getIdTelefone(): int
+        + setIdTelefone(id: int): boolean
+        + getIdPessoa(): int
+        + setIdPessoa(id: int): boolean
+        + getCodPais(): int
+        + setCodPais(codPais: int): boolean
+        + getDdd(): String
+        + setDdd(ddd: String): boolean
+        + getNumTelefone(): String
+        + setNumTelefone(numTelefone: String): boolean
     }
 
     class Disciplina {
@@ -106,16 +176,16 @@ package "persistence" {
         - descricao: String
         - preRequisito: List < Disciplina >
 
-        getIdDisciplina(): int
-        setIdDisciplina(id: int): boolean
-        getIdCurso(): int
-        setIdCurso(id: int): boolean
-        getNome(): String
-        setNome(nome: String): boolean
-        getDescricao(): String
-        setDescricao(descricao: String): boolean
-        getPreRequisito(): List<Disciplina>
-        setPreRequisito(preRequisito: List<Disciplina>): boolean
+        + getIdDisciplina(): int
+        + setIdDisciplina(id: int): boolean
+        + getIdCurso(): int
+        + setIdCurso(id: int): boolean
+        + getNome(): String
+        + setNome(nome: String): boolean
+        + getDescricao(): String
+        + setDescricao(descricao: String): boolean
+        + getPreRequisito(): List<Disciplina>
+        + setPreRequisito(preRequisito: List<Disciplina>): boolean
     }
 
     class Horario {
@@ -125,16 +195,16 @@ package "persistence" {
         - horaInicial: String
         - horaFinal: String
 
-        getIdHorario(): int
-        setIdHorario(id: int): boolean
-        getIdPeriodo(): int
-        setIdPeriodo(id: int): boolean
-        getDia(): String
-        setDia(dia: String): boolean
-        getHoraInicial(): String
-        setHoraInicial(horaInicial: String): boolean
-        getHoraFinal(): String
-        setHoraFinal(horaFinal: String): boolean
+        + getIdHorario(): int
+        + setIdHorario(id: int): boolean
+        + getIdPeriodo(): int
+        + setIdPeriodo(id: int): boolean
+        + getDia(): String
+        + setDia(dia: String): boolean
+        + getHoraInicial(): String
+        + setHoraInicial(horaInicial: String): boolean
+        + getHoraFinal(): String
+        + setHoraFinal(horaFinal: String): boolean
     }
 
     class Sala {
@@ -143,14 +213,14 @@ package "persistence" {
         - sala: String
         - capacidade: int
 
-        getIdSala(): int
-        setIdSala(id: int): boolean
-        getPredio(): String
-        setPredio(predio: String): boolean
-        getSala(): String
-        setSala(sala: String): boolean
-        getCapacidade(): int
-        setCapacidade(capacidade: int): boolean
+        + getIdSala(): int
+        + setIdSala(id: int): boolean
+        + getPredio(): String
+        + setPredio(predio: String): boolean
+        + getSala(): String
+        + setSala(sala: String): boolean
+        + getCapacidade(): int
+        + setCapacidade(capacidade: int): boolean
     }
 
     class ModeloEquipamento {
@@ -158,12 +228,12 @@ package "persistence" {
         - nome: String
         - marca String
 
-        getIdModelo(): int
-        setIdModelo(id: int): boolean
-        getNome(): String
-        setNome(nome: String): boolean
-        getMarca(): String
-        setMarca(marca: String): boolean
+        + getIdModelo(): int
+        + setIdModelo(id: int): boolean
+        + getNome(): String
+        + setNome(nome: String): boolean
+        + getMarca(): String
+        + setMarca(marca: String): boolean
     }
 
     ModeloEquipamento <|-- Equipamento
@@ -174,14 +244,14 @@ package "persistence" {
         - estado: String
         - data_aquisicao: Date
         
-        getIdEquipamento(): int
-        setIdEquipamento(id: int): boolean
-        getIdModelo(): int
-        setIdModelo(id: int): boolean
-        getIdSala(): int
-        setIdSala(id: int): boolean
-        getDataAquisicao(): Date
-        setDataAquisicao(data: Date): boolean
+        + getIdEquipamento(): int
+        + setIdEquipamento(id: int): boolean
+        + getIdModelo(): int
+        + setIdModelo(id: int): boolean
+        + getIdSala(): int
+        + setIdSala(id: int): boolean
+        + getDataAquisicao(): Date
+        + setDataAquisicao(data: Date): boolean
     }
 }
 
