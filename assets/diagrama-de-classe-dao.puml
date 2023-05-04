@@ -1,0 +1,73 @@
+@startuml trabalho_engenharia_dao
+
+package "DAO" {
+        class PessoaDAO {
+            - conexao: Connection
+    
+            + inserir(pessoa: Pessoa): boolean
+            + atualizar(pessoa: Pessoa): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Pessoa
+            + buscarTodos(): List<Pessoa>
+        }
+    
+        PessoaDAO <|-- AlunoDAO
+        class AlunoDAO {
+            + inserir(aluno: Aluno): boolean
+            + atualizar(aluno: Aluno): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Aluno
+            + buscarTodos(): List<Aluno>
+        }
+    
+        PessoaDAO <|-- ProfessorDAO
+        class ProfessorDAO {
+            + inserir(professor: Professor): boolean
+            + atualizar(professor: Professor): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Professor
+            + buscarTodos(): List<Professor>
+        }
+    
+        class EnderecoDAO {
+            + inserir(endereco: Endereco): boolean
+            + atualizar(endereco: Endereco): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Endereco
+            + buscarTodos(): List<Endereco>
+        }
+    
+        class TelefoneDAO {
+            + inserir(telefone: Telefone): boolean
+            + atualizar(telefone: Telefone): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Telefone
+            + buscarTodos(): List<Telefone>
+        }
+    
+        class DisciplinaDAO {
+            + inserir(disciplina: Disciplina): boolean
+            + atualizar(disciplina: Disciplina): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Disciplina
+            + buscarTodos(): List<Disciplina>
+        }
+    
+        class HorarioDAO {
+            + inserir(horario: Horario): boolean
+            + atualizar(horario: Horario): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Horario
+            + buscarTodos(): List<Horario>
+        }
+    
+        class SalaDAO {
+            + inserir(sala: Sala): boolean
+            + atualizar(sala: Sala): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Sala
+            + buscarTodos(): List<Sala>
+        }
+}
+
+@enduml
