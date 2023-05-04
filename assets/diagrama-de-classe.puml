@@ -1,77 +1,8 @@
-@startuml trabalho_engenharia
-
-package "DAO" {
-        class PessoaDAO {
-            - conexao: Connection
-    
-            + inserir(pessoa: Pessoa): boolean
-            + atualizar(pessoa: Pessoa): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Pessoa
-            + buscarTodos(): List<Pessoa>
-        }
-    
-        PessoaDAO <|-- AlunoDAO
-        class AlunoDAO {
-            + inserir(aluno: Aluno): boolean
-            + atualizar(aluno: Aluno): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Aluno
-            + buscarTodos(): List<Aluno>
-        }
-    
-        PessoaDAO <|-- ProfessorDAO
-        class ProfessorDAO {
-            + inserir(professor: Professor): boolean
-            + atualizar(professor: Professor): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Professor
-            + buscarTodos(): List<Professor>
-        }
-    
-        class EnderecoDAO {
-            + inserir(endereco: Endereco): boolean
-            + atualizar(endereco: Endereco): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Endereco
-            + buscarTodos(): List<Endereco>
-        }
-    
-        class TelefoneDAO {
-            + inserir(telefone: Telefone): boolean
-            + atualizar(telefone: Telefone): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Telefone
-            + buscarTodos(): List<Telefone>
-        }
-    
-        class DisciplinaDAO {
-            + inserir(disciplina: Disciplina): boolean
-            + atualizar(disciplina: Disciplina): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Disciplina
-            + buscarTodos(): List<Disciplina>
-        }
-    
-        class HorarioDAO {
-            + inserir(horario: Horario): boolean
-            + atualizar(horario: Horario): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Horario
-            + buscarTodos(): List<Horario>
-        }
-    
-        class SalaDAO {
-            + inserir(sala: Sala): boolean
-            + atualizar(sala: Sala): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Sala
-            + buscarTodos(): List<Sala>
-        }
-}
+@startuml trabalho_engenharia_persistence
 
 package "persistence" {
-
+    Pessoa o-- Telefone
+    Pessoa o-- Endereco
     class Pessoa {
         - idPessoa: int
         - nome: String
@@ -152,7 +83,6 @@ package "persistence" {
 
     class Telefone {
         - idTelefone: int
-        - idPessoa: int
         - cod_pais: int
         - ddd: String
         - numTelefone
@@ -168,12 +98,27 @@ package "persistence" {
         + getNumTelefone(): String
         + setNumTelefone(numTelefone: String): boolean
     }
-
-    class Disciplina {
-        - idDisciplina: int
+    class Curso{
         - idCurso: int
         - nome: String
+        - campus: String
+
+        + getIdCurso() : int
+        + setIdCurso(id: int): boolean
+        + getNomeCurso(): String
+        + setNomeCurso(nome: String): boolean
+        + getCampus(): String
+        + setCampus(campus: String): boolean
+
+    }
+
+    Disciplina o-- Curso
+    class Disciplina {
+        - idDisciplina: int
+        - curso: Curso
+        - nome: String
         - descricao: String
+        - horario: Horario
         - preRequisito: List < Disciplina >
 
         + getIdDisciplina(): int
@@ -184,13 +129,15 @@ package "persistence" {
         + setNome(nome: String): boolean
         + getDescricao(): String
         + setDescricao(descricao: String): boolean
+        + getHorario(): Horario
         + getPreRequisito(): List<Disciplina>
         + setPreRequisito(preRequisito: List<Disciplina>): boolean
     }
 
+    Horario o-- Periodo
     class Horario {
         - idHorario: int
-        - idPeriodo: int
+        - periodo: Periodo
         - dia: String
         - horaInicial: String
         - horaFinal: String
@@ -206,12 +153,14 @@ package "persistence" {
         + getHoraFinal(): String
         + setHoraFinal(horaFinal: String): boolean
     }
-
+    
+    Sala o-- Equipamento
     class Sala {
         - idSala: int
         - predio: String
         - sala: String
         - capacidade: int
+        - equipamentos: List < Equipamento >
 
         + getIdSala(): int
         + setIdSala(id: int): boolean
@@ -221,6 +170,8 @@ package "persistence" {
         + setSala(sala: String): boolean
         + getCapacidade(): int
         + setCapacidade(capacidade: int): boolean
+        + getEquipamentos(): List
+        + addEquipamento(equipamento: Equipamento): boolean
     }
 
     class ModeloEquipamento {
@@ -239,9 +190,7 @@ package "persistence" {
     ModeloEquipamento <|-- Equipamento
     class Equipamento {
         - idEquipamento: int
-        - idModelo: int
-        - idSala: int
-        - estado: String
+        - estado: enum
         - data_aquisicao: Date
         
         + getIdEquipamento(): int
@@ -253,6 +202,8 @@ package "persistence" {
         + getDataAquisicao(): Date
         + setDataAquisicao(data: Date): boolean
     }
+
+    
 }
 
 @enduml
