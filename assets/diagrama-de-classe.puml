@@ -1,8 +1,6 @@
 @startuml trabalho_engenharia_persistence
 
 package "persistence" {
-    Pessoa o-- Telefone
-    Pessoa o-- Endereco
     class Pessoa {
         - idPessoa: int
         - nome: String
@@ -32,25 +30,21 @@ package "persistence" {
     }
 
     Pessoa <|-- Aluno
+    Aluno --o Curso
     class Aluno {
-        - idCurso: int
         - dataIngresso: Date
 
-        + getIdCurso(): int
-        + setIdCurso(id: int): boolean
         + getDataIngresso(): Date
         + setDataIngresso(data: Date): boolean
     }
 
     Pessoa <|-- Professor
+    Professor --o Curso
     class Professor {
         - dataContratacao: Date
         - departamento: String
         - salario: float
-        - idCurso: int
 
-        + getIdCurso(): int
-        + setIdCurso(id: int): boolean
         + getSalario(): float
         + setSalario(salario: float): boolean
         + getDepartamento(): String
@@ -59,6 +53,7 @@ package "persistence" {
         + setDataContratacao(data: Date): boolean
     }
 
+    Pessoa o-- Endereco
     class Endereco {
         - idEndereco: int
         - logradouro: String
@@ -81,6 +76,7 @@ package "persistence" {
         + setTipo(tipo: String): boolean
     }
 
+    Pessoa o-- Telefone
     class Telefone {
         - idTelefone: int
         - cod_pais: int
@@ -89,8 +85,6 @@ package "persistence" {
 
         + getIdTelefone(): int
         + setIdTelefone(id: int): boolean
-        + getIdPessoa(): int
-        + setIdPessoa(id: int): boolean
         + getCodPais(): int
         + setCodPais(codPais: int): boolean
         + getDdd(): String
@@ -112,10 +106,9 @@ package "persistence" {
 
     }
 
-    Disciplina o-- Curso
+    Disciplina --o Curso
     class Disciplina {
         - idDisciplina: int
-        - curso: Curso
         - nome: String
         - descricao: String
         - horario: Horario
@@ -123,8 +116,6 @@ package "persistence" {
 
         + getIdDisciplina(): int
         + setIdDisciplina(id: int): boolean
-        + getIdCurso(): int
-        + setIdCurso(id: int): boolean
         + getNome(): String
         + setNome(nome: String): boolean
         + getDescricao(): String
