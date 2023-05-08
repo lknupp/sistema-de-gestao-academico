@@ -1,12 +1,13 @@
 @startuml trabalho_engenharia_persistence
 
 package "persistence" {
+    ' A classe Pessoa tem os métodos get e set para lista telefônica e
+    ' endereço, pois tais classes estão presentes na classe Pessoa, só
+    ' não estão presentes no diagrama pois a relação já indica a presença.
     class Pessoa {
         - nome: String
         - sobrenome: String
         - cpf: String
-        - endereco: Endereco
-        - telefone: List<Telefone>
         - sexo: String
         - raca: String
 
@@ -26,8 +27,17 @@ package "persistence" {
         + setRaca(raca: String): boolean
     }
 
+
+    '  Aluno herda da classe Pessoa
     Pessoa <|-- Aluno
-    Aluno --o Curso
+    ' A relação de aluno para curso é de 1 para muitos, pois um aluno pode
+    ' estar matriculado em mais de um curso. Já a relação de curso para aluno
+    ' é de 0 para muitos, pois um curso pode não ter nenhum aluno matriculado.
+    Aluno "1..*" -- "0..*" Curso
+    ' Um aluno pode estar em zero ou mais ofertas, porém uma oferta deve ter
+    ' pelo menos um aluno.
+    Aluno "0..*" -- "1..*" Oferta
+    (Aluno, Oferta) .. CursaOferta
     class Aluno {
         - dataIngresso: Date
         - dataNascimento: Date
@@ -38,8 +48,26 @@ package "persistence" {
         + setDataNascimento(data: Date): boolean
     }
 
+    class CursaOferta {
+        - nota: float
+        - presenca: float
+
+        + getNota(): float
+        + setNota(nota: float): boolean
+        + getPresenca(): float
+        + setPresenca(presenca: float): boolean
+    }
+
+    
+    ' Professor herda da classe Pessoa.
     Pessoa <|-- Professor
-    Professor --o Curso
+    ' A relação de professor para curso é de 1 para muitos, pois um professor
+    ' pode lecionar em mais de um curso. Já a relação de curso para professor
+    ' é de 0 para muitos, pois um curso pode não ter nenhum professor lecionando.
+    Professor "1..*" -- "0..*" Curso
+    ' Um professor pode lecionar zero ou mais ofertas, porém uma oferta só pode
+    ' ter um professor.
+    Professor "0..*" -- "1..1" Oferta
     class Professor {
         - dataContratacao: Date
         - departamento: String
@@ -53,8 +81,9 @@ package "persistence" {
         + setDataContratacao(data: Date): boolean
     }
 
-    Pessoa o-- Endereco
-    Curso o-- Endereco
+    ' Uma pessoa só pode ter um endereço, mas um endereço pode estar
+    ' associado a mais de uma pessoa.
+    Pessoa "1..1" -- "1..*" Endereco
     class Endereco {
         - logradouro: String
         - local: String
@@ -74,34 +103,36 @@ package "persistence" {
         + setTipo(tipo: String): boolean
     }
 
-    Pessoa o-- Telefone
+
+    ' A relação é simples, já que uma pessoa pode ter vários telefones,
+    ' mas um telefone pode ou não estar associado a uma pessoa.
+    Pessoa "1..*" -- "0..1" Telefone
     class Telefone {
         - cod_pais: int
-        - ddd: String
-        - number: String
+        - ddd: int
+        - number: int
 
         + getCodPais(): int
         + setCodPais(codPais: int): boolean
-        + getDdd(): String
-        + setDdd(ddd: String): boolean
-        + getNumber(): String
-        + setNumber(number: String): boolean
+        + getDdd(): int
+        + setDdd(ddd: int): boolean
+        + getNumber(): int
+        + setNumber(number: int): boolean
     }
 
     class Curso{
         - nome: String
         - campus: String
-        - endereco: Endereco
 
         + getNomeCurso(): String
         + setNomeCurso(nome: String): boolean
         + getCampus(): String
         + setCampus(campus: String): boolean
-        + getEndereco(): Endereco
-        + setEndereco(endereco: Endereco): boolean
     }
 
-    Disciplina --o Curso
+    ' A relação é de muitos para muitos para as duas classes. 
+    ' Dessa forma, não existe uma relação de agregação ou composição.
+    Disciplina "1..*" -- "1..*" Curso
     class Disciplina {
         - nome: String
         - descricao: String
@@ -115,9 +146,31 @@ package "persistence" {
         + addPreRequisito(preRequisito: Disciplina): boolean
     }
 
-    Horario o-- Periodo
+    ' Uma oferta só pode estar associada a uma disciplina, mas uma disciplina
+    ' pode ter várias ofertas. Da mesma forma, uma oferta só pode ser ministrada
+    ' em uma sala, mas uma sala pode ter várias ofertas durante os horários.
+    ' Além disso, Sala e Disciplina estão ímplicitos na classe Oferta, por isso
+    ' não estão presentes no diagrama.
+    Oferta "1..1" -- "1..*" Disciplina
+    Oferta "1..1" -- "1..*" Sala
+    class Oferta {
+        - semestre: enum
+        - ano: int
+
+        + getSemestre(): enum
+        + setSemestre(semestre: enum): boolean
+        + getAno(): int
+        + setAno(ano: int): boolean
+        + getSala(): Sala
+        + setSala(sala: Sala): boolean
+        + getDisciplina(): Disciplina
+        + setDisciplina(disciplina: Disciplina): boolean
+        + getPeriodo(): Periodo
+        + setPeriodo(periodo: Periodo): boolean
+    }
+
+    Horario "1..1" --o "1..*" Periodo
     class Horario {
-        - periodo: Periodo
         - dia: Date
         - horaInicial: Time
         - horaFinal: Time
@@ -131,13 +184,26 @@ package "persistence" {
         + getHoraFinal(): Time
         + setHoraFinal(horaFinal: Time): boolean
     }
-    
-    Sala o-- Equipamento
+
+    ' Periodo só vai existir a partir de uma oferta, por isso a relação
+    ' é de composição. Além disso, um período só pode estar associado a 
+    ' uma oferta, e uma oferta só pode ter um período.
+    Periodo --* Oferta
+    class Periodo {
+        - estado: enum
+
+        + getEstado(): enum
+        + setEstado(estado: enum): boolean
+        + getListHorarios(): List<Horario>
+        + addHorario(horario: Horario): boolean
+    }
+
+    ' Sala tem get e set para equipamentos, mas os atributos
+    ' estão implícitos na classe Sala.
     class Sala {
         - predio: String
         - sala: String
         - capacidade: int
-        - equipamentos: List < Equipamento >
 
         + getPredio(): String
         + setPredio(predio: String): boolean
@@ -149,6 +215,11 @@ package "persistence" {
         + addEquipamento(equipamento: Equipamento): boolean
     }
 
+    ' A relação é de agregação, visto que ModeloEquipamento complementa Equipamento.
+    ' Além disso, um modelo de equipamento pode estar associado 
+    ' a mais de um equipamento, mas um equipamento só pode estar
+    ' associado a um modelo de equipamento.
+    ModeloEquipamento "0..*" --o "1..1" Equipamento
     class ModeloEquipamento {
         - nome: String
         - marca String
@@ -159,7 +230,9 @@ package "persistence" {
         + setMarca(marca: String): boolean
     }
 
-    ModeloEquipamento <|-- Equipamento
+    ' Um equipamento só pode estar em uma sala. Porém, uma sala pode ter
+    ' vários equipamentos.
+    Equipamento "1..1" -- "1..*" Sala
     class Equipamento {
         - estado: enum
         - data_aquisicao: Date
@@ -168,6 +241,8 @@ package "persistence" {
         + setEstado(estado: enum): boolean
         + getDataAquisicao(): Date
         + setDataAquisicao(data: Date): boolean
+        + getModeloEquipamento(): ModeloEquipamento
+        + setModeloEquipamento(modelo: ModeloEquipamento): boolean
     }
 }
 
