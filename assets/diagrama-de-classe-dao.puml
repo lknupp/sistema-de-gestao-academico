@@ -15,6 +15,7 @@ package "DAO" {
             + removerAluno(id: int): boolean
             + buscarAluno(id: int): Aluno
             + filtrarPorCurso(curso: Curso): List <Alunos>
+            + buscarAlunoPorAno(ano: Date): List <Alunos>
         }
     
         IPessoaDAO <|-- ProfessorDAO
@@ -100,6 +101,22 @@ package "DAO" {
             + buscarTodos(): List<Sala>
         }
         class SalaDAO {
+            + inserir(sala: Sala): boolean
+            + atualizar(sala: Sala): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Sala
+            + buscarTodos(): List<Sala>
+        }
+
+        IOfertaDAO <|-- OfertaDAO
+        interface IOfertaDAO <<interface>> {
+            + inserir(oferta: Oferta): boolean
+            + atualizar(oferta: Oferta): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Sala
+            + buscarTodos(): List<Sala>
+        }
+        class OfertaDAO {
             + inserir(sala: Sala): boolean
             + atualizar(sala: Sala): boolean
             + remover(id: int): boolean
