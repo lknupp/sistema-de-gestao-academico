@@ -1,34 +1,40 @@
 @startuml trabalho_engenharia_dao
 
 package "DAO" {
-        class PessoaDAO {
-            - conexao: Connection
-    
+        interface IPessoaDAO << interface >>{
             + inserir(pessoa: Pessoa): boolean
-            + atualizar(pessoa: Pessoa): boolean
+            + atualizarDados(pessoa: Pessoa): boolean
             + remover(id: int): boolean
             + buscar(id: int): Pessoa
-            + buscarTodos(): List<Pessoa>
         }
-    
-        PessoaDAO <|-- AlunoDAO
+
+        IPessoaDAO <|-- AlunoDAO
         class AlunoDAO {
-            + inserir(aluno: Aluno): boolean
-            + atualizar(aluno: Aluno): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Aluno
-            + buscarTodos(): List<Aluno>
+            + inserirAluno(aluno: Aluno): boolean
+            + atualizarDadosAluno(aluno: Aluno): boolean
+            + removerAluno(id: int): boolean
+            + buscarAluno(id: int): Aluno
+            + filtrarPorCurso(curso: Curso): List <Alunos>
         }
     
-        PessoaDAO <|-- ProfessorDAO
+        IPessoaDAO <|-- ProfessorDAO
         class ProfessorDAO {
             + inserir(professor: Professor): boolean
             + atualizar(professor: Professor): boolean
             + remover(id: int): boolean
             + buscar(id: int): Professor
             + buscarTodos(): List<Professor>
+            + filtrarPorDisciplina(disciplina: Disciplina): List <Professor>
         }
-    
+
+        IEnderecoDAO <|-- EnderecoDAO
+        interface IEnderecoDAO <<interface>>{
+            + inserir(endereco: Endereco): boolean
+            + atualizar(endereco: Endereco): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Endereco
+            + buscarTodos(): List<Endereco>
+        }
         class EnderecoDAO {
             + inserir(endereco: Endereco): boolean
             + atualizar(endereco: Endereco): boolean
@@ -36,7 +42,15 @@ package "DAO" {
             + buscar(id: int): Endereco
             + buscarTodos(): List<Endereco>
         }
-    
+
+        ITelefoneDAO <|-- TelefoneDAO
+        interface ITelefoneDAO <<interface>> {
+            + inserir(telefone: Telefone): boolean
+            + atualizar(telefone: Telefone): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Telefone
+            + buscarTodos(): List<Telefone>
+        }
         class TelefoneDAO {
             + inserir(telefone: Telefone): boolean
             + atualizar(telefone: Telefone): boolean
@@ -44,7 +58,15 @@ package "DAO" {
             + buscar(id: int): Telefone
             + buscarTodos(): List<Telefone>
         }
-    
+
+        IDisciplinaDAO <|-- DisciplinaDAO
+        interface IDisciplinaDAO <<interface>> {
+            + inserir(disciplina: Disciplina): boolean
+            + atualizar(disciplina: Disciplina): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Disciplina
+            + buscarTodos(): List<Disciplina>
+        }
         class DisciplinaDAO {
             + inserir(disciplina: Disciplina): boolean
             + atualizar(disciplina: Disciplina): boolean
@@ -52,7 +74,15 @@ package "DAO" {
             + buscar(id: int): Disciplina
             + buscarTodos(): List<Disciplina>
         }
-    
+
+        IHorarioDAO <|-- HorarioDAO
+        interface IHorarioDAO <<interface>>{
+            + inserir(horario: Horario): boolean
+            + atualizar(horario: Horario): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Horario
+            + buscarTodos(): List<Horario>
+        }
         class HorarioDAO {
             + inserir(horario: Horario): boolean
             + atualizar(horario: Horario): boolean
@@ -60,7 +90,15 @@ package "DAO" {
             + buscar(id: int): Horario
             + buscarTodos(): List<Horario>
         }
-    
+
+        ISalaDAO <|-- SalaDAO
+        interface ISalaDAO <<interface>> {
+            + inserir(sala: Sala): boolean
+            + atualizar(sala: Sala): boolean
+            + remover(id: int): boolean
+            + buscar(id: int): Sala
+            + buscarTodos(): List<Sala>
+        }
         class SalaDAO {
             + inserir(sala: Sala): boolean
             + atualizar(sala: Sala): boolean
