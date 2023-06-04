@@ -1,128 +1,214 @@
 @startuml trabalho_engenharia_dao
 
 package "DAO" {
-        interface IPessoaDAO << interface >>{
-            + inserir(pessoa: Pessoa): boolean
-            + atualizarDados(pessoa: Pessoa): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Pessoa
-        }
+    interface IPessoaDAO << interface >>{
+        + inserir(pessoa: Pessoa): boolean
+        + atualizarDados(pessoa: Pessoa): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Pessoa
+    }
 
-        IPessoaDAO <|-- AlunoDAO
-        class AlunoDAO {
-            + inserirAluno(aluno: Aluno): boolean
-            + atualizarDadosAluno(aluno: Aluno): boolean
-            + removerAluno(id: int): boolean
-            + buscarAluno(id: int): Aluno
-            + filtrarPorCurso(curso: Curso): List <Alunos>
-            + buscarAlunoPorAno(ano: Date): List <Alunos>
-        }
-    
-        IPessoaDAO <|-- ProfessorDAO
-        class ProfessorDAO {
-            + inserir(professor: Professor): boolean
-            + atualizar(professor: Professor): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Professor
-            + buscarTodos(): List<Professor>
-            + filtrarPorDisciplina(disciplina: Disciplina): List <Professor>
-        }
+    IPessoaDAO <|-- AlunoDAO
+    class AlunoDAO {
+        + inserir(aluno: Aluno): boolean
+        + atualizarDados(aluno: Aluno): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Aluno
+        + filtrarPorCurso(curso: Curso): List <Alunos>
+        + buscarAlunoPorAno(ano: Date): List <Alunos>
+    }
 
-        IEnderecoDAO <|-- EnderecoDAO
-        interface IEnderecoDAO <<interface>>{
-            + inserir(endereco: Endereco): boolean
-            + atualizar(endereco: Endereco): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Endereco
-            + buscarTodos(): List<Endereco>
-        }
-        class EnderecoDAO {
-            + inserir(endereco: Endereco): boolean
-            + atualizar(endereco: Endereco): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Endereco
-            + buscarTodos(): List<Endereco>
-        }
+    IPessoaDAO <|-- ProfessorDAO
+    class ProfessorDAO {
+        + inserir(professor: Professor): boolean
+        + atualizarDados(professor: Professor): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Professor
+        + buscarTodos(): List<Professor>
+        + filtrarPorDisciplina(disciplina: Disciplina): List <Professor>
+    }
 
-        ITelefoneDAO <|-- TelefoneDAO
-        interface ITelefoneDAO <<interface>> {
-            + inserir(telefone: Telefone): boolean
-            + atualizar(telefone: Telefone): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Telefone
-            + buscarTodos(): List<Telefone>
-        }
-        class TelefoneDAO {
-            + inserir(telefone: Telefone): boolean
-            + atualizar(telefone: Telefone): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Telefone
-            + buscarTodos(): List<Telefone>
-        }
+    IEnderecoDAO <|-- EnderecoDAO
+    interface IEnderecoDAO <<interface>>{
+        + inserirEndereco(endereco: Endereco): boolean
+        + atualizarEndereco(endereco: Endereco): boolean
+        + removerEndereco(id: int): boolean
+        + buscarEnderecoPorCidade(cidade: String): List<Endereco>
+        + buscarTodosEnderecos(): List<Endereco>
+    }
+    class EnderecoDAO {
+        + inserirEndereco(endereco: Endereco): boolean
+        + atualizarEndereco(endereco: Endereco): boolean
+        + removerEndereco(id: int): boolean
+        + buscarEnderecoPorCidade(cidade: String): List<Endereco>
+        + buscarTodosEnderecos(): List<Endereco>
+    }
 
-        IDisciplinaDAO <|-- DisciplinaDAO
-        interface IDisciplinaDAO <<interface>> {
-            + inserir(disciplina: Disciplina): boolean
-            + atualizar(disciplina: Disciplina): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Disciplina
-            + buscarTodos(): List<Disciplina>
-        }
-        class DisciplinaDAO {
-            + inserir(disciplina: Disciplina): boolean
-            + atualizar(disciplina: Disciplina): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Disciplina
-            + buscarTodos(): List<Disciplina>
-        }
+    ITelefoneDAO <|-- TelefoneDAO
+    interface ITelefoneDAO <<interface>> {
+        + inserirTelefone(telefone: Telefone): boolean
+        + atualizarTelefone(telefone: Telefone): boolean
+        + removerTelefone(id: int): boolean
+        + buscarTelefonePorDDD(ddd: ): Telefone
+        + buscarTodosTelefone(): List<Telefone>
+    }
+    class TelefoneDAO {
+        + inserir(telefone: Telefone): boolean
+        + atualizar(telefone: Telefone): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Telefone
+        + buscarTodos(): List<Telefone>
+    }
 
-        IHorarioDAO <|-- HorarioDAO
-        interface IHorarioDAO <<interface>>{
-            + inserir(horario: Horario): boolean
-            + atualizar(horario: Horario): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Horario
-            + buscarTodos(): List<Horario>
-        }
-        class HorarioDAO {
-            + inserir(horario: Horario): boolean
-            + atualizar(horario: Horario): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Horario
-            + buscarTodos(): List<Horario>
-        }
+    IDisciplinaDAO <|-- DisciplinaDAO
+    interface IDisciplinaDAO <<interface>> {
+        + inserirDisciplina(disciplina: Disciplina): boolean
+        + atualizarDisciplina(disciplina: Disciplina): boolean
+        + removerDisciplina(id: int): boolean
+        + buscarDisciplina(id: int): Disciplina
+        + buscarTodasDisciplina(): List<Disciplina>
 
-        ISalaDAO <|-- SalaDAO
-        interface ISalaDAO <<interface>> {
-            + inserir(sala: Sala): boolean
-            + atualizar(sala: Sala): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Sala
-            + buscarTodos(): List<Sala>
-        }
-        class SalaDAO {
-            + inserir(sala: Sala): boolean
-            + atualizar(sala: Sala): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Sala
-            + buscarTodos(): List<Sala>
-        }
+    }
+    class DisciplinaDAO {
+        + inserirDisciplina(disciplina: Disciplina): boolean
+        + atualizarDisciplina(disciplina: Disciplina): boolean
+        + removerDisciplina(id: int): boolean
+        + buscarDisciplina(id: int): Disciplina
+        + buscarTodasDisciplina(): List<Disciplina>
+    }
 
-        IOfertaDAO <|-- OfertaDAO
-        interface IOfertaDAO <<interface>> {
-            + inserir(oferta: Oferta): boolean
-            + atualizar(oferta: Oferta): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Sala
-            + buscarTodos(): List<Sala>
-        }
-        class OfertaDAO {
-            + inserir(sala: Sala): boolean
-            + atualizar(sala: Sala): boolean
-            + remover(id: int): boolean
-            + buscar(id: int): Sala
-            + buscarTodos(): List<Sala>
-        }
+    IHorarioDAO <|-- HorarioDAO
+    interface IHorarioDAO <<interface>>{
+        + inserirHorario(horario: Horario): boolean
+        + atualizarHorario(horario: Horario): boolean
+        + removerHorario(id: int): boolean
+        + buscarHorario(id: int): Horario
+        + buscarTodosHorario(): List<Horario>
+    }
+    class HorarioDAO {
+        + inserirHorario(horario: Horario): boolean
+        + atualizarHorario(horario: Horario): boolean
+        + removerHorario(id: int): boolean
+        + buscarHorario(id: int): Horario
+        + buscarTodosHorario(): List<Horario>
+    }
+
+    ISalaDAO <|-- SalaDAO
+    interface ISalaDAO <<interface>> {
+        + inserirSala(sala: Sala): boolean
+        + atualizarSala(sala: Sala): boolean
+        + removerSala(id: int): boolean
+        + buscarSalaPorEquipamento(equipamento: Equipamento): List<Sala>
+        + buscarTodasSalas(): List<Sala>
+    }
+    class SalaDAO {
+        + inserirSala(sala: Sala): boolean
+        + atualizarSala(sala: Sala): boolean
+        + removerSala(id: int): boolean
+        + buscarSalaPorEquipamento(equipamento: Equipamento): List<Sala>
+        + buscarTodasSalas(): List<Sala>
+    }
+
+    IOfertaDAO <|-- OfertaDAO
+    interface IOfertaDAO <<interface>> {
+        + inserirOferta(oferta: Oferta): boolean
+        + atualizarOferta(oferta: Oferta): boolean
+        + removerOferta(id: int): boolean
+        + buscarOferta(id: int): Oferta
+        + buscarOfertaPorData(semestre: int, ano: int): List<Oferta>
+        + buscarTodasOfertas(): List<Oferta>
+    }
+    class OfertaDAO {
+        + inserirOferta(oferta: Oferta): boolean
+        + atualizarOferta(oferta: Oferta): boolean
+        + removerOferta(id: int): boolean
+        + buscarOferta(id: int): Oferta
+        + buscarOfertaPorData(semestre: int, ano: int): List<Oferta>
+        + buscarTodasOfertas(): List<Oferta>
+    }
+
+    IHistoricoOfertaDAO <|-- HistoricoOfertaDAO
+    interface IHistoricoOfertaDAO <<interface>>{
+        + inserirHistorico(HistoricoOferta: HistoricoOferta): boolean
+        + atualizarHistorico(HistoricoOferta: HistoricoOferta): boolean
+        + removerHistorico(id: int): boolean
+        + buscarTurmaPorOferta(idOferta: int): List<HistoricoOferta>
+        + buscarPorAluno(idAluno: int): HistoricoOferta
+    }
+
+    class HistoricoOfertaDAO {
+        + inserirHistorico(HistoricoOferta: HistoricoOferta): boolean
+        + atualizarHistorico(HistoricoOferta: HistoricoOferta): boolean
+        + removerHistorico(id: int): boolean
+        + buscarTurmaPorOferta(idOferta: int): List<HistoricoOferta>
+        + buscarPorAluno(idAluno: int): HistoricoOferta
+    }
+
+    IEquipamentoDAO <|-- EquipamentoDAO
+    interface IEquipamentoDAO <<interface>>{
+        + inserirEquipamento(equipamento: Equipamento): boolean
+        + atualizarEquipamento(equipamento: Equipamento): boolean
+        + removerEquipamento(id: int): boolean
+        + buscarTodosEquipamentos(): List<Equipamento>
+        + buscarEquipamentoPorModelo(modelo: Modelo): List<Equipamento>
+    }
+
+    class EquipamentoDAO {
+        + inserirEquipamento(equipamento: Equipamento): boolean
+        + atualizarEquipamento(equipamento: Equipamento): boolean
+        + removerEquipamento(id: int): boolean
+        + buscarTodosEquipamentos(): List<Equipamento>
+        + buscarEquipamentoPorModelo(modelo: Modelo): List<Equipamento>
+    }
+
+    ICursoDAO <|-- CursoDAO
+    interface ICursoDAO <<interface>>{
+        + inserirCurso(curso: Curso): boolean
+        + atualizarCurso(curso: Curso): boolean
+        + removerCurso(id: int): boolean
+        + buscarCurso(id: int): Curso
+        + buscarTodosCursos(id: int): List<Curso>
+    }
+
+    class CursoDAO {
+        + inserirCurso(curso: Curso): boolean
+        + atualizarCurso(curso: Curso): boolean
+        + removerCurso(id: int): boolean
+        + buscarCurso(id: int): Curso
+        + buscarTodosCursos(id: int): List<Curso>
+    }
+
+    IPeriodoDAO <|-- PeriodoDAO
+    interface IPeriodoDAO <<interface>>{
+        + inserirPeriodo(periodo: Periodo): boolean
+        + atualizarPeriodo(periodo: Periodo): boolean
+        + removerPeriodo(id: int): boolean
+        + buscarPeriodo(id: int): Periodo
+    }
+
+    class PeriodoDAO {
+        + inserirPeriodo(periodo: Periodo): boolean
+        + atualizarPeriodo(periodo: Periodo): boolean
+        + removerPeriodo(id: int): boolean
+        + buscarPeriodo(id: int): Periodo
+    }
+
+    IModeloDAO <|-- ModeloDAO
+    interface IModeloDAO {
+        + inserirModelos(modelos: Modelos): boolean
+        + atualizarModelos(modelos: Modelos): boolean
+        + removerModelos(id: int): boolean
+        + buscarModelos(id: int): Modelos
+        + buscarTodosModelos(): List<Modelos>
+    }
+
+    class ModeloDAO {
+        + inserirModelos(modelos: Modelos): boolean
+        + atualizarModelos(modelos: Modelos): boolean
+        + removerModelos(id: int): boolean
+        + buscarModelos(id: int): Modelos
+        + buscarTodosModelos(): List<Modelos>
+    }
 }
 
 @enduml
