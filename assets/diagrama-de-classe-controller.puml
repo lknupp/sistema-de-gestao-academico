@@ -1,0 +1,8 @@
+@startuml trabalho_engenharia_dao
+
+package "controller" {
+    interface IPessoaController << interface >>{
+        
+    }
+
+}
