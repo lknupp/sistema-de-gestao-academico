@@ -14,7 +14,7 @@ autonumber 1.1
 ' Verificar se o aluno já existe
 Frontend->Routes: res = post("api/aluno", req): Object
 Routes->AlunoController: res = verificarAluno(req.body.cpf): Object
-AlunoController->AlunoDAO: res = buscarPorCPF(req.params.cpf): Object
+AlunoController->AlunoDAO: res = buscarPorCPF(cpf): Object
 AlunoDAO->AlunoController: res
 AlunoController->Routes: res
 Routes->Frontend: res
