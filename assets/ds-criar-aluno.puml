@@ -1,6 +1,5 @@
 @startuml Diagrama de Sequencia
 
-
 participant Frontend as Frontend
 participant "AlunoRoute(route) : IRoutes" as Routes
 participant "AlunoController(alunoController) : IAlunoController" as AlunoController
@@ -9,7 +8,7 @@ participant "AlunoDAO(alunoDAO) : IAlunoDAO" as AlunoDAO
 
 autonumber 1.1
 Frontend->Routes: res = post("api/aluno:cpf", req): Object
-AlunoController->AlunoDAO: res = findByCpf(req.params.cpf): Object
+AlunoController->AlunoDAO: res = buscarPorCPF(req.params.cpf): Object
 AlunoDAO->AlunoController: res
 AlunoController->Routes: res
 Routes->Frontend: res
@@ -22,7 +21,7 @@ AlunoController->Aluno: setSexo(req.body.sexo)
 AlunoController->Aluno: setRaca(req.body.raca)
 AlunoController->Aluno: setDataIngresso(req.body.dataIngresso)
 AlunoController->Aluno: setDataNascimento(req.body.dataNascimento)
-AlunoController->AlunoDAO: res = save(aluno): Object
+AlunoController->AlunoDAO: res = salvar(aluno): Object
 AlunoDAO->AlunoController: res
 AlunoController->Routes: res
 Routes->Frontend: res
