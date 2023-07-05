@@ -41,13 +41,13 @@ AlunoController->Routes: res
 Routes->Frontend: res
 
 ' Armazenar aluno
-AlunoController->Aluno: setNome(req.body.nome)
-AlunoController->Aluno: setSobrenome(req.body.sobrenome)
-AlunoController->Aluno: setCpf(req.body.cpf)
-AlunoController->Aluno: setSexo(req.body.sexo)
-AlunoController->Aluno: setRaca(req.body.raca)
-AlunoController->Aluno: setDataIngresso(req.body.dataIngresso)
-AlunoController->Aluno: setDataNascimento(req.body.dataNascimento)
+AlunoController->Aluno: setNome(req.nome)
+AlunoController->Aluno: setSobrenome(req.sobrenome)
+AlunoController->Aluno: setCpf(req.cpf)
+AlunoController->Aluno: setSexo(req.sexo)
+AlunoController->Aluno: setRaca(req.raca)
+AlunoController->Aluno: setDataIngresso(req.dataIngresso)
+AlunoController->Aluno: setDataNascimento(req.dataNascimento)
 AlunoController->Aluno: setEndereco(endereco)
 AlunoController->Aluno: setTelefone(telefone)
 AlunoController->AlunoDAO: res = inserir(aluno): Object
