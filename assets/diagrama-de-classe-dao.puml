@@ -166,16 +166,16 @@ package "DAO" {
         + inserirCurso(curso: Curso): boolean
         + atualizarCurso(curso: Curso): boolean
         + removerCurso(id: int): boolean
-        + buscarCurso(id: int): Curso
-        + buscarTodosCursos(id: int): List<Curso>
+        + buscarCursoPorNome(nome: String): Curso
+        + buscarTodosCursos(): List<Curso>
     }
 
     class CursoDAO {
         + inserirCurso(curso: Curso): boolean
         + atualizarCurso(curso: Curso): boolean
         + removerCurso(id: int): boolean
-        + buscarCurso(id: int): Curso
-        + buscarTodosCursos(id: int): List<Curso>
+        + buscarCursoPorNome(nome: String): Curso
+        + buscarTodosCursos(): List<Curso>
     }
 
     IPeriodoDAO <|-- PeriodoDAO
