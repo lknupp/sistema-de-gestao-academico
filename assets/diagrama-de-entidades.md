@@ -10,7 +10,7 @@
 
 + Cursa(**id_cursa**, id_aluno, id_oferta, semestre, ano, nota, presenca);
 
-[//]: <> (Parte de matheus a seguir)
++ Ministra(**id_professor**, **id_oferta**)
 
 + Curso(**id_curso**, nome, campus);
 

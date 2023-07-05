@@ -1,0 +1,130 @@
+@startuml trabalho_engenharia_controller
+
+package "Controller" {
+    interface IPessoaController << interface >>{
+        + inserir(pessoa: Pessoa): boolean
+        + atualizar(pessoa: Pessoa): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Pessoa
+        + buscarPorCPF(cpf: string): Pessoa
+    }
+
+    interface ICursoController << interface >>{
+        + inserir(curso: Curso): boolean
+        + atualizar(curso: Curso): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Curso
+    }
+
+    interface IDisciplinaController << interface >>{
+        + inserir(disciplina: Disciplina): boolean
+        + atualizar(disciplina: Disciplina): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Disciplina
+        + buscarPorPreRequisito(id: int): Disciplina
+    }
+
+    interface IOfertaController << interface >> {
+        + inserir(oferta: Oferta): boolean
+        + atualizar(oferta: Oferta): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Oferta
+        + buscarPorSemestre(ano: int, semestre: int): Oferta
+    }
+
+    interface IPeriodoController << interface >> {
+        + inserir(periodo: Periodo): boolean
+        + atualizar(periodo: Periodo): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Periodo
+    }
+
+    interface ISalaController << interface >> {
+        + inserir(sala: Sala): boolean
+        + atualizar(sala: Sala): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Sala
+    }
+
+    interface IEquipamentoController << interface >> {
+        + inserir(equipamento: Equipamento): boolean
+        + atualizar(equipamento: Equipamento): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Equipamento
+    }
+
+    interface IModeloEquipamentoController << interface >> {
+        + inserir(modelo: ModeloEquipamento): boolean
+        + atualizar(modelo: ModeloEquipamento): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): ModeloEquipamento
+    }
+
+    class AlunoController implements IPessoaController {
+        + inserir(pessoa: Aluno): boolean
+        + atualizar(pessoa: Aluno): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Aluno
+        + buscarPorCPF(cpf: string): Pessoa
+    }
+
+    class ProfessorController implements IPessoaController {
+        + inserir(pessoa: Professor): boolean
+        + atualizar(pessoa: Professor): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Professor
+        + buscarPorCPF(cpf: string): Pessoa
+    }
+
+
+    class CursoController implements ICursoController {
+        + inserir(curso: Curso): boolean
+        + atualizar(curso: Curso): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Curso
+    }
+
+    class DisciplinaController implements IDisciplinaController {
+        + inserir(disciplina: Disciplina): boolean
+        + atualizar(disciplina: Disciplina): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Disciplina
+        + buscarPorPreRequisito(id: int): Disciplina
+    }
+
+    class OfertaController implements IOfertaController {
+        + inserir(oferta: Oferta): boolean
+        + atualizar(oferta: Oferta): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Oferta
+        + buscarPorSemestre(ano: int, semestre: int): Oferta
+    }
+
+    class PeriodoController implements IPeriodoController {
+        + inserir(periodo: Periodo): boolean
+        + atualizar(periodo: Periodo): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Periodo
+    }
+
+    class SalaController implements ISalaController {
+        + inserir(sala: Sala): boolean
+        + atualizar(sala: Sala): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Sala
+    }
+
+    class EquipamentoController implements IEquipamentoController {
+        + inserir(equipamento: Equipamento): boolean
+        + atualizar(equipamento: Equipamento): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): Equipamento
+    }
+
+    class ModeloEquipamentoController implements IModeloEquipamentoController {
+        + inserir(modelo: ModeloEquipamento): boolean
+        + atualizar(modelo: ModeloEquipamento): boolean
+        + remover(id: int): boolean
+        + buscar(id: int): ModeloEquipamento
+    }
+}

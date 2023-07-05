@@ -1,0 +1,12 @@
+@startuml trabalho_engenharia_routes
+
+package "Service" {
+    interface IRoutes {
+        - void createRoutes()
+    }
+
+    class FastAPIRoutes{
+        
+    }
+    
+}
