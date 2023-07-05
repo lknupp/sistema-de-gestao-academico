@@ -16,6 +16,7 @@ DisciplinaController->Routes: res
 Routes->Frontend: res
 
 ' Armazenar disciplina
+Routes -> DisciplinaController: res = salvar(req.body): Object
 DisciplinaController->Disciplina: setNome(req.nome)
 DisciplinaController->Disciplina: setDescricao(req.descricao)
 DisciplinaController->Disciplina: addPreRequisitos(req.preRequisitos)
