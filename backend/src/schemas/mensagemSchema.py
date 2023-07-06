@@ -2,7 +2,8 @@ import pydantic as _pydantic
 
 
 class _MensagemBase(_pydantic.BaseModel):
-    id: int
+    success: bool
+    status: int
     texto: str
 
 

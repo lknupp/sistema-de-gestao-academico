@@ -2,7 +2,7 @@ import fastapi as _fastapi
 import sqlalchemy.orm as _orm
 from typing import List
 
-import src.database as _database
+import backend.src.database.database as _database
 from src.schemas import pessoaSchema as _schemas
 import src.controller.pessoaController as _controller
 

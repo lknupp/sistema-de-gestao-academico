@@ -1,16 +1,16 @@
 from typing import List
 import sqlalchemy.orm as _orm
-import src.model as _model
+import backend.src.models.model as _model
 import src.schemas.mensagemSchema as _msg_schema
 
 class IPessoaDAO:
-    def inserir(db: _orm.Session, pessoa: _model.Pessoa) -> _model.Pessoa:
+    def inserir(db: _orm.Session, pessoa: _model.Pessoa) -> _msg_schema.Mensagem:
         pass
 
-    def atualizar_dados(db: _orm.Session, pessoa: _model.Pessoa) -> _model.Pessoa:
+    def atualizar_dados(db: _orm.Session, pessoa: _model.Pessoa) -> _msg_schema.Mensagem:
         pass
 
-    def remover(db: _orm.Session, id: int) -> bool:
+    def remover(db: _orm.Session, id: int) -> _msg_schema.Mensagem:
         pass
 
     def buscar(db: _orm.Session, id: int) -> _model.Pessoa:
@@ -29,7 +29,7 @@ class AlunoDAO(IPessoaDAO):
         except Exception as e:
             mensagem.id = -1
             mensagem.texto = "Erro ao cadastrar aluno.\n{}".format(e)
-        return mensagem
+
 
     def atualizar_dados(
         self, db: _orm.Session, aluno: _model.Aluno

@@ -1,6 +1,6 @@
 import sqlalchemy.orm as _orm
 
-import src.model as _model
+import backend.src.models.model as _model
 import src.schemas as _schemas
 from src.dao.pessoaDAO import AlunoDAO
 

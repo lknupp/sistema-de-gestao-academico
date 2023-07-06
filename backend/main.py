@@ -1,5 +1,5 @@
 import fastapi as _fastapi
-import src.database as _database
+import backend.src.database.database as _database
 from src.routes import pessoaRouter as _pessoaRouter
 
 app = _fastapi.FastAPI()

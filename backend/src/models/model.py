@@ -1,6 +1,6 @@
 import sqlalchemy as _sql
 
-import src.database as _database
+import backend.src.database.database as _database
 
 
 class Endereco(_database.Base):
