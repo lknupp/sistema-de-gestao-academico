@@ -1,9 +1,9 @@
 import fastapi as _fastapi
-import backend.src.database.database as _database
-from src.routes import pessoaRouter as _pessoaRouter
+import src.database.sqlite as _database
+from src.routes import alunoRoute as _alunoRoute
 
 app = _fastapi.FastAPI()
 
 _database.create_database()
 
-app.include_router(_pessoaRouter.router)
+app.include_router(_alunoRoute.router)
