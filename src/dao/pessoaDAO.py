@@ -1,8 +1,7 @@
-from typing import List, Optional
+from typing import List
 import sqlalchemy.orm as _orm
 import src.model as _model
-import src.schemas.mensagemSchema as _schemas
-
+import src.schemas.mensagemSchema as _msg_schema
 
 class IPessoaDAO:
     def inserir(db: _orm.Session, pessoa: _model.Pessoa) -> _model.Pessoa:
@@ -19,8 +18,8 @@ class IPessoaDAO:
 
 
 class AlunoDAO(IPessoaDAO):
-    def inserir(self, db: _orm.Session, aluno: _model.Aluno) -> _schemas.Mensagem:
-        mensagem = _schemas.Mensagem()
+    def inserir(self, db: _orm.Session, aluno: _model.Aluno) -> _msg_schema.Mensagem:
+        mensagem = _msg_schema.Mensagem()
         try:
             db.add(aluno)
             db.commit()
@@ -34,8 +33,8 @@ class AlunoDAO(IPessoaDAO):
 
     def atualizar_dados(
         self, db: _orm.Session, aluno: _model.Aluno
-    ) -> _schemas.Mensagem:
-        mensagem = _schemas.Mensagem()
+    ) -> _msg_schema.Mensagem:
+        mensagem = _msg_schema.Mensagem()
         try:
             db.query(_model.Aluno).filter(_model.Aluno.id == aluno.id).update(aluno)
             db.commit()
@@ -47,8 +46,8 @@ class AlunoDAO(IPessoaDAO):
             mensagem.texto = "Erro ao atualizar dados do aluno.\n{}".format(e)
         return mensagem
 
-    def remover(self, db: _orm.Session, id: int) -> _schemas.Mensagem:
-        mensagem = _schemas.Mensagem()
+    def remover(self, db: _orm.Session, id: int) -> _msg_schema.Mensagem:
+        mensagem = _msg_schema.Mensagem()
         try:
             db.remove(db.query(_model.Aluno).filter(_model.Aluno.id == id).first())
             db.commit()
