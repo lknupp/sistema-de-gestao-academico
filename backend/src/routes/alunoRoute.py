@@ -14,7 +14,7 @@ controller = _controller.AlunoController()
 
 class AlunoRoute(_IRoute.IRoute):
     @router.post("/api/aluno/", response_model=_msgSchema.Mensagem)
-    def criar_aluno(
+    def criar(
         aluno: _alunoSchema.AlunoCreate,
         db: _orm.Session = _fastapi.Depends(_database.get_db),
     ):
@@ -24,7 +24,7 @@ class AlunoRoute(_IRoute.IRoute):
         return controller.inserir(db, aluno)
 
     @router.get("/api/aluno/", response_model=List[_alunoSchema.Aluno])
-    def ler_alunos(db: _orm.Session = _fastapi.Depends(_database.get_db)):
+    def ler_todos(db: _orm.Session = _fastapi.Depends(_database.get_db)):
         alunos = controller.buscarTodos(db)
         if alunos is None:
             raise _fastapi.HTTPException(
@@ -33,7 +33,7 @@ class AlunoRoute(_IRoute.IRoute):
         return alunos
 
     @router.get("/api/aluno/{aluno_id}", response_model=_alunoSchema.Aluno)
-    def ler_aluno(aluno_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
+    def ler(aluno_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         aluno = controller.buscar(db, aluno_id)
         if aluno is None:
             raise _fastapi.HTTPException(status_code=404, detail="Aluno não encontrado")
