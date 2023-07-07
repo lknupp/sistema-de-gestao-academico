@@ -15,6 +15,13 @@ DisciplinaDAO->DisciplinaController: res
 DisciplinaController->Routes: res
 Routes->Frontend: res
 
+' Verificar se pre-requisitos existem
+Routes->DisciplinaController: res = verificarDisciplina(req.body.prerequisitos.nome): Mensagem
+DisciplinaController->DisciplinaDAO: res = buscarPorNome(nome): Mensagem
+DisciplinaDAO->DisciplinaController: res
+DisciplinaController->Routes: res
+Routes->Frontend: res
+
 ' Armazenar disciplina
 Routes -> DisciplinaController: res = salvar(req.body): Mensagem
 DisciplinaController->Disciplina: setNome(req.nome)
