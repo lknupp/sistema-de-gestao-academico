@@ -8,19 +8,19 @@ participant "DisciplinaDAO(disciplinaDAO) : IDisciplinaDAO" as DisciplinaDAO
 
 autonumber 1.1
 ' Verificar se a disciplina já existe
-Frontend->Routes: res = post("api/disciplina", req): Object
-Routes->DisciplinaController: res = verificarDisciplina(req.body.nome): Object
-DisciplinaController->DisciplinaDAO: res = buscarPorNome(nome): Object
+Frontend->Routes: res = post("api/disciplina", req): Mensagem
+Routes->DisciplinaController: res = verificarDisciplina(req.body.nome): Mensagem
+DisciplinaController->DisciplinaDAO: res = buscarPorNome(nome): Mensagem
 DisciplinaDAO->DisciplinaController: res
 DisciplinaController->Routes: res
 Routes->Frontend: res
 
 ' Armazenar disciplina
-Routes -> DisciplinaController: res = salvar(req.body): Object
+Routes -> DisciplinaController: res = salvar(req.body): Mensagem
 DisciplinaController->Disciplina: setNome(req.nome)
 DisciplinaController->Disciplina: setDescricao(req.descricao)
 DisciplinaController->Disciplina: addPreRequisitos(req.preRequisitos)
-DisciplinaController->DisciplinaDAO: res = inserir(disciplina): Object
+DisciplinaController->DisciplinaDAO: res = inserir(disciplina): Mensagem
 DisciplinaDAO->DisciplinaController: res
 DisciplinaController->Routes: res
 Routes->Frontend: res

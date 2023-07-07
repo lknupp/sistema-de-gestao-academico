@@ -13,6 +13,7 @@ package "Controller" {
         + inserir(curso: Curso): Mensagem
         + atualizar(curso: Curso): Mensagem
         + remover(curso_id: int): Mensagem
+        + verificarCurso(nome: string): Curso
         + buscar(curso_id: int): Curso
     }
 
@@ -21,6 +22,7 @@ package "Controller" {
         + atualizar(disciplina: Disciplina): Mensagem
         + remover(disciplina_id: int): Mensagem
         + buscar(disciplina_id: int): Disciplina
+        + verificarDisciplina(nome: string): Disciplina
         + buscarDisciplinaPorPreRequisito(disciplina_id: int): Disciplina
     }
 
@@ -81,6 +83,7 @@ package "Controller" {
         + inserir(curso: Curso): Mensagem
         + atualizar(curso: Curso): Mensagem
         + remover(curso_id: int): Mensagem
+        + verificarCurso(nome: string): Curso
         + buscar(curso_id: int): Curso
     }
 
@@ -89,6 +92,7 @@ package "Controller" {
         + atualizar(disciplina: Disciplina): Mensagem
         + remover(disciplina_id: int): Mensagem
         + buscar(disciplina_id: int): Disciplina
+        + verificarDisciplina(nome: string): Disciplina
         + buscarPorPreRequisito(disciplina_id: int): Disciplina
     }
 

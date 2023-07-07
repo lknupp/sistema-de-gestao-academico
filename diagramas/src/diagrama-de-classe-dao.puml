@@ -69,6 +69,7 @@ package "DAO" {
         + atualizar(disciplina: Disciplina): Mensagem
         + remover(disciplina_id: int): Mensagem
         + buscar(disciplina_id: int): Disciplina
+        + buscarPorNome(nome: String): Disciplina
         + buscarTodas(): List<Disciplina>
     }
 
@@ -77,6 +78,7 @@ package "DAO" {
         + atualizar(disciplina: Disciplina): Mensagem
         + remover(disciplina_id: int): Mensagem
         + buscar(disciplina_id: int): Disciplina
+        + buscarPorNome(nome: String): Disciplina
         + buscarTodas(): List<Disciplina>
     }
 

@@ -8,18 +8,18 @@ participant "CursoDAO(cursoDAO) : ICursoDAO" as CursoDAO
 
 autonumber 1.1
 ' Verificar se o curso já existe
-Frontend->Routes: res = post("api/curso", req): Object
-Routes->CursoController: res = verificarCurso(req.body.nome): Object
-CursoController->CursoDAO: res = buscarCursoPorNome(nome): Object
+Frontend->Routes: res = post("api/curso", req): Curso
+Routes->CursoController: res = verificarCurso(req.body.nome): Curso
+CursoController->CursoDAO: res = buscarCursoPorNome(nome): Curso
 CursoDAO->CursoController: res
 CursoController->Routes: res
 Routes->Frontend: res
 
 ' Armazenar curso
-Routes->CursoController: res = salvar(req.body): Object
+Routes->CursoController: res = inserir(req.body): Mensagem
 CursoController->Curso: setNomeCurso(req.nome)
 CursoController->Curso: setCampus(req.campus)
-CursoController->CursoDAO: res = inserirCurso(curso): Object
+CursoController->CursoDAO: res = inserir(curso): Mensagem
 CursoDAO->CursoController: res
 CursoController->Routes: res
 Routes->Frontend: res
