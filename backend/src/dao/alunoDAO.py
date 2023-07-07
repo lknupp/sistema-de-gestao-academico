@@ -55,6 +55,6 @@ class AlunoDAO(_IPessoaDAO.IPessoaDAO):
         aluno = db.query(_alunoModel.Aluno).filter(_alunoModel.Aluno.cpf == cpf).first()
         return aluno
 
-    def filtrarPorAno(self, db: _orm.Session, ano: int) -> List[_alunoModel.Aluno]:
+    def buscarAlunoPorAno(self, db: _orm.Session, ano: int) -> List[_alunoModel.Aluno]:
         alunos = db.query(_alunoModel.Aluno).filter(_alunoModel.Aluno.ano == ano).all()
         return alunos
