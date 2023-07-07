@@ -2,129 +2,129 @@
 
 package "Controller" {
     interface IPessoaController << interface >>{
-        + inserir(pessoa: Pessoa): boolean
-        + atualizar(pessoa: Pessoa): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): Pessoa
+        + inserir(pessoa: Pessoa): Mensagem
+        + atualizar(pessoa: Pessoa): Mensagem
+        + remover(pessoa_id: int): Mensagem
+        + buscar(pessoa_id: int): Pessoa
         + buscarPorCPF(cpf: string): Pessoa
     }
 
     interface ICursoController << interface >>{
-        + inserir(curso: Curso): boolean
-        + atualizar(curso: Curso): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): Curso
+        + inserir(curso: Curso): Mensagem
+        + atualizar(curso: Curso): Mensagem
+        + remover(curso_id: int): Mensagem
+        + buscar(curso_id: int): Curso
     }
 
     interface IDisciplinaController << interface >>{
-        + inserir(disciplina: Disciplina): boolean
-        + atualizar(disciplina: Disciplina): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): Disciplina
-        + buscarPorPreRequisito(id: int): Disciplina
+        + inserir(disciplina: Disciplina): Mensagem
+        + atualizar(disciplina: Disciplina): Mensagem
+        + remover(disciplina_id: int): Mensagem
+        + buscar(disciplina_id: int): Disciplina
+        + buscarDisciplinaPorPreRequisito(disciplina_id: int): Disciplina
     }
 
     interface IOfertaController << interface >> {
-        + inserir(oferta: Oferta): boolean
-        + atualizar(oferta: Oferta): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): Oferta
-        + buscarPorSemestre(ano: int, semestre: int): Oferta
+        + inserir(oferta: Oferta): Mensagem
+        + atualizar(oferta: Oferta): Mensagem
+        + remover(oferta_id: int): Mensagem
+        + buscar(oferta_id: int): Oferta
+        + buscarPorSemestre(semestre: int, ano: int): Oferta
     }
 
     interface IPeriodoController << interface >> {
-        + inserir(periodo: Periodo): boolean
-        + atualizar(periodo: Periodo): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): Periodo
+        + inserir(periodo: Periodo): Mensagem
+        + atualizar(periodo: Periodo): Mensagem
+        + remover(periodo_id: int): Mensagem
+        + buscar(periodo_id: int): Periodo
     }
 
     interface ISalaController << interface >> {
-        + inserir(sala: Sala): boolean
-        + atualizar(sala: Sala): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): Sala
+        + inserir(sala: Sala): Mensagem
+        + atualizar(sala: Sala): Mensagem
+        + remover(sala_id: int): Mensagem
+        + buscar(sala_id: int): Sala
     }
 
     interface IEquipamentoController << interface >> {
-        + inserir(equipamento: Equipamento): boolean
-        + atualizar(equipamento: Equipamento): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): Equipamento
+        + inserir(equipamento: Equipamento): Mensagem
+        + atualizar(equipamento: Equipamento): Mensagem
+        + remover(equipamento_id: int): Mensagem
+        + buscar(equipamento_id: int): Equipamento
     }
 
     interface IModeloEquipamentoController << interface >> {
-        + inserir(modelo: ModeloEquipamento): boolean
-        + atualizar(modelo: ModeloEquipamento): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): ModeloEquipamento
+        + inserir(modelo: ModeloEquipamento): Mensagem
+        + atualizar(modelo: ModeloEquipamento): Mensagem
+        + remover(modelo_id: int): Mensagem
+        + buscar(modelo_id: int): ModeloEquipamento
     }
 
     class AlunoController implements IPessoaController {
-        + inserir(pessoa: Aluno): boolean
-        + atualizar(pessoa: Aluno): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): Aluno
-        + buscarPorCPF(cpf: string): Pessoa
+        + inserir(pessoa: Aluno): Mensagem
+        + atualizar(pessoa: Aluno): Mensagem
+        + remover(pessoa_id: int): Mensagem
+        + buscar(pessoa_id: int): Aluno
+        + buscarTodos(): List<Aluno>
+        + buscarPorCPF(cpf: string): Aluno
     }
 
     class ProfessorController implements IPessoaController {
-        + inserir(pessoa: Professor): boolean
-        + atualizar(pessoa: Professor): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): Professor
-        + buscarPorCPF(cpf: string): Pessoa
+        + inserir(pessoa: Professor): Mensagem
+        + atualizar(pessoa: Professor): Mensagem
+        + remover(pessoa_id: int): Mensagem
+        + buscar(pessoa_id: int): Professor
+        + buscarPorCPF(cpf: string): Professor
     }
 
-
     class CursoController implements ICursoController {
-        + inserir(curso: Curso): boolean
-        + atualizar(curso: Curso): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): Curso
+        + inserir(curso: Curso): Mensagem
+        + atualizar(curso: Curso): Mensagem
+        + remover(curso_id: int): Mensagem
+        + buscar(curso_id: int): Curso
     }
 
     class DisciplinaController implements IDisciplinaController {
-        + inserir(disciplina: Disciplina): boolean
-        + atualizar(disciplina: Disciplina): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): Disciplina
-        + buscarPorPreRequisito(id: int): Disciplina
+        + inserir(disciplina: Disciplina): Mensagem
+        + atualizar(disciplina: Disciplina): Mensagem
+        + remover(disciplina_id: int): Mensagem
+        + buscar(disciplina_id: int): Disciplina
+        + buscarPorPreRequisito(disciplina_id: int): Disciplina
     }
 
     class OfertaController implements IOfertaController {
-        + inserir(oferta: Oferta): boolean
-        + atualizar(oferta: Oferta): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): Oferta
-        + buscarPorSemestre(ano: int, semestre: int): Oferta
+        + inserir(oferta: Oferta): Mensagem
+        + atualizar(oferta: Oferta): Mensagem
+        + remover(oferta_id: int): Mensagem
+        + buscar(oferta_id: int): Oferta
+        + buscarPorSemestre(semestre: int, ano: int): Oferta
     }
 
     class PeriodoController implements IPeriodoController {
-        + inserir(periodo: Periodo): boolean
-        + atualizar(periodo: Periodo): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): Periodo
+        + inserir(periodo: Periodo): Mensagem
+        + atualizar(periodo: Periodo): Mensagem
+        + remover(periodo_id: int): Mensagem
+        + buscar(periodo_id: int): Periodo
     }
 
     class SalaController implements ISalaController {
-        + inserir(sala: Sala): boolean
-        + atualizar(sala: Sala): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): Sala
+        + inserir(sala: Sala): Mensagem
+        + atualizar(sala: Sala): Mensagem
+        + remover(sala_id: int): Mensagem
+        + buscar(sala_id: int): Sala
     }
 
     class EquipamentoController implements IEquipamentoController {
-        + inserir(equipamento: Equipamento): boolean
-        + atualizar(equipamento: Equipamento): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): Equipamento
+        + inserir(equipamento: Equipamento): Mensagem
+        + atualizar(equipamento: Equipamento): Mensagem
+        + remover(equipamento_id: int): Mensagem
+        + buscar(equipamento_id: int): Equipamento
     }
 
     class ModeloEquipamentoController implements IModeloEquipamentoController {
-        + inserir(modelo: ModeloEquipamento): boolean
-        + atualizar(modelo: ModeloEquipamento): boolean
-        + remover(id: int): boolean
-        + buscar(id: int): ModeloEquipamento
+        + inserir(modelo: ModeloEquipamento): Mensagem
+        + atualizar(modelo: ModeloEquipamento): Mensagem
+        + remover(modelo_id: int): Mensagem
+        + buscar(modelo_id: int): ModeloEquipamento
     }
 }
