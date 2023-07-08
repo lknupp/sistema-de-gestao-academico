@@ -9,6 +9,15 @@ package "Controller" {
         + buscarPorCPF(cpf: string): Pessoa
     }
 
+    interface IEnderecoController << interface >>{
+        + inserir(endereco: Endereco): Mensagem
+        + atualizar(endereco: Endereco): Mensagem
+        + remover(endereco_id: int): Mensagem
+        + buscar(endereco_id: int): Endereco
+        + buscarTodos(): List<Endereco>
+        + buscarPorLogradouro(logradouro: string): Endereco
+    }
+
     interface ICursoController << interface >>{
         + inserir(curso: Curso): Mensagem
         + atualizar(curso: Curso): Mensagem
@@ -77,6 +86,15 @@ package "Controller" {
         + remover(pessoa_id: int): Mensagem
         + buscar(pessoa_id: int): Professor
         + buscarPorCPF(cpf: string): Professor
+    }
+
+    class EnderecoController implements IEnderecoController{
+        + inserir(endereco: Endereco): Mensagem
+        + atualizar(endereco: Endereco): Mensagem
+        + remover(endereco_id: int): Mensagem
+        + buscar(endereco_id: int): Endereco
+        + buscarTodos(): List<Endereco>
+        + buscarPorLogradouro(logradouro: string): Endereco
     }
 
     class CursoController implements ICursoController {

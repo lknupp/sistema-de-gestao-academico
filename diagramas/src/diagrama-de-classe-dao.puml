@@ -33,15 +33,17 @@ package "DAO" {
         + inserir(endereco: Endereco): Mensagem
         + atualizar(endereco: Endereco): Mensagem
         + remover(endereco_id: int): Mensagem
-        + buscarTodosEnderecos(): List<Endereco>
-        + buscarEnderecoPorCidade(cidade: String): List<Endereco>
+        + buscar(endereco_id: int): Endereco
+        + buscarTodos(): List<Endereco>
+        + buscarPorLogradouro(logradouro: String): List<Endereco>
     }
 
     class EnderecoDAO {
         + inserir(endereco: Endereco): Mensagem
         + atualizar(endereco: Endereco): Mensagem
         + remover(endereco_id: int): Mensagem
-        + buscarTodosEnderecos(): List<Endereco>
+        + buscar(endereco_id: int): Endereco
+        + buscarTodos(): List<Endereco>
         + buscarEnderecoPorCidade(cidade: String): List<Endereco>
     }
 
