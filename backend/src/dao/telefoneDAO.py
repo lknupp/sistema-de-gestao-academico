@@ -32,8 +32,8 @@ class TelefoneAlunoDAO(_ITelefoneDAO.ITelefoneDAO):
         telefones = db.query(_telefoneModel.TelefoneAluno).all()
         return telefones
     
-    def buscarPorLogradouro(self, db: _orm.Session, logradouro: str) -> _telefoneModel.TelefoneAluno:
-        telefone = db.query(_telefoneModel.TelefoneAluno).filter(_telefoneModel.TelefoneAluno.logradouro == logradouro).first()
+    def buscarPorDdd(self, db: _orm.Session, ddd: int) -> _telefoneModel.TelefoneAluno:
+        telefone = db.query(_telefoneModel.TelefoneAluno).filter(_telefoneModel.TelefoneAluno.ddd == ddd).first()
         return telefone
 
 
