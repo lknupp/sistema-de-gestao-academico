@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class ITelefoneDAO(ABC):
     @abstractmethod
     def inserir(db, telefone):

@@ -8,14 +8,15 @@ from ..schemas import enderecoSchema as _enderecoSchema
 from ..controller import enderecoController as _controller
 
 router = _fastapi.APIRouter()
-controller = _controller.EnderecoController('aluno')
+controller = _controller.EnderecoController("aluno")
 
 
 class AlunoRoute(_IRoute.IRoute):
     @router.post("/api/endereco/", response_model=_enderecoSchema.Endereco)
     def criar(
         endereco: _enderecoSchema.EnderecoCreate,
-        db: _orm.Session = _fastapi.Depends(_database.get_db)):
+        db: _orm.Session = _fastapi.Depends(_database.get_db),
+    ):
         return controller.inserir(db, endereco)
 
     @router.get("/api/endereco/", response_model=List[_enderecoSchema.Endereco])
@@ -31,18 +32,21 @@ class AlunoRoute(_IRoute.IRoute):
     def ler(endereco_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         endereco = controller.buscar(db, endereco_id)
         if endereco is None:
-            raise _fastapi.HTTPException(status_code=404, detail="Endereço não encontrado")
+            raise _fastapi.HTTPException(
+                status_code=404, detail="Endereço não encontrado"
+            )
         return endereco
-    
+
     @router.put("/api/endereco/", response_model=_enderecoSchema.Endereco)
     def atualizar(
         endereco: _enderecoSchema.Endereco,
-        db: _orm.Session = _fastapi.Depends(_database.get_db)):
+        db: _orm.Session = _fastapi.Depends(_database.get_db),
+    ):
         return controller.atualizar(db, endereco)
-    
+
     @router.delete("/api/endereco/", response_model=_enderecoSchema.Endereco)
     def remover(
         endereco: _enderecoSchema.Endereco,
-        db: _orm.Session = _fastapi.Depends(_database.get_db)):
+        db: _orm.Session = _fastapi.Depends(_database.get_db),
+    ):
         return controller.remover(db, endereco)
-    

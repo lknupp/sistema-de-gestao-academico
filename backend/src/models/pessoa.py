@@ -4,6 +4,7 @@ import sqlalchemy.orm as _orm
 from sqlalchemy.ext.declarative import declared_attr
 from . import endereco as _endereco
 
+
 class Pessoa(_database.Base):
     __abstract__ = True
     id_pessoa = _sql.Column(_sql.Integer, primary_key=True, index=True)

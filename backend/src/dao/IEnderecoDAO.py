@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class IEnderecoDAO(ABC):
     @abstractmethod
     def inserir(db, endereco):

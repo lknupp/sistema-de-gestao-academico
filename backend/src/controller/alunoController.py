@@ -24,11 +24,9 @@ class AlunoController(_pessoaController.IPessoaController):
         res = _alunoModel.Aluno(**pessoa.dict())
         return self.aluno_dao.atualizar(db, res)
 
-
     def remover(self, db: _orm.Session, pessoa_id: int) -> _alunoSchema.Aluno:
         res = self.aluno_dao.remover(db, pessoa_id)
         return res
-
 
     def buscar(self, db: _orm.Session, pessoa_id: int) -> _alunoSchema.Aluno:
         res = self.aluno_dao.buscar(db, pessoa_id)

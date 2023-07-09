@@ -24,11 +24,9 @@ class ProfessorController(_pessoaController.IPessoaController):
         res = _professorModel.Professor(**pessoa.dict())
         return self.professor_dao.atualizar(db, res)
 
-
     def remover(self, db: _orm.Session, pessoa_id: int) -> _professorSchema.Professor:
         res = self.professor_dao.remover(db, pessoa_id)
         return res
-
 
     def buscar(self, db: _orm.Session, pessoa_id: int) -> _professorSchema.Professor:
         res = self.professor_dao.buscar(db, pessoa_id)

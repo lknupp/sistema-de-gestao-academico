@@ -18,13 +18,19 @@ class AlunoDAO(_IPessoaDAO.IPessoaDAO):
     def atualizar(
         self, db: _orm.Session, pessoa: _alunoModel.Aluno
     ) -> _alunoSchema.Aluno:
-        db.query(_alunoModel.Aluno).filter(_alunoModel.Aluno.id == pessoa.id).update(pessoa)
+        db.query(_alunoModel.Aluno).filter(_alunoModel.Aluno.id == pessoa.id).update(
+            pessoa
+        )
         db.commit()
         db.refresh(pessoa)
         return pessoa
 
     def remover(self, db: _orm.Session, pessoa_id: int) -> _alunoSchema.Aluno:
-        pessoa = db.query(_alunoModel.Aluno).filter(_alunoModel.Aluno.id == pessoa_id).first()
+        pessoa = (
+            db.query(_alunoModel.Aluno)
+            .filter(_alunoModel.Aluno.id == pessoa_id)
+            .first()
+        )
         db.remove(pessoa)
         db.commit()
         return pessoa
@@ -33,7 +39,8 @@ class AlunoDAO(_IPessoaDAO.IPessoaDAO):
         pessoa = (
             db.query(_alunoModel.Aluno)
             .filter(_alunoModel.Aluno.id == pessoa_id)
-            .first())
+            .first()
+        )
         return pessoa
 
     def buscarTodos(self, db: _orm.Session) -> List[_alunoModel.Aluno]:
@@ -41,7 +48,9 @@ class AlunoDAO(_IPessoaDAO.IPessoaDAO):
         return pessoas
 
     def buscarPorCPF(self, db: _orm.Session, cpf: str) -> _alunoModel.Aluno:
-        pessoa = db.query(_alunoModel.Aluno).filter(_alunoModel.Aluno.cpf == cpf).first()
+        pessoa = (
+            db.query(_alunoModel.Aluno).filter(_alunoModel.Aluno.cpf == cpf).first()
+        )
         return pessoa
 
     def buscarAlunoPorAno(self, db: _orm.Session, ano: int) -> List[_alunoModel.Aluno]:

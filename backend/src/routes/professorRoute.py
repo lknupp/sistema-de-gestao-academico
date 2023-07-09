@@ -31,9 +31,13 @@ class ProfessorRoute(_IRoute.IRoute):
             )
         return professors
 
-    @router.get("/api/professor/{professor_id}", response_model=_professorSchema.Professor)
+    @router.get(
+        "/api/professor/{professor_id}", response_model=_professorSchema.Professor
+    )
     def ler(professor_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         professor = controller.buscar(db, professor_id)
         if professor is None:
-            raise _fastapi.HTTPException(status_code=404, detail="Professor não encontrado")
+            raise _fastapi.HTTPException(
+                status_code=404, detail="Professor não encontrado"
+            )
         return professor
