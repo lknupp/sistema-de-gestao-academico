@@ -37,33 +37,33 @@ class EnderecoAlunoDAO(_IEnderecoDAO.IEnderecoDAO):
         return endereco
 
 
-# class EnderecoProfessorDAO(_IEnderecoDAO.IEnderecoDAO):
-#     def inserir(self, db: _orm.Session, endereco: _enderecoModel.EnderecoProfessor) -> _enderecoSchema.Endereco:
-#         db.add(endereco)
-#         db.commit()
-#         db.refresh(endereco)
-#         return endereco
+class EnderecoProfessorDAO(_IEnderecoDAO.IEnderecoDAO):
+    def inserir(self, db: _orm.Session, endereco: _enderecoModel.EnderecoProfessor) -> _enderecoSchema.Endereco:
+        db.add(endereco)
+        db.commit()
+        db.refresh(endereco)
+        return endereco
     
-#     def atualizar(self, db: _orm.Session, endereco: _enderecoModel.EnderecoProfessor) -> _enderecoModel.EnderecoProfessor:
-#         db.query(_enderecoModel.EnderecoProfessor).filter(_enderecoModel.EnderecoProfessor.id == endereco.id).update(endereco)
-#         db.commit()
-#         db.refresh(endereco)
-#         return endereco
+    def atualizar(self, db: _orm.Session, endereco: _enderecoModel.EnderecoProfessor) -> _enderecoModel.EnderecoProfessor:
+        db.query(_enderecoModel.EnderecoProfessor).filter(_enderecoModel.EnderecoProfessor.id == endereco.id).update(endereco)
+        db.commit()
+        db.refresh(endereco)
+        return endereco
     
-#     def remover(self, db: _orm.Session, endereco_id: int) -> _enderecoModel.EnderecoProfessor:
-#         endereco = db.query(_enderecoModel.EnderecoProfessor).filter(_enderecoModel.EnderecoProfessor.id == endereco_id).first()
-#         db.remove(endereco)
-#         db.commit()
-#         return endereco
+    def remover(self, db: _orm.Session, endereco_id: int) -> _enderecoModel.EnderecoProfessor:
+        endereco = db.query(_enderecoModel.EnderecoProfessor).filter(_enderecoModel.EnderecoProfessor.id == endereco_id).first()
+        db.remove(endereco)
+        db.commit()
+        return endereco
     
-#     def buscar(self, db: _orm.Session, endereco_id: int) -> _enderecoModel.EnderecoProfessor:
-#         endereco = db.query(_enderecoModel.EnderecoProfessor).filter(_enderecoModel.EnderecoProfessor.id == endereco_id).first()
-#         return endereco
+    def buscar(self, db: _orm.Session, endereco_id: int) -> _enderecoModel.EnderecoProfessor:
+        endereco = db.query(_enderecoModel.EnderecoProfessor).filter(_enderecoModel.EnderecoProfessor.id == endereco_id).first()
+        return endereco
     
-#     def buscarTodos(self, db: _orm.Session) -> List[_enderecoModel.EnderecoProfessor]:
-#         enderecos = db.query(_enderecoModel.EnderecoProfessor).all()
-#         return enderecos
+    def buscarTodos(self, db: _orm.Session) -> List[_enderecoModel.EnderecoProfessor]:
+        enderecos = db.query(_enderecoModel.EnderecoProfessor).all()
+        return enderecos
     
-#     def buscarPorLogradouro(self, db: _orm.Session, logradouro: str) -> _enderecoModel.EnderecoProfessor:
-#         endereco = db.query(_enderecoModel.EnderecoProfessor).filter(_enderecoModel.EnderecoProfessor.logradouro == logradouro).first()
-#         return endereco
+    def buscarPorLogradouro(self, db: _orm.Session, logradouro: str) -> _enderecoModel.EnderecoProfessor:
+        endereco = db.query(_enderecoModel.EnderecoProfessor).filter(_enderecoModel.EnderecoProfessor.logradouro == logradouro).first()
+        return endereco

@@ -1,25 +1,25 @@
 from abc import ABC, abstractmethod
 
 
-class IEnderecoController(ABC):
+class ITelefoneController(ABC):
     @abstractmethod
     def __init__(self):
         pass
 
     @abstractmethod
-    def inserir(endereco):
+    def inserir(telefone):
         pass
 
     @abstractmethod
-    def atualizar(endereco):
+    def atualizar(telefone):
         pass
 
     @abstractmethod
-    def remover(endereco_id):
+    def remover(telefone_id):
         pass
 
     @abstractmethod
-    def buscar(endereco_id):
+    def buscar(telefone_id):
         pass
 
     @abstractmethod
@@ -27,5 +27,5 @@ class IEnderecoController(ABC):
         pass
 
     @abstractmethod
-    def buscarPorLogradouro(logradouro):
+    def buscarPorDdd(ddd):
         pass
