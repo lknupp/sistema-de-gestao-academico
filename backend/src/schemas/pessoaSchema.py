@@ -17,4 +17,4 @@ class PessoaCreate(_PessoaBase):
 
 
 class Pessoa(_PessoaBase):
-    id: int
+    id_pessoa: int

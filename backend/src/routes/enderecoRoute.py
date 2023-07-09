@@ -8,7 +8,7 @@ from ..schemas import enderecoSchema as _enderecoSchema
 from ..controller import enderecoController as _controller
 
 router = _fastapi.APIRouter()
-controller = _controller.EnderecoController()
+controller = _controller.EnderecoController('aluno')
 
 
 class AlunoRoute(_IRoute.IRoute):

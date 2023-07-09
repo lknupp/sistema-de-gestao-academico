@@ -5,7 +5,6 @@ from typing import List
 from . import IRoute as _IRoute
 from ..database import sqlite as _database
 from ..schemas import alunoSchema as _alunoSchema
-from ..schemas import mensagemSchema as _msgSchema
 from ..controller import alunoController as _controller
 
 router = _fastapi.APIRouter()
@@ -13,7 +12,7 @@ controller = _controller.AlunoController()
 
 
 class AlunoRoute(_IRoute.IRoute):
-    @router.post("/api/aluno/", response_model=_msgSchema.Mensagem)
+    @router.post("/api/aluno/", response_model=_alunoSchema.Aluno)
     def criar(
         aluno: _alunoSchema.AlunoCreate,
         db: _orm.Session = _fastapi.Depends(_database.get_db),

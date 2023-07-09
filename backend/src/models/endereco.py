@@ -1,11 +1,15 @@
-import sqlalchemy as _sql
-from ..database import sqlite as _database
+from . import IEndereco as _IEndereco
 
-class Endereco(_database.Base):
-    __tablename__ = 'endereco'
-    id = _sql.Column(_sql.Integer, primary_key=True, index=True)
-    logradouro = _sql.Column(_sql.String)
-    numero = _sql.Column(_sql.String)
-    local = _sql.Column(_sql.String)
-    cep = _sql.Column(_sql.String)
-    tipo = _sql.Column(_sql.String)
+class EnderecoAluno(_IEndereco.EnderecoBase):
+    __tablename__ = 'endereco_aluno'
+
+    @classmethod
+    def _get_pessoa_table_name(cls):
+        return 'aluno'
+    
+# class EnderecoProfessor(_IEndereco.EnderecoBase):
+#     __tablename__ = 'endereco_professor'
+
+#     @classmethod
+#     def _get_pessoa_table_name(cls):
+#         return 'professor'

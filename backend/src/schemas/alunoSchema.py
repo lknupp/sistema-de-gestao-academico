@@ -13,4 +13,4 @@ class AlunoCreate(_AlunoBase):
 
 
 class Aluno(_AlunoBase):
-    id: int
+    id_pessoa: int
