@@ -4,7 +4,7 @@
 
 + Professor(**id_prof**, nome, sobrenome, cpf, sexo, raca, data_contratacao, departamento, salario, id_curso);
 
-+ Endereço(**id_endereco**, logradouro, local, numero, cep, tipo);
++ Endereço(**id_endereco**, id_pessoa, logradouro, local, numero, cep, tipo);
 
 + Telefone(**id_telefone**, id_pessoa, cod_pais, ddd, num_telefone);
 

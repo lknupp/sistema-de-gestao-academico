@@ -7,9 +7,9 @@ class EnderecoAluno(_IEndereco.EnderecoBase):
     def _get_pessoa_table_name(cls):
         return 'aluno'
     
-# class EnderecoProfessor(_IEndereco.EnderecoBase):
-#     __tablename__ = 'endereco_professor'
+class EnderecoProfessor(_IEndereco.EnderecoBase):
+    __tablename__ = 'endereco_professor'
 
-#     @classmethod
-#     def _get_pessoa_table_name(cls):
-#         return 'professor'
+    @classmethod
+    def _get_pessoa_table_name(cls):
+        return 'professor'
