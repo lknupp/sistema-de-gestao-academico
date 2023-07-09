@@ -16,10 +16,10 @@ CursoController->Routes: res
 Routes->Frontend: res
 
 ' Armazenar curso
-Routes->CursoController: res = inserir(req.body): Mensagem
+Routes->CursoController: res = inserir(req.body): Curso
 CursoController->Curso: setNomeCurso(req.nome)
 CursoController->Curso: setCampus(req.campus)
-CursoController->CursoDAO: res = inserir(curso): Mensagem
+CursoController->CursoDAO: res = inserir(curso): Curso
 CursoDAO->CursoController: res
 CursoController->Routes: res
 Routes->Frontend: res

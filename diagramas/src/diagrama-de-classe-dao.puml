@@ -2,17 +2,17 @@
 
 package "DAO" {
     interface IPessoaDAO << interface >>{
-        + inserir(pessoa: Pessoa): Mensagem
-        + atualizar(pessoa: Pessoa): Mensagem
-        + remover(pessoa_id: int): Mensagem
+        + inserir(pessoa: Pessoa): Object
+        + atualizar(pessoa: Pessoa): Object
+        + remover(pessoa_id: int): Object
         + buscar(pessoa_id: int): Pessoa
     }
 
     IPessoaDAO <|-- AlunoDAO
     class AlunoDAO {
-        + inserir(aluno: Aluno): Mensagem
-        + atualizarDados(aluno: Aluno): Mensagem
-        + remover(aluno_id: int): Mensagem
+        + inserir(aluno: Aluno): Object
+        + atualizarDados(aluno: Aluno): Object
+        + remover(aluno_id: int): Object
         + buscar(aluno_id: int): Aluno
         + buscarTodos(): List<Aluno>
         + buscarPorCPF(cpf: String): Aluno
@@ -21,45 +21,43 @@ package "DAO" {
 
     IPessoaDAO <|-- ProfessorDAO
     class ProfessorDAO {
-        + inserir(professor: Professor): Mensagem
-        + atualizarDados(professor: Professor): Mensagem
-        + remover(professor_id: int): Mensagem
+        + inserir(professor: Professor): Object
+        + atualizarDados(professor: Professor): Object
+        + remover(professor_id: int): Object
         + buscar(professor_id: int): Professor
         + buscarTodos(): List<Professor>
     }
 
     IEnderecoDAO <|-- EnderecoDAO
     interface IEnderecoDAO <<interface>>{
-        + inserir(endereco: Endereco): Mensagem
-        + atualizar(endereco: Endereco): Mensagem
-        + remover(endereco_id: int): Mensagem
-        + buscar(endereco_id: int): Endereco
-        + buscarTodos(): List<Endereco>
-        + buscarPorLogradouro(logradouro: String): List<Endereco>
+        + inserir(endereco: Endereco): Object
+        + atualizar(endereco: Endereco): Object
+        + remover(endereco_id: int): Object
+        + buscarTodosEnderecos(): List<Endereco>
+        + buscarEnderecoPorCidade(cidade: String): List<Endereco>
     }
 
     class EnderecoDAO {
-        + inserir(endereco: Endereco): Mensagem
-        + atualizar(endereco: Endereco): Mensagem
-        + remover(endereco_id: int): Mensagem
-        + buscar(endereco_id: int): Endereco
-        + buscarTodos(): List<Endereco>
+        + inserir(endereco: Endereco): Object
+        + atualizar(endereco: Endereco): Object
+        + remover(endereco_id: int): Object
+        + buscarTodosEnderecos(): List<Endereco>
         + buscarEnderecoPorCidade(cidade: String): List<Endereco>
     }
 
     ITelefoneDAO <|-- TelefoneDAO
     interface ITelefoneDAO <<interface>> {
-        + inserir(telefone: Telefone): Mensagem
-        + atualizar(telefone: Telefone): Mensagem
-        + remover(telefone_id: int): Mensagem
+        + inserir(telefone: Telefone): Object
+        + atualizar(telefone: Telefone): Object
+        + remover(telefone_id: int): Object
         + buscarTelefonesPorDDD(ddd: int): List<Telefone>
         + buscarTodos(): List<Telefone>
     }
 
     class TelefoneDAO {
-        + inserir(telefone: Telefone): Mensagem
-        + atualizar(telefone: Telefone): Mensagem
-        + remover(telefone_id: int): Mensagem
+        + inserir(telefone: Telefone): Object
+        + atualizar(telefone: Telefone): Object
+        + remover(telefone_id: int): Object
         + buscar(telefone_id: int): Telefone
         + buscarTodos(): List<Telefone>
         + buscarTelefonesPorDDD(ddd: int): List<Telefone>
@@ -67,18 +65,18 @@ package "DAO" {
 
     IDisciplinaDAO <|-- DisciplinaDAO
     interface IDisciplinaDAO <<interface>> {
-        + inserir(disciplina: Disciplina): Mensagem
-        + atualizar(disciplina: Disciplina): Mensagem
-        + remover(disciplina_id: int): Mensagem
+        + inserir(disciplina: Disciplina): Object
+        + atualizar(disciplina: Disciplina): Object
+        + remover(disciplina_id: int): Object
         + buscar(disciplina_id: int): Disciplina
         + buscarPorNome(nome: String): Disciplina
         + buscarTodas(): List<Disciplina>
     }
 
     class DisciplinaDAO {
-        + inserir(disciplina: Disciplina): Mensagem
-        + atualizar(disciplina: Disciplina): Mensagem
-        + remover(disciplina_id: int): Mensagem
+        + inserir(disciplina: Disciplina): Object
+        + atualizar(disciplina: Disciplina): Object
+        + remover(disciplina_id: int): Object
         + buscar(disciplina_id: int): Disciplina
         + buscarPorNome(nome: String): Disciplina
         + buscarTodas(): List<Disciplina>
@@ -86,52 +84,52 @@ package "DAO" {
 
     IHorarioDAO <|-- HorarioDAO
     interface IHorarioDAO <<interface>>{
-        + inserir(horario: Horario): Mensagem
-        + atualizar(horario: Horario): Mensagem
-        + remover(horario_id: int): Mensagem
+        + inserir(horario: Horario): Object
+        + atualizar(horario: Horario): Object
+        + remover(horario_id: int): Object
         + buscar(horario_id: int): Horario
         + buscarTodos(): List<Horario>
     }
 
     class HorarioDAO {
-        + inserir(horario: Horario): Mensagem
-        + atualizar(horario: Horario): Mensagem
-        + remover(horario_id: int): Mensagem
+        + inserir(horario: Horario): Object
+        + atualizar(horario: Horario): Object
+        + remover(horario_id: int): Object
         + buscar(horario_id: int): Horario
         + buscarTodos(): List<Horario>
     }
 
     ISalaDAO <|-- SalaDAO
     interface ISalaDAO <<interface>> {
-        + inserir(sala: Sala): Mensagem
-        + atualizar(sala: Sala): Mensagem
-        + remover(sala_id: int): Mensagem
+        + inserir(sala: Sala): Object
+        + atualizar(sala: Sala): Object
+        + remover(sala_id: int): Object
         + buscarSalaPorEquipamento(equipamento: Equipamento): List<Sala>
         + buscarTodas(): List<Sala>
     }
 
     class SalaDAO {
-        + inserir(sala: Sala): Mensagem
-        + atualizar(sala: Sala): Mensagem
-        + remover(sala_id: int): Mensagem
+        + inserir(sala: Sala): Object
+        + atualizar(sala: Sala): Object
+        + remover(sala_id: int): Object
         + buscarSalaPorEquipamento(equipamento: Equipamento): List<Sala>
         + buscarTodas(): List<Sala>
     }
 
     IOfertaDAO <|-- OfertaDAO
     interface IOfertaDAO <<interface>> {
-        + inserir(oferta: Oferta): Mensagem
-        + atualizar(oferta: Oferta): Mensagem
-        + remover(oferta_id: int): Mensagem
+        + inserir(oferta: Oferta): Object
+        + atualizar(oferta: Oferta): Object
+        + remover(oferta_id: int): Object
         + buscar(oferta_id: int): Oferta
         + buscarOfertaPorData(semestre: int, ano: int): List<Oferta>
         + buscarTodas(): List<Oferta>
     }
 
     class OfertaDAO {
-        + inserir(oferta: Oferta): Mensagem
-        + atualizar(oferta: Oferta): Mensagem
-        + remover(oferta_id: int): Mensagem
+        + inserir(oferta: Oferta): Object
+        + atualizar(oferta: Oferta): Object
+        + remover(oferta_id: int): Object
         + buscar(oferta_id: int): Oferta
         + buscarOfertaPorData(semestre: int, ano: int): List<Oferta>
         + buscarTodas(): List<Oferta>
@@ -139,33 +137,33 @@ package "DAO" {
 
     IHistoricoDAO <|-- HistoricoDAO
     interface IHistoricoOfertaDAO <<interface>>{
-        + inserir(HistoricoOferta: HistoricoOferta): Mensagem
-        + atualizar(HistoricoOferta: HistoricoOferta): Mensagem
-        + remover(historico_id: int): Mensagem
+        + inserir(HistoricoOferta: HistoricoOferta): Object
+        + atualizar(HistoricoOferta: HistoricoOferta): Object
+        + remover(historico_id: int): Object
         + buscar(historico_id: int): HistoricoOferta
     }
 
     class HistoricoDAO {
-        + inserir(HistoricoOferta: HistoricoOferta): Mensagem
-        + atualizar(HistoricoOferta: HistoricoOferta): Mensagem
-        + remover(historico_id: int): Mensagem
+        + inserir(HistoricoOferta: HistoricoOferta): Object
+        + atualizar(HistoricoOferta: HistoricoOferta): Object
+        + remover(historico_id: int): Object
         + buscar(historico_id: int): HistoricoOferta
     }
 
     IEquipamentoDAO <|-- EquipamentoDAO
     interface IEquipamentoDAO <<interface>>{
-        + inserir(equipamento: Equipamento): Mensagem
-        + atualizar(equipamento: Equipamento): Mensagem
-        + remover(equipamento_id: int): Mensagem
+        + inserir(equipamento: Equipamento): Object
+        + atualizar(equipamento: Equipamento): Object
+        + remover(equipamento_id: int): Object
         + buscar(equipamento_id: int): Equipamento
         + buscarTodosEquipamentos(): List<Equipamento>
         + buscarEquipamentoPorModelo(modelo: Modelo): List<Equipamento>
     }
 
     class EquipamentoDAO {
-        + inserir(equipamento: Equipamento): Mensagem
-        + atualizar(equipamento: Equipamento): Mensagem
-        + remover(equipamento_id: int): Mensagem
+        + inserir(equipamento: Equipamento): Object
+        + atualizar(equipamento: Equipamento): Object
+        + remover(equipamento_id: int): Object
         + buscar(equipamento_id: int): Equipamento
         + buscarTodosEquipamentos(): List<Equipamento>
         + buscarEquipamentoPorModelo(modelo: Modelo): List<Equipamento>
@@ -173,18 +171,18 @@ package "DAO" {
 
     ICursoDAO <|-- CursoDAO
     interface ICursoDAO <<interface>>{
-        + inserir(curso: Curso): Mensagem
-        + atualizar(curso: Curso): Mensagem
-        + remover(curso_id: int): Mensagem
+        + inserir(curso: Curso): Object
+        + atualizar(curso: Curso): Object
+        + remover(curso_id: int): Object
         + buscar(curso_id: int): Curso
         + buscarCursoPorNome(nome: String): Curso
         + buscarTodos(): List<Curso>
     }
 
     class CursoDAO {
-        + inserir(curso: Curso): Mensagem
-        + atualizar(curso: Curso): Mensagem
-        + remover(curso_id: int): Mensagem
+        + inserir(curso: Curso): Object
+        + atualizar(curso: Curso): Object
+        + remover(curso_id: int): Object
         + buscar(curso_id: int): Curso
         + buscarCursoPorNome(nome: String): Curso
         + buscarTodos(): List<Curso>
@@ -192,32 +190,32 @@ package "DAO" {
 
     IPeriodoDAO <|-- PeriodoDAO
     interface IPeriodoDAO <<interface>>{
-        + inserir(periodo: Periodo): Mensagem
-        + atualizar(periodo: Periodo): Mensagem
-        + remover(periodo_id: int): Mensagem
+        + inserir(periodo: Periodo): Object
+        + atualizar(periodo: Periodo): Object
+        + remover(periodo_id: int): Object
         + buscar(periodo_id: int): Periodo
     }
 
     class PeriodoDAO {
-        + inserir(periodo: Periodo): Mensagem
-        + atualizar(periodo: Periodo): Mensagem
-        + remover(periodo_id: int): Mensagem
+        + inserir(periodo: Periodo): Object
+        + atualizar(periodo: Periodo): Object
+        + remover(periodo_id: int): Object
         + buscar(periodo_id: int): Periodo
     }
 
     IModeloDAO <|-- ModeloDAO
     interface IModeloDAO {
-        + inserir(modelo: Modelo): Mensagem
-        + atualizar(modelo: Modelo): Mensagem
-        + remover(modelo_id: int): Mensagem
+        + inserir(modelo: Modelo): Object
+        + atualizar(modelo: Modelo): Object
+        + remover(modelo_id: int): Object
         + buscar(modelo_id: int): Modelo
         + buscarTodos(): List<Modelo>
     }
 
     class ModeloDAO {
-        + inserir(modelo: Modelo): Mensagem
-        + atualizar(modelo: Modelo): Mensagem
-        + remover(modelo_id: int): Mensagem
+        + inserir(modelo: Modelo): Object
+        + atualizar(modelo: Modelo): Object
+        + remover(modelo_id: int): Object
         + buscar(modelo_id: int): Modelo
         + buscarTodos(): List<Modelo>
     }

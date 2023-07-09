@@ -12,19 +12,19 @@ participant "AlunoDAO(alunoDAO) : IAlunoDAO" as AlunoDAO
 
 autonumber 1.1
 ' Verificar se o aluno já existe
-Frontend->Routes: res = post("api/aluno", req): Mensagem
-Routes->AlunoController: res = verificarAluno(req.body.cpf): Mensagem
-AlunoController->AlunoDAO: res = buscarPorCPF(cpf): Mensagem
+Frontend->Routes: res = post("api/aluno", req): Aluno
+Routes->AlunoController: res = verificarAluno(req.body.cpf): Aluno
+AlunoController->AlunoDAO: res = buscarPorCPF(cpf): Aluno
 AlunoDAO->AlunoController: res
 AlunoController->Routes: res
 Routes->Frontend: res
 
 ' Armazenar telefone
-Routes->AlunoController: res = salvar(req.body): Mensagem
+Routes->AlunoController: res = salvar(req.body): Telefone
 AlunoController->Telefone: setCodPais(req.codPais)
 AlunoController->Telefone: setDdd(req.ddd)
 AlunoController->Telefone: setNumero(req.numero)
-AlunoController->TelefoneDAO: res = inserir(telefone): Mensagem
+AlunoController->TelefoneDAO: res = inserir(telefone): Telefone
 TelefoneDAO->AlunoController: res
 AlunoController->Routes: res
 Routes->Frontend: res
@@ -35,7 +35,7 @@ AlunoController->Endereco: setNumero(req.numero)
 AlunoController->Endereco: setLocal(req.local)
 AlunoController->Endereco: setCep(req.cep)
 AlunoController->Endereco: setTipo(req.tipo)
-AlunoController->EnderecoDAO: res = inserir(endereco): Mensagem
+AlunoController->EnderecoDAO: res = inserir(endereco): Endereco
 EnderecoDAO->AlunoController: res
 AlunoController->Routes: res
 Routes->Frontend: res
@@ -50,7 +50,7 @@ AlunoController->Aluno: setDataIngresso(req.dataIngresso)
 AlunoController->Aluno: setDataNascimento(req.dataNascimento)
 AlunoController->Aluno: setEndereco(endereco)
 AlunoController->Aluno: setTelefone(telefone)
-AlunoController->AlunoDAO: res = inserir(aluno): Mensagem
+AlunoController->AlunoDAO: res = inserir(aluno): Aluno
 AlunoDAO->AlunoController: res
 AlunoController->Routes: res
 Routes->Frontend: res

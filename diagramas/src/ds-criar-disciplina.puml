@@ -8,26 +8,26 @@ participant "DisciplinaDAO(disciplinaDAO) : IDisciplinaDAO" as DisciplinaDAO
 
 autonumber 1.1
 ' Verificar se a disciplina já existe
-Frontend->Routes: res = post("api/disciplina", req): Mensagem
-Routes->DisciplinaController: res = verificarDisciplina(req.body.nome): Mensagem
-DisciplinaController->DisciplinaDAO: res = buscarPorNome(nome): Mensagem
+Frontend->Routes: res = post("api/disciplina", req): Disciplina
+Routes->DisciplinaController: res = verificarDisciplina(req.body.nome): Disciplina
+DisciplinaController->DisciplinaDAO: res = buscarPorNome(nome): Disciplina
 DisciplinaDAO->DisciplinaController: res
 DisciplinaController->Routes: res
 Routes->Frontend: res
 
 ' Verificar se pre-requisitos existem
-Routes->DisciplinaController: res = verificarDisciplina(req.body.prerequisitos.nome): Mensagem
-DisciplinaController->DisciplinaDAO: res = buscarPorNome(nome): Mensagem
+Routes->DisciplinaController: res = verificarDisciplina(req.body.prerequisitos.nome): Disciplina
+DisciplinaController->DisciplinaDAO: res = buscarPorNome(nome): Disciplina
 DisciplinaDAO->DisciplinaController: res
 DisciplinaController->Routes: res
 Routes->Frontend: res
 
 ' Armazenar disciplina
-Routes -> DisciplinaController: res = salvar(req.body): Mensagem
+Routes -> DisciplinaController: res = salvar(req.body): Disciplina
 DisciplinaController->Disciplina: setNome(req.nome)
 DisciplinaController->Disciplina: setDescricao(req.descricao)
 DisciplinaController->Disciplina: addPreRequisitos(req.preRequisitos)
-DisciplinaController->DisciplinaDAO: res = inserir(disciplina): Mensagem
+DisciplinaController->DisciplinaDAO: res = inserir(disciplina): Disciplina
 DisciplinaDAO->DisciplinaController: res
 DisciplinaController->Routes: res
 Routes->Frontend: res
