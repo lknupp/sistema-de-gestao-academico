@@ -1,7 +1,7 @@
 import sqlalchemy.orm as _orm
 from typing import List
 
-from . import ITelefoneDAO as _ITelefoneDAO
+from .interface import ITelefoneDAO as _ITelefoneDAO
 from ..models import telefone as _telefoneModel
 from ..schemas import telefoneSchema as _telefoneSchema
 

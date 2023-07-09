@@ -1,4 +1,4 @@
-from . import ITelefone as _ITelefone
+from .interface import ITelefone as _ITelefone
 
 
 class TelefoneAluno(_ITelefone.TelefoneBase):

@@ -1,7 +1,7 @@
 import sqlalchemy.orm as _orm
 from typing import List
 from ..models import curso as _cursoModel
-from . import ICursoDAO as _ICursoDAO
+from .interface import ICursoDAO as _ICursoDAO
 
 
 class CursoDAO(_ICursoDAO.ICursoDAO):

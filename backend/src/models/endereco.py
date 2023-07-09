@@ -1,4 +1,4 @@
-from . import IEndereco as _IEndereco
+from .interface import IEndereco as _IEndereco
 
 
 class EnderecoAluno(_IEndereco.EnderecoBase):

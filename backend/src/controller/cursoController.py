@@ -1,7 +1,7 @@
 import sqlalchemy.orm as _orm
 from typing import List
 
-from . import ICursoController as _ICursoController
+from .interface import ICursoController as _ICursoController
 from ..dao import cursoDAO as _cursoDAO
 from ..schemas import cursoSchema as _cursoSchema
 from ..models import curso as _cursoModel
@@ -14,7 +14,7 @@ class CursoController(_ICursoController.ICursoController):
 
     # TODO: Implementar Erros
     def inserir(self, db: _orm.Session, curso: _cursoSchema.CursoCreate):
-        db_curso = _cursoModel.Curso(**curso.dict())
+        db_curso = _cursoModel.Curso(**curso.model_dump())
         print(db)
         try:
             curso = self.curso_dao.inserir(db=db, curso=db_curso)
@@ -23,14 +23,13 @@ class CursoController(_ICursoController.ICursoController):
         return curso
 
     def atualizar(self, db: _orm.Session, curso: _cursoSchema.CursoCreate):
-        db_curso = _cursoModel.Curso(**curso.dict())
+        db_curso = _cursoModel.Curso(**curso.model_dump())
 
         try:
             res = self.curso_dao.atualizar(db, db_curso)
             return res
         except Exception as e:
             pass
-            return msg
 
     def remover(self, db: _orm.Session, curso_id: int):
         try:

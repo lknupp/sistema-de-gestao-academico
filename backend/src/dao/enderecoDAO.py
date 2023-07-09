@@ -1,7 +1,7 @@
 import sqlalchemy.orm as _orm
 from typing import List
 
-from . import IEnderecoDAO as _IEnderecoDAO
+from .interface import IEnderecoDAO as _IEnderecoDAO
 from ..models import endereco as _enderecoModel
 from ..schemas import enderecoSchema as _enderecoSchema
 

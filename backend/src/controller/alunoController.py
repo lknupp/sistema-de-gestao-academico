@@ -1,7 +1,7 @@
 import sqlalchemy.orm as _orm
 from typing import List
 
-from . import IPessoaController as _pessoaController
+from .interface import IPessoaController as _pessoaController
 from ..dao import alunoDAO as _alunoDAO
 from ..schemas import alunoSchema as _alunoSchema
 from ..models import aluno as _alunoModel
@@ -15,13 +15,13 @@ class AlunoController(_pessoaController.IPessoaController):
     def inserir(
         self, db: _orm.Session, pessoa: _alunoSchema.AlunoCreate
     ) -> _alunoSchema.Aluno:
-        res = _alunoModel.Aluno(**pessoa.dict())
+        res = _alunoModel.Aluno(**pessoa.model_dump())
         return self.aluno_dao.inserir(db, res)
 
     def atualizar(
         self, db: _orm.Session, pessoa: _alunoSchema.AlunoCreate
     ) -> _alunoSchema.Aluno:
-        res = _alunoModel.Aluno(**pessoa.dict())
+        res = _alunoModel.Aluno(**pessoa.model_dump())
         return self.aluno_dao.atualizar(db, res)
 
     def remover(self, db: _orm.Session, pessoa_id: int) -> _alunoSchema.Aluno:

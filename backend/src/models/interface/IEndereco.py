@@ -1,15 +1,17 @@
 import sqlalchemy as _sql
 from sqlalchemy.ext.declarative import declared_attr
-from ..database import sqlite as _database
+from ...database import sqlite as _database
 
 
-class TelefoneBase(_database.Base):
+class EnderecoBase(_database.Base):
     __abstract__ = True
 
-    id_telefone = _sql.Column(_sql.Integer, primary_key=True, index=True)
-    cod_pais = _sql.Column(_sql.Integer)
-    ddd = _sql.Column(_sql.Integer)
-    number = _sql.Column(_sql.Integer)
+    id_endereco = _sql.Column(_sql.Integer, primary_key=True, index=True)
+    logradouro = _sql.Column(_sql.String)
+    numero = _sql.Column(_sql.String)
+    local = _sql.Column(_sql.String)
+    cep = _sql.Column(_sql.String)
+    tipo = _sql.Column(_sql.String)
 
     @declared_attr
     def id_pessoa(cls):

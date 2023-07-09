@@ -2,7 +2,7 @@ import fastapi as _fastapi
 import sqlalchemy.orm as _orm
 from typing import List
 
-from . import IRoute as _IRoute
+from .interface import IRoute as _IRoute
 from ..database import sqlite as _database
 from ..schemas import enderecoSchema as _enderecoSchema
 from ..controller import enderecoController as _controller

@@ -1,7 +1,7 @@
 import sqlalchemy.orm as _orm
 from typing import List
 
-from . import IPessoaDAO as _IPessoaDAO
+from .interface import IPessoaDAO as _IPessoaDAO
 from ..models import aluno as _alunoModel
 from ..schemas import alunoSchema as _alunoSchema
 
