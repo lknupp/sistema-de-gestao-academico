@@ -5,7 +5,6 @@ from typing import List
 from . import IRoute as _IRoute
 from ..database import sqlite as _database
 from ..schemas import enderecoSchema as _enderecoSchema
-from ..schemas import mensagemSchema as _msgSchema
 from ..controller import enderecoController as _controller
 
 router = _fastapi.APIRouter()
@@ -13,7 +12,7 @@ controller = _controller.EnderecoController()
 
 
 class AlunoRoute(_IRoute.IRoute):
-    @router.post("/api/endereco/", response_model=_msgSchema.Mensagem)
+    @router.post("/api/endereco/", response_model=_enderecoSchema.Endereco)
     def criar(
         endereco: _enderecoSchema.EnderecoCreate,
         db: _orm.Session = _fastapi.Depends(_database.get_db)):
@@ -35,13 +34,13 @@ class AlunoRoute(_IRoute.IRoute):
             raise _fastapi.HTTPException(status_code=404, detail="Endereço não encontrado")
         return endereco
     
-    @router.put("/api/endereco/", response_model=_msgSchema.Mensagem)
+    @router.put("/api/endereco/", response_model=_enderecoSchema.Endereco)
     def atualizar(
         endereco: _enderecoSchema.Endereco,
         db: _orm.Session = _fastapi.Depends(_database.get_db)):
         return controller.atualizar(db, endereco)
     
-    @router.delete("/api/endereco/", response_model=_msgSchema.Mensagem)
+    @router.delete("/api/endereco/", response_model=_enderecoSchema.Endereco)
     def remover(
         endereco: _enderecoSchema.Endereco,
         db: _orm.Session = _fastapi.Depends(_database.get_db)):

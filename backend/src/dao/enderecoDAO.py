@@ -4,26 +4,25 @@ from typing import List
 from . import IEnderecoDAO as _IEnderecoDAO
 from ..models import endereco as _enderecoModel
 from ..schemas import enderecoSchema as _enderecoSchema
-from ..schemas import mensagemSchema as _msgSchema
 
 class EnderecoDAO(_IEnderecoDAO.IEnderecoDAO):
-    def inserir(self, db: _orm.Session, endereco: _enderecoModel.Endereco) -> _msgSchema.Mensagem:
+    def inserir(self, db: _orm.Session, endereco: _enderecoModel.Endereco) -> _enderecoSchema.Endereco:
         db.add(endereco)
         db.commit()
-        mensagem = _msgSchema.Mensagem(status=200, texto="Endereco cadastrado com sucesso.")
-        return mensagem
+        db.refresh(endereco)
+        return endereco
     
-    def atualizar(self, db: _orm.Session, endereco: _enderecoModel.Endereco) -> _msgSchema.Mensagem:
+    def atualizar(self, db: _orm.Session, endereco: _enderecoModel.Endereco) -> _enderecoModel.Endereco:
         db.query(_enderecoModel.Endereco).filter(_enderecoModel.Endereco.id == endereco.id).update(endereco)
         db.commit()
-        mensagem = _msgSchema.Mensagem(status=200, texto="Endereco atualizado com sucesso.")
-        return mensagem
+        db.refresh(endereco)
+        return endereco
     
-    def remover(self, db: _orm.Session, endereco_id: int) -> _msgSchema.Mensagem:
-        db.remove(db.query(_enderecoModel.Endereco).filter(_enderecoModel.Endereco.id == endereco_id).first())
+    def remover(self, db: _orm.Session, endereco_id: int) -> _enderecoModel.Endereco:
+        endereco = db.query(_enderecoModel.Endereco).filter(_enderecoModel.Endereco.id == endereco_id).first()
+        db.remove(endereco)
         db.commit()
-        mensagem = _msgSchema.Mensagem(status=200, texto="Endereco removido com sucesso.")
-        return mensagem
+        return endereco
     
     def buscar(self, db: _orm.Session, endereco_id: int) -> _enderecoModel.Endereco:
         endereco = db.query(_enderecoModel.Endereco).filter(_enderecoModel.Endereco.id == endereco_id).first()

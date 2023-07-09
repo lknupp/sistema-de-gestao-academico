@@ -4,7 +4,6 @@ from typing import List
 from . import IEnderecoController as _enderecoController
 from ..dao import enderecoDAO as _enderecoDAO
 from ..schemas import enderecoSchema as _enderecoSchema
-from ..schemas import mensagemSchema as _msgSchema
 from ..models import endereco as _enderecoModel
 
 class EnderecoController(_enderecoController.IEnderecoController):
@@ -12,15 +11,15 @@ class EnderecoController(_enderecoController.IEnderecoController):
         super().__init__()
         self.endereco_dao = _enderecoDAO.EnderecoDAO()
     
-    def inserir(self, db: _orm.Session, endereco: _enderecoSchema.EnderecoCreate) -> _msgSchema.Mensagem:
+    def inserir(self, db: _orm.Session, endereco: _enderecoSchema.EnderecoCreate) -> _enderecoSchema.Endereco:
         endereco_db = _enderecoModel.Endereco(**endereco.dict())
         return self.endereco_dao.inserir(db, endereco_db)
     
-    def atualizar(self, db: _orm.Session, endereco: _enderecoSchema.Endereco) -> _msgSchema.Mensagem:
+    def atualizar(self, db: _orm.Session, endereco: _enderecoSchema.Endereco) -> _enderecoSchema.Endereco:
         endereco_db = _enderecoModel.Endereco(**endereco.dict())
         return self.endereco_dao.atualizar(db, endereco_db)
     
-    def remover(self, db: _orm.Session, endereco: _enderecoSchema.Endereco) -> _msgSchema.Mensagem:
+    def remover(self, db: _orm.Session, endereco: _enderecoSchema.Endereco) -> _enderecoSchema.Endereco:
         endereco_db = _enderecoModel.Endereco(**endereco.dict())
         return self.endereco_dao.remover(db, endereco_db)
     
