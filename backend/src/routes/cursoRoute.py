@@ -5,7 +5,6 @@ from typing import List
 from . import IRoute as _IRoute
 from ..database import sqlite as _database
 from ..schemas import cursoSchema as _cursoSchema
-from ..schemas import mensagemSchema as _msgSchema
 from ..controller import cursoController as _controller
 
 router = _fastapi.APIRouter()

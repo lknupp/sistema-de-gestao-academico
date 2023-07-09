@@ -4,7 +4,6 @@ from typing import List
 from . import ICursoController as _ICursoController
 from ..dao import cursoDAO as _cursoDAO
 from ..schemas import cursoSchema as _cursoSchema
-from ..schemas import mensagemSchema as _msgSchema
 from ..models import curso as _cursoModel
 
 
@@ -20,10 +19,7 @@ class CursoController(_ICursoController.ICursoController):
         try:
             curso = self.curso_dao.inserir(db=db, curso=db_curso)
         except Exception as e:
-            msg = _msgSchema.Mensagem(
-                status=400,
-                texto="Erro ao adicionar curso.{}".format(e),
-            )
+            pass
         return curso
 
     def atualizar(self, db: _orm.Session, curso: _cursoSchema.CursoCreate):
@@ -33,10 +29,7 @@ class CursoController(_ICursoController.ICursoController):
             res = self.curso_dao.atualizar(db, db_curso)
             return res
         except Exception as e:
-            msg = _msgSchema.Mensagem(
-                status=400,
-                texto="Erro ao atualizar curso.\n{}".format(e),
-            )
+            pass
             return msg
 
     def remover(self, db: _orm.Session, curso_id: int):
@@ -44,10 +37,7 @@ class CursoController(_ICursoController.ICursoController):
             res = self.curso_dao.remover(db, curso_id)
             return res
         except Exception as e:
-            msg = _msgSchema.Mensagem(
-                status=400, texto="Erro ao remover curso.\n{}".format(e)
-            )
-            return msg
+            pass
 
     def buscar(self, db: _orm.Session, curso_id: int):
         return self.curso_dao.buscar(db, curso_id)

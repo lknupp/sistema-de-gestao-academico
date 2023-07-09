@@ -1,7 +1,6 @@
 import sqlalchemy.orm as _orm
 from typing import List
 from ..models import curso as _cursoModel
-from ..schemas import mensagemSchema as _msgSchema
 from . import ICursoDAO as _ICursoDAO
 
 
@@ -12,9 +11,6 @@ class CursoDAO(_ICursoDAO.ICursoDAO):
         db.add(curso)
         db.commit()
         db.refresh(curso)
-        msg = _msgSchema.Mensagem(
-            status=200, texto="Curso cadastrado com sucesso."
-        )
 
         return curso
 
@@ -23,9 +19,8 @@ class CursoDAO(_ICursoDAO.ICursoDAO):
             _cursoModel.Curso.id == curso.id).update(curso)
         db.commit()
         db.refresh(curso)
-        msg = _msgSchema.Mensagem(
-            status=200, texto="Curso atualizado com sucesso.")
-        return msg
+
+        return curso
 
     def remover(self, db: _orm.Session, curso_id: int):
         db.remove(db.query(_cursoModel.Curso).filter(
