@@ -5,12 +5,16 @@ from src.routes import enderecoRoute as _enderecoRoute
 from src.routes import professorRoute as _profRoute
 from src.routes import telefoneRoute as _telRoute
 from src.routes import cursoRoute as _cursoRoute
+from src.routes import disciplinaRoute as _disciplinaRoute
+from src.routes import prerequisitoRoute as _prerequisitoRoute
 
 app = _fastapi.FastAPI()
 
 _database.create_database()
 
 app.include_router(_cursoRoute.router)
+app.include_router(_disciplinaRoute.router)
+app.include_router(_prerequisitoRoute.router)
 app.include_router(_alunoRoute.router)
 app.include_router(_profRoute.router)
 app.include_router(_enderecoRoute.router)

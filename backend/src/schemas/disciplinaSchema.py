@@ -1,5 +1,6 @@
 import pydantic as _pydantic
 
+from . import prerequisitoSchema as _prerequisitoSchema
 
 class _DisciplinaBase(_pydantic.BaseModel):
     nome: str
@@ -13,6 +14,6 @@ class _DisciplinaBase(_pydantic.BaseModel):
 class DisciplinaCreate(_DisciplinaBase):
     pass
 
-
 class Disciplina(_DisciplinaBase):
     id_disciplina: int
+    
