@@ -19,7 +19,8 @@ class CursoRoute(_IRoute.IRoute):
     ):
         db_curso = controller.buscarCursoPorNome(db, curso_nome=curso.nome)
         if db_curso:
-            raise _fastapi.HTTPException(status_code=400, detail="Curso já cadastrado.")
+            raise _fastapi.HTTPException(
+                status_code=400, detail="Curso já cadastrado.")
         return controller.inserir(db, curso)
 
     @router.get("/api/curso/", response_model=List[_cursoSchema.Curso])
@@ -35,12 +36,18 @@ class CursoRoute(_IRoute.IRoute):
     def ler(curso_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         curso = controller.buscar(db, curso_id)
         if curso is None:
-            raise _fastapi.HTTPException(status_code=404, detail="Curso não encontrado")
+            raise _fastapi.HTTPException(
+                status_code=404, detail="Curso não encontrado")
         return curso
 
     @router.get("/api/curso/curso-nome/{curso_nome}", response_model=_cursoSchema.Curso)
     def ler(curso_nome: str, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         curso = controller.buscarCursoPorNome(db, curso_nome)
         if curso is None:
-            raise _fastapi.HTTPException(status_code=404, detail="Curso não encontrado")
+            raise _fastapi.HTTPException(
+                status_code=404, detail="Curso não encontrado")
         return curso
+
+    @router.put("/api/curso/atualizar/", response_model=_cursoSchema.Curso)
+    def atualizar(curso: _cursoSchema.Curso, db: _orm.Session = _fastapi.Depends(_database.get_db)):
+        return controller.atualizar(db, curso)

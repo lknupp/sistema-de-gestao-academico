@@ -1,3 +1,4 @@
+import sqlalchemy as _sql
 import sqlalchemy.orm as _orm
 from typing import List
 from ..models import curso as _cursoModel
@@ -13,20 +14,25 @@ class CursoDAO(_ICursoDAO.ICursoDAO):
         return curso
 
     def atualizar(self, db: _orm.Session, curso: _cursoModel.Curso):
-        db.query(_cursoModel.Curso).filter(_cursoModel.Curso.id == curso.id).update(
-            curso
-        )
-        db.commit()
-        db.refresh(curso)
+        curso_db = db.query(_cursoModel.Curso).get(curso.id)
+        curso_db.nome = curso.nome
+        curso_db.campus = curso.campus
 
-        return curso
+        db.commit()
+        db.refresh(curso_db)
+
+        return curso_db
 
     def remover(self, db: _orm.Session, curso_id: int):
         db.remove(
-            db.query(_cursoModel.Curso).filter(_cursoModel.Curso.id == curso_id).first()
+            db.query(_cursoModel.Curso).filter(
+                _cursoModel.Curso.id == curso_id).first()
         )
         db.commit()
         db.refresh()
+
+    def buscar(self, db: _orm.Session, curso_id: int) -> _cursoModel.Curso:
+        return db.query(_cursoModel.Curso).filter(_cursoModel.Curso.id == curso_id).first()
 
     def buscarTodos(self, db: _orm.Session) -> List[_cursoModel.Curso]:
         return db.query(_cursoModel.Curso).all()

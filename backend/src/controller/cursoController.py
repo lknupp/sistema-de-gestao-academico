@@ -1,6 +1,6 @@
 import sqlalchemy.orm as _orm
 from typing import List
-
+import fastapi as _fastapi
 from .interface import ICursoController as _ICursoController
 from ..dao import cursoDAO as _cursoDAO
 from ..schemas import cursoSchema as _cursoSchema
@@ -14,8 +14,7 @@ class CursoController(_ICursoController.ICursoController):
 
     # TODO: Implementar Erros
     def inserir(self, db: _orm.Session, curso: _cursoSchema.CursoCreate):
-        db_curso = _cursoModel.Curso(**curso.model_dump())
-        print(db)
+        db_curso = _cursoModel.Curso(**curso.dict())
         try:
             curso = self.curso_dao.inserir(db=db, curso=db_curso)
         except Exception as e:
@@ -23,13 +22,15 @@ class CursoController(_ICursoController.ICursoController):
         return curso
 
     def atualizar(self, db: _orm.Session, curso: _cursoSchema.CursoCreate):
-        db_curso = _cursoModel.Curso(**curso.model_dump())
-
+        curso = _cursoModel.Curso(**curso.dict())
+        if curso is None:
+            raise _fastapi.HTTPException(
+                status_code=404, detail="Curso não encontrado")
         try:
-            res = self.curso_dao.atualizar(db, db_curso)
-            return res
+            curso = self.curso_dao.atualizar(db, curso)
         except Exception as e:
             pass
+        return curso
 
     def remover(self, db: _orm.Session, curso_id: int):
         try:
@@ -39,7 +40,7 @@ class CursoController(_ICursoController.ICursoController):
             pass
 
     def buscar(self, db: _orm.Session, curso_id: int):
-        return self.curso_dao.buscar(db, curso_id)
+        return self.curso_dao.buscar(db=db, curso_id=curso_id)
 
     def buscarTodos(self, db: _orm.Session):
         return self.curso_dao.buscarTodos(db)
