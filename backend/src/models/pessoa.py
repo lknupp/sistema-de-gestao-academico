@@ -1,8 +1,6 @@
 import sqlalchemy as _sql
 from ..database import sqlite as _database
-import sqlalchemy.orm as _orm
 from sqlalchemy.ext.declarative import declared_attr
-from . import endereco as _endereco
 
 
 class Pessoa(_database.Base):
@@ -13,3 +11,7 @@ class Pessoa(_database.Base):
     cpf = _sql.Column(_sql.String)
     sexo = _sql.Column(_sql.String)
     raca = _sql.Column(_sql.String)
+
+    @declared_attr
+    def id_curso(cls):
+        return _sql.Column(_sql.Integer, _sql.ForeignKey('curso.id_curso'))
