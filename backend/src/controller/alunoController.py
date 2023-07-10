@@ -12,24 +12,20 @@ class AlunoController(_pessoaController.IPessoaController):
         super().__init__()
         self.aluno_dao = _alunoDAO.AlunoDAO()
 
-    def inserir(
-        self, db: _orm.Session, pessoa: _alunoSchema.AlunoCreate
-    ) -> _alunoSchema.Aluno:
+    def inserir(self, db: _orm.Session, pessoa: _alunoSchema.AlunoCreate) -> _alunoSchema.Aluno:
         res = _alunoModel.Aluno(**pessoa.model_dump())
         return self.aluno_dao.inserir(db, res)
 
-    def atualizar(
-        self, db: _orm.Session, pessoa: _alunoSchema.AlunoCreate
-    ) -> _alunoSchema.Aluno:
+    def atualizar(self, db: _orm.Session, pessoa: _alunoSchema.Aluno) -> _alunoSchema.Aluno:
         res = _alunoModel.Aluno(**pessoa.model_dump())
         return self.aluno_dao.atualizar(db, res)
 
-    def remover(self, db: _orm.Session, pessoa_id: int) -> _alunoSchema.Aluno:
-        res = self.aluno_dao.remover(db, pessoa_id)
+    def remover(self, db: _orm.Session, id_pessoa: int) -> _alunoSchema.Aluno:
+        res = self.aluno_dao.remover(db, id_pessoa)
         return res
 
-    def buscar(self, db: _orm.Session, pessoa_id: int) -> _alunoSchema.Aluno:
-        res = self.aluno_dao.buscar(db, pessoa_id)
+    def buscar(self, db: _orm.Session, id_pessoa: int) -> _alunoSchema.Aluno:
+        res = self.aluno_dao.buscar(db, id_pessoa)
         return res
 
     def buscarTodos(self, db: _orm.Session) -> List[_alunoSchema.Aluno]:

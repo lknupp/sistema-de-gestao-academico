@@ -1,6 +1,6 @@
 import sqlalchemy.orm as _orm
 from typing import List
-
+import fastapi as _fastapi
 from .interface import IEnderecoController as _enderecoController
 from ..dao import enderecoDAO as _enderecoDAO
 from ..schemas import enderecoSchema as _enderecoSchema
@@ -26,14 +26,24 @@ class EnderecoController(_enderecoController.IEnderecoController):
     def atualizar(
         self, db: _orm.Session, endereco: _enderecoSchema.Endereco
     ) -> _enderecoSchema.Endereco:
+        endereco_db = self.endereco_dao.buscar(db, endereco.id_endereco)
+        if not endereco_db:
+            raise _fastapi.HTTPException(
+                status_code=400, detail="Endereco não encontrado"
+            )
         endereco_db = self.model(**endereco.model_dump())
         return self.endereco_dao.atualizar(db, endereco_db)
 
     def remover(
-        self, db: _orm.Session, endereco: _enderecoSchema.Endereco
+        self, db: _orm.Session, endereco_id: int
     ) -> _enderecoSchema.Endereco:
-        endereco_db = self.model(**endereco.model_dump())
-        return self.endereco_dao.remover(db, endereco_db)
+        try:
+            res = self.endereco_dao.remover(db, endereco_id)
+        except Exception as e:
+            raise _fastapi.HTTPException(
+                status_code=400, detail="{}".format(str(e))
+            )
+        return res
 
     def buscar(self, db: _orm.Session, endereco_id: int) -> _enderecoSchema.Endereco:
         return self.endereco_dao.buscar(db, endereco_id)

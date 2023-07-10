@@ -7,42 +7,32 @@ from ..schemas import telefoneSchema as _telefoneSchema
 
 
 class TelefoneAlunoDAO(_ITelefoneDAO.ITelefoneDAO):
-    def inserir(
-        self, db: _orm.Session, telefone: _telefoneModel.TelefoneAluno
-    ) -> _telefoneSchema.Telefone:
+    def inserir(self, db: _orm.Session, telefone: _telefoneModel.TelefoneAluno) -> _telefoneSchema.Telefone:
         db.add(telefone)
         db.commit()
         db.refresh(telefone)
         return telefone
 
-    def atualizar(
-        self, db: _orm.Session, telefone: _telefoneModel.TelefoneAluno
-    ) -> _telefoneModel.TelefoneAluno:
-        db.query(_telefoneModel.TelefoneAluno).filter(
-            _telefoneModel.TelefoneAluno.id == telefone.id
-        ).update(telefone)
+    def atualizar(self, db: _orm.Session, telefone: _telefoneModel.TelefoneAluno) -> _telefoneModel.TelefoneAluno:
+        db.merge(telefone)
         db.commit()
         db.refresh(telefone)
         return telefone
 
-    def remover(
-        self, db: _orm.Session, telefone_id: int
-    ) -> _telefoneModel.TelefoneAluno:
+    def remover(self, db: _orm.Session, id_telefone: int) -> _telefoneModel.TelefoneAluno:
         telefone = (
             db.query(_telefoneModel.TelefoneAluno)
-            .filter(_telefoneModel.TelefoneAluno.id == telefone_id)
+            .filter(_telefoneModel.TelefoneAluno.id_telefone == id_telefone)
             .first()
         )
-        db.remove(telefone)
+        db.delete(telefone)
         db.commit()
         return telefone
 
-    def buscar(
-        self, db: _orm.Session, telefone_id: int
-    ) -> _telefoneModel.TelefoneAluno:
+    def buscar(self, db: _orm.Session, id_telefone: int) -> _telefoneModel.TelefoneAluno:
         telefone = (
             db.query(_telefoneModel.TelefoneAluno)
-            .filter(_telefoneModel.TelefoneAluno.id == telefone_id)
+            .filter(_telefoneModel.TelefoneAluno.id_telefone == id_telefone)
             .first()
         )
         return telefone
@@ -61,42 +51,32 @@ class TelefoneAlunoDAO(_ITelefoneDAO.ITelefoneDAO):
 
 
 class TelefoneProfessorDAO(_ITelefoneDAO.ITelefoneDAO):
-    def inserir(
-        self, db: _orm.Session, telefone: _telefoneModel.TelefoneProfessor
-    ) -> _telefoneSchema.Telefone:
+    def inserir(self, db: _orm.Session, telefone: _telefoneModel.TelefoneProfessor) -> _telefoneSchema.Telefone:
         db.add(telefone)
         db.commit()
         db.refresh(telefone)
         return telefone
 
-    def atualizar(
-        self, db: _orm.Session, telefone: _telefoneModel.TelefoneProfessor
-    ) -> _telefoneModel.TelefoneProfessor:
-        db.query(_telefoneModel.TelefoneProfessor).filter(
-            _telefoneModel.TelefoneProfessor.id == telefone.id
-        ).update(telefone)
+    def atualizar(self, db: _orm.Session, telefone: _telefoneModel.TelefoneProfessor) -> _telefoneModel.TelefoneProfessor:
+        db.merge(telefone)
         db.commit()
         db.refresh(telefone)
         return telefone
 
-    def remover(
-        self, db: _orm.Session, telefone_id: int
-    ) -> _telefoneModel.TelefoneProfessor:
+    def remover(self, db: _orm.Session, id_telefone: int) -> _telefoneModel.TelefoneProfessor:
         telefone = (
             db.query(_telefoneModel.TelefoneProfessor)
-            .filter(_telefoneModel.TelefoneProfessor.id == telefone_id)
+            .filter(_telefoneModel.TelefoneProfessor.id_telefone == id_telefone)
             .first()
         )
-        db.remove(telefone)
+        db.delete(telefone)
         db.commit()
         return telefone
 
-    def buscar(
-        self, db: _orm.Session, telefone_id: int
-    ) -> _telefoneModel.TelefoneProfessor:
+    def buscar(self, db: _orm.Session, id_telefone: int) -> _telefoneModel.TelefoneProfessor:
         telefone = (
             db.query(_telefoneModel.TelefoneProfessor)
-            .filter(_telefoneModel.TelefoneProfessor.id == telefone_id)
+            .filter(_telefoneModel.TelefoneProfessor.id_telefone == id_telefone)
             .first()
         )
         return telefone
@@ -105,9 +85,7 @@ class TelefoneProfessorDAO(_ITelefoneDAO.ITelefoneDAO):
         telefones = db.query(_telefoneModel.TelefoneProfessor).all()
         return telefones
 
-    def buscarPorDdd(
-        self, db: _orm.Session, ddd: int
-    ) -> _telefoneModel.TelefoneProfessor:
+    def buscarPorDdd(self, db: _orm.Session, ddd: int) -> _telefoneModel.TelefoneProfessor:
         telefone = (
             db.query(_telefoneModel.TelefoneProfessor)
             .filter(_telefoneModel.TelefoneProfessor.ddd == ddd)

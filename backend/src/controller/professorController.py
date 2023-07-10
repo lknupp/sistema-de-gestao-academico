@@ -12,24 +12,20 @@ class ProfessorController(_pessoaController.IPessoaController):
         super().__init__()
         self.professor_dao = _professorDAO.ProfessorDAO()
 
-    def inserir(
-        self, db: _orm.Session, pessoa: _professorSchema.ProfessorCreate
-    ) -> _professorSchema.Professor:
+    def inserir(self, db: _orm.Session, pessoa: _professorSchema.ProfessorCreate) -> _professorSchema.Professor:
         res = _professorModel.Professor(**pessoa.model_dump())
         return self.professor_dao.inserir(db, res)
 
-    def atualizar(
-        self, db: _orm.Session, pessoa: _professorSchema.ProfessorCreate
-    ) -> _professorSchema.Professor:
+    def atualizar(self, db: _orm.Session, pessoa: _professorSchema.Professor) -> _professorSchema.Professor:
         res = _professorModel.Professor(**pessoa.model_dump())
         return self.professor_dao.atualizar(db, res)
 
-    def remover(self, db: _orm.Session, pessoa_id: int) -> _professorSchema.Professor:
-        res = self.professor_dao.remover(db, pessoa_id)
+    def remover(self, db: _orm.Session, id_pessoa: int) -> _professorSchema.Professor:
+        res = self.professor_dao.remover(db, id_pessoa)
         return res
 
-    def buscar(self, db: _orm.Session, pessoa_id: int) -> _professorSchema.Professor:
-        res = self.professor_dao.buscar(db, pessoa_id)
+    def buscar(self, db: _orm.Session, id_pessoa: int) -> _professorSchema.Professor:
+        res = self.professor_dao.buscar(db, id_pessoa)
         return res
 
     def buscarTodos(self, db: _orm.Session) -> List[_professorSchema.Professor]:

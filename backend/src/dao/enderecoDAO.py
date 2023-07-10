@@ -18,9 +18,7 @@ class EnderecoAlunoDAO(_IEnderecoDAO.IEnderecoDAO):
     def atualizar(
         self, db: _orm.Session, endereco: _enderecoModel.EnderecoAluno
     ) -> _enderecoModel.EnderecoAluno:
-        db.query(_enderecoModel.EnderecoAluno).filter(
-            _enderecoModel.EnderecoAluno.id == endereco.id
-        ).update(endereco)
+        db.merge(endereco)
         db.commit()
         db.refresh(endereco)
         return endereco
@@ -30,10 +28,10 @@ class EnderecoAlunoDAO(_IEnderecoDAO.IEnderecoDAO):
     ) -> _enderecoModel.EnderecoAluno:
         endereco = (
             db.query(_enderecoModel.EnderecoAluno)
-            .filter(_enderecoModel.EnderecoAluno.id == endereco_id)
+            .filter(_enderecoModel.EnderecoAluno.id_endereco == endereco_id)
             .first()
         )
-        db.remove(endereco)
+        db.delete(endereco)
         db.commit()
         return endereco
 
@@ -42,7 +40,7 @@ class EnderecoAlunoDAO(_IEnderecoDAO.IEnderecoDAO):
     ) -> _enderecoModel.EnderecoAluno:
         endereco = (
             db.query(_enderecoModel.EnderecoAluno)
-            .filter(_enderecoModel.EnderecoAluno.id == endereco_id)
+            .filter(_enderecoModel.EnderecoAluno.id_endereco == endereco_id)
             .first()
         )
         return endereco
@@ -74,9 +72,7 @@ class EnderecoProfessorDAO(_IEnderecoDAO.IEnderecoDAO):
     def atualizar(
         self, db: _orm.Session, endereco: _enderecoModel.EnderecoProfessor
     ) -> _enderecoModel.EnderecoProfessor:
-        db.query(_enderecoModel.EnderecoProfessor).filter(
-            _enderecoModel.EnderecoProfessor.id == endereco.id
-        ).update(endereco)
+        db.merge(endereco)
         db.commit()
         db.refresh(endereco)
         return endereco
@@ -89,7 +85,7 @@ class EnderecoProfessorDAO(_IEnderecoDAO.IEnderecoDAO):
             .filter(_enderecoModel.EnderecoProfessor.id == endereco_id)
             .first()
         )
-        db.remove(endereco)
+        db.delete(endereco)
         db.commit()
         return endereco
 
