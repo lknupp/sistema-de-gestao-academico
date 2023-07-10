@@ -15,7 +15,6 @@ class PrerequisitoDAO(_IPrerequisitoDAO.IPrerequisitoDAO):
     def atualizar(self, db: _orm.Session, prerequisito: _prerequisitoModel.Prerequisito) -> _prerequisitoSchema.Prerequisito:
         db.merge(prerequisito)
         db.commit()
-        db.refresh(prerequisito)
         return prerequisito
 
     def remover(self, db: _orm.Session, id_prerequisito: int) -> _prerequisitoSchema.Prerequisito:

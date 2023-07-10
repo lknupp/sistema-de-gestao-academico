@@ -14,7 +14,7 @@ class CursoController(_ICursoController.ICursoController):
 
     # TODO: Implementar Erros
     def inserir(self, db: _orm.Session, curso: _cursoSchema.CursoCreate):
-        db_curso = _cursoModel.Curso(**curso.model_dump())
+        db_curso = _cursoModel.Curso(**curso.dict())
         print(db)
         try:
             curso = self.curso_dao.inserir(db=db, curso=db_curso)
@@ -23,7 +23,7 @@ class CursoController(_ICursoController.ICursoController):
         return curso
 
     def atualizar(self, db: _orm.Session, curso: _cursoSchema.CursoCreate):
-        db_curso = _cursoModel.Curso(**curso.model_dump())
+        db_curso = _cursoModel.Curso(**curso.dict())
 
         try:
             res = self.curso_dao.atualizar(db, db_curso)

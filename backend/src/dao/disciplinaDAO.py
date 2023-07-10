@@ -15,7 +15,6 @@ class DisciplinaDAO(_IDisciplinaDAO.IDisciplinaDAO):
     def atualizar(self, db: _orm.Session, disciplina: _disciplinaModel.Disciplina) -> _disciplinaSchema.Disciplina:
         db.merge(disciplina)
         db.commit()
-        db.refresh(disciplina)
         return disciplina
 
     def remover(self, db: _orm.Session, id_disciplina: int) -> _disciplinaSchema.Disciplina:

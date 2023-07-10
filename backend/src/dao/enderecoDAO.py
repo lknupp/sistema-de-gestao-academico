@@ -20,7 +20,6 @@ class EnderecoAlunoDAO(_IEnderecoDAO.IEnderecoDAO):
     ) -> _enderecoModel.EnderecoAluno:
         db.merge(endereco)
         db.commit()
-        db.refresh(endereco)
         return endereco
 
     def remover(
@@ -74,7 +73,6 @@ class EnderecoProfessorDAO(_IEnderecoDAO.IEnderecoDAO):
     ) -> _enderecoModel.EnderecoProfessor:
         db.merge(endereco)
         db.commit()
-        db.refresh(endereco)
         return endereco
 
     def remover(

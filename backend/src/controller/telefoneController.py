@@ -20,13 +20,13 @@ class TelefoneController(_telefoneController.ITelefoneController):
     def inserir(
         self, db: _orm.Session, telefone: _telefoneSchema.TelefoneCreate
     ) -> _telefoneSchema.Telefone:
-        telefone_db = self.model(**telefone.model_dump())
+        telefone_db = self.model(**telefone.dict())
         return self.telefone_dao.inserir(db, telefone_db)
 
     def atualizar(
         self, db: _orm.Session, telefone: _telefoneSchema.Telefone
     ) -> _telefoneSchema.Telefone:
-        telefone_db = self.model(**telefone.model_dump())
+        telefone_db = self.model(**telefone.dict())
         return self.telefone_dao.atualizar(db, telefone_db)
 
     def remover(

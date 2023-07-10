@@ -16,7 +16,6 @@ class AlunoDAO(_IPessoaDAO.IPessoaDAO):
     def atualizar(self, db: _orm.Session, pessoa: _alunoModel.Aluno) -> _alunoSchema.Aluno:
         db.merge(pessoa)
         db.commit()
-        db.refresh(pessoa)
         return pessoa
 
     def remover(self, db: _orm.Session, id_pessoa: int) -> _alunoSchema.Aluno:

@@ -20,7 +20,7 @@ class EnderecoController(_enderecoController.IEnderecoController):
     def inserir(
         self, db: _orm.Session, endereco: _enderecoSchema.EnderecoCreate
     ) -> _enderecoSchema.Endereco:
-        endereco_db = self.model(**endereco.model_dump())
+        endereco_db = self.model(**endereco.dict())
         return self.endereco_dao.inserir(db, endereco_db)
 
     def atualizar(
@@ -31,7 +31,7 @@ class EnderecoController(_enderecoController.IEnderecoController):
             raise _fastapi.HTTPException(
                 status_code=400, detail="Endereco não encontrado"
             )
-        endereco_db = self.model(**endereco.model_dump())
+        endereco_db = self.model(**endereco.dict())
         return self.endereco_dao.atualizar(db, endereco_db)
 
     def remover(

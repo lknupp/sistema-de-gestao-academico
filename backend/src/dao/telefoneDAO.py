@@ -60,7 +60,6 @@ class TelefoneProfessorDAO(_ITelefoneDAO.ITelefoneDAO):
     def atualizar(self, db: _orm.Session, telefone: _telefoneModel.TelefoneProfessor) -> _telefoneModel.TelefoneProfessor:
         db.merge(telefone)
         db.commit()
-        db.refresh(telefone)
         return telefone
 
     def remover(self, db: _orm.Session, id_telefone: int) -> _telefoneModel.TelefoneProfessor:

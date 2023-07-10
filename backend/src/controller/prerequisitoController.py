@@ -12,11 +12,11 @@ class PrerequisitoController(_prerequisitoController.IPrerequisitoController):
         self.prerequisito_dao = _prerequisitoDAO.PrerequisitoDAO()
 
     def inserir(self, db: _orm.Session, prerequisito: _prerequisitoSchema.PrerequisitoCreate) -> _prerequisitoSchema.Prerequisito:
-        res = _prerequisitoModel.Prerequisito(**prerequisito.model_dump())
+        res = _prerequisitoModel.Prerequisito(**prerequisito.dict())
         return self.prerequisito_dao.inserir(db, res)
 
     def atualizar(self, db: _orm.Session, prerequisito: _prerequisitoSchema.Prerequisito) -> _prerequisitoSchema.Prerequisito:
-        res = _prerequisitoModel.Prerequisito(**prerequisito.model_dump())
+        res = _prerequisitoModel.Prerequisito(**prerequisito.dict())
         return self.prerequisito_dao.atualizar(db, res)
 
     def remover(self, db: _orm.Session, id_prerequisito: int) -> _prerequisitoSchema.Prerequisito:

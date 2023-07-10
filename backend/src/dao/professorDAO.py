@@ -16,7 +16,6 @@ class ProfessorDAO(_IPessoaDAO.IPessoaDAO):
     def atualizar(self, db: _orm.Session, pessoa: _professorModel.Professor) -> _professorSchema.Professor:
         db.merge(pessoa)
         db.commit()
-        db.refresh(pessoa)
         return pessoa
 
     def remover(self, db: _orm.Session, id_pessoa: int) -> _professorSchema.Professor:

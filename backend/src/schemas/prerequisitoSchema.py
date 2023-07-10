@@ -3,7 +3,7 @@ import pydantic as _pydantic
 
 class _PrerequisitoBase(_pydantic.BaseModel):
     id_disciplina: int
-
+    prerequisito: int
     class Config:
         orm_mode = True
 

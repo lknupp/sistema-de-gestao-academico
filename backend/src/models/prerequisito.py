@@ -8,4 +8,6 @@ class Prerequisito(_database.Base):
     id_prerequisito = _sql.Column(_sql.Integer, primary_key=True, index=True)
     
     id_disciplina = _sql.Column(_sql.Integer, _sql.ForeignKey('disciplina.id_disciplina'))
-    disciplina = _orm.relationship('Disciplina', back_populates='prerequisitos')
+    disciplina = _orm.relationship('Disciplina', foreign_keys=[id_disciplina], back_populates='prerequisitos')
+
+    prerequisito = _sql.Column(_sql.Integer)

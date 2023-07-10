@@ -13,11 +13,11 @@ class DisciplinaController(_disciplinaController.IDisciplinaController):
         self.disciplina_dao = _disciplinaDAO.DisciplinaDAO()
 
     def inserir(self, db: _orm.Session, disciplina: _disciplinaSchema.DisciplinaCreate) -> _disciplinaSchema.Disciplina:
-        res = _disciplinaModel.Disciplina(**disciplina.model_dump())
+        res = _disciplinaModel.Disciplina(**disciplina.dict())
         return self.disciplina_dao.inserir(db, res)
 
     def atualizar(self, db: _orm.Session, disciplina: _disciplinaSchema.Disciplina) -> _disciplinaSchema.Disciplina:
-        res = _disciplinaModel.Disciplina(**disciplina.model_dump())
+        res = _disciplinaModel.Disciplina(**disciplina.dict())
         return self.disciplina_dao.atualizar(db, res)
 
     def remover(self, db: _orm.Session, id_disciplina: int) -> _disciplinaSchema.Disciplina:
