@@ -14,4 +14,4 @@ class CursoCreate(_CursoBase):
 
 
 class Curso(_CursoBase):
-    id: int
+    id_curso: int
