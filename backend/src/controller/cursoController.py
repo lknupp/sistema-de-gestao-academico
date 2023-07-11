@@ -1,5 +1,6 @@
 import sqlalchemy.orm as _orm
 from typing import List
+from http import HTTPStatus
 import fastapi as _fastapi
 from .interface import ICursoController as _ICursoController
 from ..dao import cursoDAO as _cursoDAO
@@ -45,4 +46,9 @@ class CursoController(_ICursoController.ICursoController):
         return self.curso_dao.buscarTodos(db)
 
     def buscarCursoPorNome(self, db: _orm.Session, curso_nome: str):
-        return self.curso_dao.buscarCursoPorNome(db=db, curso_nome=curso_nome)
+        curso_db: _cursoModel.Curso = self.curso_dao.buscarCursoPorNome(
+            db=db, curso_nome=curso_nome)
+        if curso_db is None:
+            raise _fastapi.HTTPException(
+                status_code=HTTPStatus.NO_CONTENT.value, detail=HTTPStatus.NO_CONTENT.phrase)
+        return curso_db
