@@ -1,7 +1,7 @@
 import fastapi as _fastapi
 import sqlalchemy.orm as _orm
 from typing import List
-
+from http import HTTPStatus
 from .interface import IRoute as _IRoute
 from ..database import sqlite as _database
 from ..schemas import telefoneSchema as _telefoneSchema
@@ -11,8 +11,9 @@ router = _fastapi.APIRouter()
 controllerAluno = _controller.TelefoneController("aluno")
 controllerProfessor = _controller.TelefoneController("professor")
 
+
 class TelefoneAlunoRoute(_IRoute.IRoute):
-    @router.post("/api/aluno/telefone/", response_model=_telefoneSchema.Telefone)
+    @router.post("/api/aluno/telefone/", response_model=_telefoneSchema.Telefone, status_code=HTTPStatus.CREATED.value, description=HTTPStatus.CREATED.phrase)
     def criar(telefone: _telefoneSchema.TelefoneCreate, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         return controllerAluno.inserir(db, telefone)
 
@@ -31,7 +32,8 @@ class TelefoneAlunoRoute(_IRoute.IRoute):
     @router.delete("/api/aluno/telefone/", response_model=_telefoneSchema.Telefone)
     def remover(telefone_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         return controllerAluno.remover(db, telefone_id)
-    
+
+
 class TelefoneProfessorRoute(_IRoute.IRoute):
     @router.post("/api/professor/telefone/", response_model=_telefoneSchema.Telefone)
     def criar(telefone: _telefoneSchema.TelefoneCreate, db: _orm.Session = _fastapi.Depends(_database.get_db)):

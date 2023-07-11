@@ -1,7 +1,7 @@
 import fastapi as _fastapi
 import sqlalchemy.orm as _orm
 from typing import List
-
+from http import HTTPStatus
 from .interface import IRoute as _IRoute
 from ..database import sqlite as _database
 from ..schemas import enderecoSchema as _enderecoSchema
@@ -11,8 +11,9 @@ router = _fastapi.APIRouter()
 controllerAluno = _controller.EnderecoController("aluno")
 controllerProfessor = _controller.EnderecoController("professor")
 
+
 class AlunoRoute(_IRoute.IRoute):
-    @router.post("/api/aluno/endereco/", response_model=_enderecoSchema.Endereco)
+    @router.post("/api/aluno/endereco/", response_model=_enderecoSchema.Endereco, status_code=HTTPStatus.CREATED.value, description=HTTPStatus.CREATED.phrase)
     def criar(endereco: _enderecoSchema.EnderecoCreate, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         return controllerAluno.inserir(db, endereco)
 
@@ -31,6 +32,7 @@ class AlunoRoute(_IRoute.IRoute):
     @router.delete("/api/aluno/endereco/", response_model=_enderecoSchema.Endereco)
     def remover(endereco_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         return controllerAluno.remover(db, endereco_id)
+
 
 class EnderecoProfessorRoute(_IRoute.IRoute):
     @router.post("/api/professor/endereco/", response_model=_enderecoSchema.Endereco)

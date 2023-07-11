@@ -1,6 +1,7 @@
 import fastapi as _fastapi
 import sqlalchemy.orm as _orm
 from typing import List
+from http import HTTPStatus
 
 from .interface import IRoute as _IRoute
 from ..database import sqlite as _database
@@ -12,7 +13,7 @@ controller = _controller.CursoController()
 
 
 class CursoRoute(_IRoute.IRoute):
-    @router.post("/api/curso/", response_model=_cursoSchema.Curso)
+    @router.post("/api/curso/", response_model=_cursoSchema.Curso, status_code=HTTPStatus.CREATED.value, description=HTTPStatus.CREATED.phrase)
     def criar(
         curso: _cursoSchema.CursoCreate,
         db: _orm.Session = _fastapi.Depends(_database.get_db),
