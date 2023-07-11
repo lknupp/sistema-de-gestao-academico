@@ -14,13 +14,10 @@ class CursoDAO(_ICursoDAO.ICursoDAO):
         return curso
 
     def atualizar(self, db: _orm.Session, curso: _cursoModel.Curso):
-        curso_db = db.query(_cursoModel.Curso).get(curso.id)
-        curso_db.nome = curso.nome
-        curso_db.campus = curso.campus
-
+        db.merge(curso)
         db.commit()
-        db.refresh(curso_db)
-        return curso_db
+        db.refresh(curso)
+        return curso
 
     def remover(self, db: _orm.Session, curso_id: int):
         curso_db: _cursoModel.Curso = self.buscar(db, curso_id)
