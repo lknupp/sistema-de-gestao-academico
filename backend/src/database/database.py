@@ -1,7 +1,10 @@
 import sqlalchemy as _sql
 import sqlalchemy.ext.declarative as _declarative
 import sqlalchemy.orm as _orm
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
 
 DATABASE = os.getenv('DATABASE')
 USER = os.getenv('APP_USER')
