@@ -13,11 +13,11 @@ class AlunoController(_pessoaController.IPessoaController):
         self.aluno_dao = _alunoDAO.AlunoDAO()
 
     def inserir(self, db: _orm.Session, pessoa: _alunoSchema.AlunoCreate) -> _alunoSchema.Aluno:
-        res = _alunoModel.Aluno(**pessoa.model_dump())
+        res = _alunoModel.Aluno(**pessoa.dict())
         return self.aluno_dao.inserir(db, res)
 
     def atualizar(self, db: _orm.Session, pessoa: _alunoSchema.Aluno) -> _alunoSchema.Aluno:
-        res = _alunoModel.Aluno(**pessoa.model_dump())
+        res = _alunoModel.Aluno(**pessoa.dict())
         return self.aluno_dao.atualizar(db, res)
 
     def remover(self, db: _orm.Session, id_pessoa: int) -> _alunoSchema.Aluno:
