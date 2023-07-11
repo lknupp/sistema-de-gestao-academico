@@ -34,8 +34,7 @@ class CursoController(_ICursoController.ICursoController):
 
     def remover(self, db: _orm.Session, curso_id: int):
         try:
-            res = self.curso_dao.remover(db, curso_id)
-            return res
+            return self.curso_dao.remover(db, curso_id)
         except Exception as e:
             pass
 

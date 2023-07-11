@@ -52,3 +52,7 @@ class CursoRoute(_IRoute.IRoute):
     @router.put("/api/curso/atualizar/", response_model=_cursoSchema.Curso)
     def atualizar(curso: _cursoSchema.Curso, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         return controller.atualizar(db, curso)
+
+    @router.delete("/api/curso/remover/", response_model=_cursoSchema.Curso)
+    def remover(curso_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
+        return controller.remover(db, curso_id)

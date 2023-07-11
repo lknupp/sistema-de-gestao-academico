@@ -20,19 +20,17 @@ class CursoDAO(_ICursoDAO.ICursoDAO):
 
         db.commit()
         db.refresh(curso_db)
-
         return curso_db
 
     def remover(self, db: _orm.Session, curso_id: int):
-        db.remove(
-            db.query(_cursoModel.Curso).filter(
-                _cursoModel.Curso.id == curso_id).first()
-        )
+        curso_db: _cursoModel.Curso = self.buscar(db, curso_id)
+        db.delete(curso_db)
         db.commit()
-        db.refresh()
+
+        return curso_db
 
     def buscar(self, db: _orm.Session, curso_id: int) -> _cursoModel.Curso:
-        return db.query(_cursoModel.Curso).filter(_cursoModel.Curso.id == curso_id).first()
+        return db.query(_cursoModel.Curso).filter(_cursoModel.Curso.id_curso == curso_id).first()
 
     def buscarTodos(self, db: _orm.Session) -> List[_cursoModel.Curso]:
         return db.query(_cursoModel.Curso).all()
