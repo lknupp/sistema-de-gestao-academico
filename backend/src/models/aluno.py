@@ -1,6 +1,6 @@
 import sqlalchemy as _sql
 
-from ..database import sqlite as _database
+from ..database import database as _database
 from . import pessoa as _pessoa
 
 
