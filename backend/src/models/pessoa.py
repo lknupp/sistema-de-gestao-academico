@@ -1,5 +1,5 @@
 import sqlalchemy as _sql
-from ..database import sqlite as _database
+from ..database import database as _database
 from sqlalchemy.ext.declarative import declared_attr
 
 

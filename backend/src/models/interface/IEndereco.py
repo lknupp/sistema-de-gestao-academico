@@ -1,6 +1,5 @@
 import sqlalchemy as _sql
-from sqlalchemy.ext.declarative import declared_attr
-from ...database import sqlite as _database
+from ...database import database as _database
 
 
 class EnderecoBase(_database.Base):
@@ -13,10 +12,6 @@ class EnderecoBase(_database.Base):
     cep = _sql.Column(_sql.String)
     tipo = _sql.Column(_sql.String)
 
-    @declared_attr
-    def id_pessoa(cls):
-        return _sql.Column(_sql.Integer, _sql.ForeignKey(cls._get_pessoa_table_name()))
-
     @classmethod
-    def _get_pessoa_table_name(cls):
+    def _get_table_name(cls):
         raise NotImplementedError("Subclasses devem implementar esse método.")

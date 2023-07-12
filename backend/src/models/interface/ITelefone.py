@@ -1,6 +1,6 @@
 import sqlalchemy as _sql
 from sqlalchemy.ext.declarative import declared_attr
-from ...database import sqlite as _database
+from ...database import database as _database
 
 
 class TelefoneBase(_database.Base):

@@ -3,7 +3,7 @@ import sqlalchemy.orm as _orm
 from typing import List
 from http import HTTPStatus
 from .interface import IRoute as _IRoute
-from ..database import sqlite as _database
+from ..database import database as _database
 from ..schemas import prerequisitoSchema as _prerequisitoSchema
 from ..controller import prerequisitoController as _controller
 

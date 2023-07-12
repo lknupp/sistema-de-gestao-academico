@@ -1,6 +1,6 @@
 import sqlalchemy as _sql
 import sqlalchemy.orm as _orm
-from ..database import sqlite as _database
+from ..database import database as _database
 
 
 class Disciplina(_database.Base):
@@ -12,4 +12,5 @@ class Disciplina(_database.Base):
     id_curso = _sql.Column(_sql.Integer, _sql.ForeignKey('curso.id_curso'))
     curso = _orm.relationship('Curso', back_populates='disciplinas')
 
-    prerequisitos = _orm.relationship('Prerequisito', back_populates='disciplina')
+    prerequisitos = _orm.relationship(
+        'Prerequisito', back_populates='disciplina')
