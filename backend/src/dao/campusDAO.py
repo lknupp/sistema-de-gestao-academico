@@ -40,12 +40,8 @@ class CampusDAO(_ICampusDAO.ICampusDAO):
             .first()
         )
 
-    def adicionarCurso(self, db: _orm.Session, campus_id: int, curso_id: int):
-        campus_db: _campusModel.Campus = self.buscar(db, campus_id)
-        curso_db: _cursoModel.Curso = self.buscar(db, curso_id)
-
-        campus_db.cursos.append(curso_db)
+    def adicionarCurso(self, db: _orm.Session, campus: _campusModel.Campus, curso: _cursoModel.Curso):
+        campus.cursos.append(curso)
         db.commit()
-        db.refresh(campus_db)
-
-        return curso_db
+        db.refresh(campus)
+        return campus

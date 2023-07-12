@@ -57,6 +57,6 @@ class CampusRoute(_IRoute.IRoute):
     def remover(campus_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         return controller.remover(db, campus_id)
 
-    @router.post("/api/campus/adicionar-curso/", response_model=_cursoSchema.Curso)
+    @router.post("/api/campus/adicionar-curso/", response_model=_campusSchema.Campus)
     def adicionar_curso(campus_id: int, curso_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         return controller.adicionarCurso(db, campus_id, curso_id)

@@ -4,6 +4,7 @@ from http import HTTPStatus
 import fastapi as _fastapi
 from .interface import ICampusController as _ICampusController
 from ..dao import campusDAO as _campusDAO
+from ..dao import cursoDAO as _cursoDAO
 from ..schemas import campusSchema as _campusSchema
 from ..models import campus as _campusModel
 
@@ -54,4 +55,6 @@ class CampusController(_ICampusController.ICampusController):
         return campus_db
 
     def adicionarCurso(self, db, campus_id, curso_id):
-        return self.campus_dao.adicionarCurso(db, campus_id, curso_id)
+        campus_db = self.campus_dao.buscar(db, campus_id)
+        curso_db = _cursoDAO.CursoDAO().buscar(db, curso_id)
+        return self.campus_dao.adicionarCurso(db, campus_db, curso_db)
