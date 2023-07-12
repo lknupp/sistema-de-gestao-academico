@@ -48,7 +48,7 @@ class CursoController(_ICursoController.ICursoController):
     def buscarCursoPorNome(self, db: _orm.Session, curso_nome: str):
         curso_db: _cursoModel.Curso = self.curso_dao.buscarCursoPorNome(
             db=db, curso_nome=curso_nome)
-        if curso_db is None:
-            raise _fastapi.HTTPException(
-                status_code=HTTPStatus.NO_CONTENT.value, detail=HTTPStatus.NO_CONTENT.phrase)
+        # if curso_db is None:
+        #     raise _fastapi.HTTPException(
+        #         status_code=HTTPStatus.NO_CONTENT.value, detail=HTTPStatus.NO_CONTENT.phrase)
         return curso_db
