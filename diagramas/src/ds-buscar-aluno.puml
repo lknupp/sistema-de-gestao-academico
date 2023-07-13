@@ -3,11 +3,6 @@
 participant Frontend as Frontend
 participant "AlunoRoute(route) : IRoutes" as Routes
 participant "AlunoController(alunoController) : IAlunoController" as AlunoController
-participant "fone: Telefone" as Telefone
-participant "TelefoneDAO(telefoneDAO) : ITelefoneDAO" as TelefoneDAO
-participant "endereco: Endereco" as Endereco
-participant "EnderecoDAO(enderecoDAO) : IEnderecoDAO" as EnderecoDAO
-participant "aluno: Aluno" as Aluno
 participant "AlunoDAO(alunoDAO) : IAlunoDAO" as AlunoDAO
 
 autonumber 1.1

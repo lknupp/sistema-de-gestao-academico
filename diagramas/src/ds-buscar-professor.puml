@@ -3,11 +3,6 @@
 participant Frontend as Frontend
 participant "ProfessorRoute(route) : IRoutes" as Routes
 participant "ProfessorController(professorController) : IProfessorController" as ProfessorController
-participant "fone: Telefone" as Telefone
-participant "TelefoneDAO(telefoneDAO) : ITelefoneDAO" as TelefoneDAO
-participant "endereco: Endereco" as Endereco
-participant "EnderecoDAO(enderecoDAO) : IEnderecoDAO" as EnderecoDAO
-participant "professor: Professor" as Professor
 participant "ProfessorDAO(professorDAO) : IProfessorDAO" as ProfessorDAO
 
 autonumber 1.1

@@ -11,10 +11,32 @@ participant "aluno: Aluno" as Aluno
 participant "AlunoDAO(alunoDAO) : IAlunoDAO" as AlunoDAO
 
 autonumber 1.1
-' Alterar aluno
-Frontend->Routes: res = put("api/aluno/{id}", req): Aluno
+' Armazenar telefone
+Frontend->Routes: res = put("api/aluno", req): Aluno
 Routes->AlunoController: res = alterar(req.body): Aluno
-AlunoController->Aluno: setId(req.id)
+AlunoController->Telefone: setCodPais(req.codPais)
+AlunoController->Telefone: setDdd(req.ddd)
+AlunoController->Telefone: setNumero(req.numero)
+AlunoController->TelefoneDAO: res = alterar(telefone): Telefone
+TelefoneDAO->AlunoController: res
+AlunoController->Routes: res
+Routes->Frontend: res
+
+
+' Armazenar endereço
+autonumber inc A
+AlunoController->Endereco: setLogradouro(req.logradouro)
+AlunoController->Endereco: setNumero(req.numero)
+AlunoController->Endereco: setLocal(req.local)
+AlunoController->Endereco: setCep(req.cep)
+AlunoController->Endereco: setTipo(req.tipo)
+AlunoController->EnderecoDAO: res = alterar(endereco): Endereco
+EnderecoDAO->AlunoController: res
+AlunoController->Routes: res
+Routes->Frontend: res
+
+' Armazenar aluno
+autonumber inc A
 AlunoController->Aluno: setNome(req.nome)
 AlunoController->Aluno: setSobrenome(req.sobrenome)
 AlunoController->Aluno: setCpf(req.cpf)
@@ -26,15 +48,6 @@ AlunoController->Aluno: setEndereco(req.endereco)
 AlunoController->Aluno: setTelefone(req.telefone)
 AlunoController->Aluno: setCurso(req.curso)
 AlunoController->AlunoDAO: res = alterar(aluno): Aluno
-AlunoDAO->AlunoController: res
-AlunoController->Routes: res
-Routes->Frontend: res
-
-' Deletar aluno
-autonumber inc A
-Frontend->Routes: res = delete("api/aluno/{id}", req): Aluno
-Routes->AlunoController: res = remover(req.body.id): Aluno
-AlunoController->AlunoDAO: res = remover(id): Aluno
 AlunoDAO->AlunoController: res
 AlunoController->Routes: res
 Routes->Frontend: res

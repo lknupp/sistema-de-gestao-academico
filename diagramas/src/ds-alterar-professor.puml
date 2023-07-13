@@ -11,10 +11,32 @@ participant "professor: Professor" as Professor
 participant "ProfessorDAO(professorDAO) : IProfessorDAO" as ProfessorDAO
 
 autonumber 1.1
-' Alterar professor
-Frontend->Routes: res = put("api/professor/{id}", req): Professor
+' Armazenar telefone
+Frontend->Routes: res = put("api/professor", req): Professor
 Routes->ProfessorController: res = alterar(req.body): Professor
-ProfessorController->Professor: setId(req.id)
+ProfessorController->Telefone: setCodPais(req.codPais)
+ProfessorController->Telefone: setDdd(req.ddd)
+ProfessorController->Telefone: setNumero(req.numero)
+ProfessorController->TelefoneDAO: res = alterar(telefone): Telefone
+TelefoneDAO->ProfessorController: res
+ProfessorController->Routes: res
+Routes->Frontend: res
+
+
+' Armazenar endereço
+autonumber inc A
+ProfessorController->Endereco: setLogradouro(req.logradouro)
+ProfessorController->Endereco: setNumero(req.numero)
+ProfessorController->Endereco: setLocal(req.local)
+ProfessorController->Endereco: setCep(req.cep)
+ProfessorController->Endereco: setTipo(req.tipo)
+ProfessorController->EnderecoDAO: res = alterar(endereco): Endereco
+EnderecoDAO->ProfessorController: res
+ProfessorController->Routes: res
+Routes->Frontend: res
+
+' Armazenar professor
+autonumber inc A
 ProfessorController->Professor: setNome(req.nome)
 ProfessorController->Professor: setSobrenome(req.sobrenome)
 ProfessorController->Professor: setCpf(req.cpf)
@@ -26,15 +48,6 @@ ProfessorController->Professor: setEndereco(req.endereco)
 ProfessorController->Professor: setTelefone(req.telefone)
 ProfessorController->Professor: setCurso(req.curso)
 ProfessorController->ProfessorDAO: res = alterar(professor): Professor
-ProfessorDAO->ProfessorController: res
-ProfessorController->Routes: res
-Routes->Frontend: res
-
-' Deletar professor
-autonumber inc A
-Frontend->Routes: res = delete("api/professor/{id}", req): Professor
-Routes->ProfessorController: res = remover(req.body.id): Professor
-ProfessorController->ProfessorDAO: res = remover(id): Professor
 ProfessorDAO->ProfessorController: res
 ProfessorController->Routes: res
 Routes->Frontend: res
