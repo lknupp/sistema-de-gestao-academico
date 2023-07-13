@@ -1,0 +1,40 @@
+@startuml Diagrama de Sequencia
+
+participant Frontend as Frontend
+participant "AlunoRoute(route) : IRoutes" as Routes
+participant "AlunoController(alunoController) : IAlunoController" as AlunoController
+participant "fone: Telefone" as Telefone
+participant "TelefoneDAO(telefoneDAO) : ITelefoneDAO" as TelefoneDAO
+participant "endereco: Endereco" as Endereco
+participant "EnderecoDAO(enderecoDAO) : IEnderecoDAO" as EnderecoDAO
+participant "aluno: Aluno" as Aluno
+participant "AlunoDAO(alunoDAO) : IAlunoDAO" as AlunoDAO
+
+autonumber 1.1
+' Alterar aluno
+Frontend->Routes: res = put("api/aluno/{id}", req): Aluno
+Routes->AlunoController: res = alterar(req.body): Aluno
+AlunoController->Aluno: setId(req.id)
+AlunoController->Aluno: setNome(req.nome)
+AlunoController->Aluno: setSobrenome(req.sobrenome)
+AlunoController->Aluno: setCpf(req.cpf)
+AlunoController->Aluno: setSexo(req.sexo)
+AlunoController->Aluno: setRaca(req.raca)
+AlunoController->Aluno: setDataIngresso(req.dataIngresso)
+AlunoController->Aluno: setDataNascimento(req.dataNascimento)
+AlunoController->Aluno: setEndereco(req.endereco)
+AlunoController->Aluno: setTelefone(req.telefone)
+AlunoController->Aluno: setCurso(req.curso)
+AlunoController->AlunoDAO: res = alterar(aluno): Aluno
+AlunoDAO->AlunoController: res
+AlunoController->Routes: res
+Routes->Frontend: res
+
+' Deletar aluno
+autonumber inc A
+Frontend->Routes: res = delete("api/aluno/{id}", req): Aluno
+Routes->AlunoController: res = remover(req.body.id): Aluno
+AlunoController->AlunoDAO: res = remover(id): Aluno
+AlunoDAO->AlunoController: res
+AlunoController->Routes: res
+Routes->Frontend: res
