@@ -6,12 +6,11 @@ from http import HTTPStatus
 from .interface import IRoute as _IRoute
 from ..database import database as _database
 from ..schemas import disciplinaSchema as _disciplinaSchema
+from ..schemas import prerequisitoSchema as _prerequisitoSchema
 from ..controller import disciplinaController as _controller
-from ..controller import prerequisitoController as _prerequisitoController
 
 router = _fastapi.APIRouter()
 controller = _controller.DisciplinaController()
-pr_controller = _prerequisitoController.PrerequisitoController()
 
 
 class DisciplinaRoute(_IRoute.IRoute):

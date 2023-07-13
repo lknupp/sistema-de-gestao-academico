@@ -2,6 +2,7 @@ import pydantic as _pydantic
 
 
 class _PrerequisitoBase(_pydantic.BaseModel):
+    prerequisito: int
     id_disciplina: int
 
     class Config:

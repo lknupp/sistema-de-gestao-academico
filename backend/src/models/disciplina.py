@@ -9,8 +9,5 @@ class Disciplina(_database.Base):
     nome = _sql.Column(_sql.String)
     descricao = _sql.Column(_sql.String)
 
+    prerequisitos = _orm.relationship('Prerequisito', backref='disciplina')
     id_curso = _sql.Column(_sql.Integer, _sql.ForeignKey('curso.id_curso'))
-    curso = _orm.relationship('Curso', back_populates='disciplinas')
-
-    prerequisitos = _orm.relationship(
-        'Prerequisito', back_populates='disciplina')

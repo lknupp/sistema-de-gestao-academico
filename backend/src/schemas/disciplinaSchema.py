@@ -1,7 +1,5 @@
 import pydantic as _pydantic
 
-from . import prerequisitoSchema as _prerequisitoSchema
-
 class _DisciplinaBase(_pydantic.BaseModel):
     nome: str
     descricao: str
@@ -16,4 +14,3 @@ class DisciplinaCreate(_DisciplinaBase):
 
 class Disciplina(_DisciplinaBase):
     id_disciplina: int
-    
