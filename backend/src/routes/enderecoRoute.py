@@ -8,49 +8,26 @@ from ..schemas import enderecoSchema as _enderecoSchema
 from ..controller import enderecoController as _controller
 
 router = _fastapi.APIRouter()
-controllerAluno = _controller.EnderecoController("aluno")
-controllerProfessor = _controller.EnderecoController("professor")
+controller = _controller.EnderecoController()
 
 
-class AlunoRoute(_IRoute.IRoute):
-    @router.post("/api/aluno/endereco/", response_model=_enderecoSchema.Endereco, status_code=HTTPStatus.CREATED.value, description=HTTPStatus.CREATED.phrase)
+class Route(_IRoute.IRoute):
+    @router.post("/api/endereco/", response_model=_enderecoSchema.Endereco, status_code=HTTPStatus.CREATED.value, description=HTTPStatus.CREATED.phrase)
     def criar(endereco: _enderecoSchema.EnderecoCreate, db: _orm.Session = _fastapi.Depends(_database.get_db)):
-        return controllerAluno.inserir(db, endereco)
+        return controller.inserir(db, endereco)
 
-    @router.get("/api/aluno/endereco/", response_model=List[_enderecoSchema.Endereco])
+    @router.get("/api/endereco/", response_model=List[_enderecoSchema.Endereco])
     def ler_todos(db: _orm.Session = _fastapi.Depends(_database.get_db)):
-        return controllerAluno.buscarTodos(db)
+        return controller.buscarTodos(db)
 
-    @router.get("/api/aluno/endereco/{endereco_id}", response_model=_enderecoSchema.Endereco)
+    @router.get("/api/endereco/{endereco_id}", response_model=_enderecoSchema.Endereco)
     def ler(endereco_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
-        return controllerAluno.buscar(db, endereco_id)
+        return controller.buscar(db, endereco_id)
 
-    @router.put("/api/aluno/endereco/", response_model=_enderecoSchema.Endereco)
+    @router.put("/api/endereco/", response_model=_enderecoSchema.Endereco)
     def atualizar(endereco: _enderecoSchema.Endereco, db: _orm.Session = _fastapi.Depends(_database.get_db)):
-        return controllerAluno.atualizar(db, endereco)
+        return controller.atualizar(db, endereco)
 
-    @router.delete("/api/aluno/endereco/", response_model=_enderecoSchema.Endereco)
+    @router.delete("/api/endereco/", response_model=_enderecoSchema.Endereco)
     def remover(endereco_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
-        return controllerAluno.remover(db, endereco_id)
-
-
-class EnderecoProfessorRoute(_IRoute.IRoute):
-    @router.post("/api/professor/endereco/", response_model=_enderecoSchema.Endereco)
-    def criar(endereco: _enderecoSchema.EnderecoCreate, db: _orm.Session = _fastapi.Depends(_database.get_db)):
-        return controllerProfessor.inserir(db, endereco)
-
-    @router.get("/api/professor/endereco/", response_model=List[_enderecoSchema.Endereco])
-    def ler_todos(db: _orm.Session = _fastapi.Depends(_database.get_db)):
-        return controllerProfessor.buscarTodos(db)
-
-    @router.get("/api/professor/endereco/{endereco_id}", response_model=_enderecoSchema.Endereco)
-    def ler(endereco_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
-        return controllerProfessor.buscar(db, endereco_id)
-
-    @router.put("/api/professor/endereco/", response_model=_enderecoSchema.Endereco)
-    def atualizar(endereco: _enderecoSchema.Endereco, db: _orm.Session = _fastapi.Depends(_database.get_db)):
-        return controllerProfessor.atualizar(db, endereco)
-
-    @router.delete("/api/professor/endereco/", response_model=_enderecoSchema.Endereco)
-    def remover(endereco_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
-        return controllerProfessor.remover(db, endereco_id)
+        return controller.remover(db, endereco_id)

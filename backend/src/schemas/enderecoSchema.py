@@ -7,7 +7,6 @@ class _EnderecoBase(_pydantic.BaseModel):
     local: str
     cep: str
     tipo: str
-    id_pessoa: int
 
     class Config:
         orm_mode = True

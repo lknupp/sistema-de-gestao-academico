@@ -8,19 +8,14 @@ from ..models import endereco as _enderecoModel
 
 
 class EnderecoController(_enderecoController.IEnderecoController):
-    def __init__(self, model) -> None:
+    def __init__(self) -> None:
         super().__init__()
-        if model == "aluno":
-            self.endereco_dao = _enderecoDAO.EnderecoAlunoDAO()
-            self.model = _enderecoModel.EnderecoAluno
-        elif model == "professor":
-            self.endereco_dao = _enderecoDAO.EnderecoProfessorDAO()
-            self.model = _enderecoModel.EnderecoProfessor
+        self.endereco_dao = _enderecoDAO.EnderecoDAO()
 
     def inserir(
         self, db: _orm.Session, endereco: _enderecoSchema.EnderecoCreate
     ) -> _enderecoSchema.Endereco:
-        endereco_db = self.model(**endereco.model_dump())
+        endereco_db = _enderecoModel.Endereco(**endereco.model_dump())
         return self.endereco_dao.inserir(db, endereco_db)
 
     def atualizar(
@@ -31,7 +26,7 @@ class EnderecoController(_enderecoController.IEnderecoController):
             raise _fastapi.HTTPException(
                 status_code=400, detail="Endereco não encontrado"
             )
-        endereco_db = self.model(**endereco.model_dump())
+        endereco_db = _enderecoModel.Endereco(**endereco.model_dump())
         return self.endereco_dao.atualizar(db, endereco_db)
 
     def remover(

@@ -12,6 +12,6 @@ class Pessoa(_database.Base):
     sexo = _sql.Column(_sql.String)
     raca = _sql.Column(_sql.String)
 
-    @declared_attr
-    def id_curso(cls):
-        return _sql.Column(_sql.Integer, _sql.ForeignKey('curso.id_curso'))
+    id_curso = _sql.Column(_sql.Integer, _sql.ForeignKey('curso.id_curso'))
+    id_endereco = _sql.Column(_sql.Integer, _sql.ForeignKey('endereco.id_endereco'))
+    id_telefone = _sql.Column(_sql.Integer, _sql.ForeignKey('telefone.id_telefone'))

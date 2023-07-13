@@ -1,30 +1,17 @@
-from .interface import IEndereco as _IEndereco
 import sqlalchemy as _sql
+import sqlalchemy.orm as _orm
+from ..database import database as _database
 
 
-class EnderecoAluno(_IEndereco.EnderecoBase):
-    __tablename__ = "endereco_aluno"
-    id_pessoa = _sql.Column(_sql.Integer, _sql.ForeignKey('aluno.id_pessoa'))
+class Endereco(_database.Base):
+    __tablename__ = 'endereco'
 
-    @classmethod
-    def _get_table_name(cls):
-        return "aluno"
+    id_endereco = _sql.Column(_sql.Integer, primary_key=True, index=True)
+    logradouro = _sql.Column(_sql.String)
+    numero = _sql.Column(_sql.String)
+    local = _sql.Column(_sql.String)
+    cep = _sql.Column(_sql.String)
+    tipo = _sql.Column(_sql.String)
 
-
-class EnderecoProfessor(_IEndereco.EnderecoBase):
-    __tablename__ = "endereco_professor"
-    id_pessoa = _sql.Column(
-        _sql.Integer, _sql.ForeignKey('professor.id_pessoa'))
-
-    @classmethod
-    def _get_table_name(cls):
-        return "professor"
-
-
-class EnderecoCampus(_IEndereco.EnderecoBase):
-    __tablename__ = "endereco_campus"
-    id_campus = _sql.Column(_sql.Integer, _sql.ForeignKey('campus.id_campus'))
-
-    @classmethod
-    def _get_table_name(cls):
-        return "campus"
+    aluno = _orm.relationship('Aluno', backref='endereco')
+    professor = _orm.relationship('Professor', backref='endereco')

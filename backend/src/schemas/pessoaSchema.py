@@ -8,6 +8,8 @@ class _PessoaBase(_pydantic.BaseModel):
     sexo: str
     raca: str
     id_curso: int
+    id_endereco: int
+    id_telefone: int
 
     class Config:
         orm_mode = True

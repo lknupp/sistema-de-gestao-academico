@@ -1,17 +1,14 @@
-from .interface import ITelefone as _ITelefone
+import sqlalchemy as _sql
+import sqlalchemy.orm as _orm
+from ..database import database as _database
 
+class Telefone(_database.Base):
+    __tablename__ = 'telefone'
+    id_telefone = _sql.Column(_sql.Integer, primary_key=True, index=True)
+    cod_pais = _sql.Column(_sql.Integer)
+    ddd = _sql.Column(_sql.Integer)
+    number = _sql.Column(_sql.Integer)
 
-class TelefoneAluno(_ITelefone.TelefoneBase):
-    __tablename__ = "telefone_aluno"
+    aluno = _orm.relationship('Aluno', backref='telefone')
+    professor = _orm.relationship('Professor', backref='telefone')
 
-    @classmethod
-    def _get_pessoa_table_name(cls):
-        return "aluno"
-
-
-class TelefoneProfessor(_ITelefone.TelefoneBase):
-    __tablename__ = "telefone_professor"
-
-    @classmethod
-    def _get_pessoa_table_name(cls):
-        return "professor"

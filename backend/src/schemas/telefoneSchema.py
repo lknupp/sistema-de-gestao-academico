@@ -5,7 +5,6 @@ class _TelefoneBase(_pydantic.BaseModel):
     cod_pais: int
     ddd: int
     number: int
-    id_pessoa: int
 
     class Config:
         orm_mode = True
