@@ -3,27 +3,45 @@
 participant Frontend as Frontend
 participant "DisciplinaRoute(route) : IRoutes" as Routes
 participant "DisciplinaController(disciplinaController) : IDisciplinaController" as DisciplinaController
-participant "disciplina: Disciplina" as Disciplina
 participant "DisciplinaDAO(disciplinaDAO) : IDisciplinaDAO" as DisciplinaDAO
-
-autonumber 1.1
-' Verificar se a disciplina já existe
-Frontend->Routes: res = post("api/disciplina", req): Disciplina
-Routes->DisciplinaController: res = verificarDisciplina(req.body.nome): Disciplina
-DisciplinaController->DisciplinaDAO: res = buscarPorNome(nome): Disciplina
-DisciplinaDAO->DisciplinaController: res
-DisciplinaController->Routes: res
-Routes->Frontend: res
+participant "disciplina: Disciplina" as Disciplina
+participant "PrerequisitoRoute(route) : IRoutes" as PRoutes
+participant "PrerequisitoController(prerequisitoController) : IPrerequisitoController" as PrerequisitoController
+participant "PrerequisitoDAO(prerequisitoDAO) : IPrerequisitoDAO" as PrerequisitoDAO
+participant "prerequisito: Prerequisito" as Prerequisito
 
 ' Verificar se pre-requisitos existem
-Routes->DisciplinaController: res = verificarDisciplina(req.body.prerequisitos.nome): Disciplina
+autonumber 1.1
+Frontend->PRoutes: res = post("api/prerequisito/", req): Disciplina
+PRoutes->DisciplinaController: res = buscar(req.body.prerequisitos.id): Disciplina
+DisciplinaController->DisciplinaDAO: res = buscar(id): Disciplina
+DisciplinaDAO->DisciplinaController: res
+DisciplinaController->PRoutes: res
+PRoutes->Frontend: res
+
+' Armazenar pre-requisitos
+autonumber inc A
+PRoutes->PrerequisitoController: res = inserir(req.body.prerequisitos): Prerequisito
+PrerequisitoController->Prerequisito: setDisciplina(req.id_disciplina)
+PrerequisitoController->Prerequisito: setPreRequisito(req.prerequisito)
+PrerequisitoController->PrerequisitoDAO: res = inserir(prerequisito): Prerequisito
+PrerequisitoDAO->PrerequisitoController: res
+PrerequisitoController->PRoutes: res
+PRoutes->Frontend: res
+
+
+' Verificar se a disciplina já existe
+autonumber inc A
+Frontend->Routes: res = post("api/disciplina/", req): Disciplina
+Routes->DisciplinaController: res = buscarPorNome(req.body.nome): Disciplina
 DisciplinaController->DisciplinaDAO: res = buscarPorNome(nome): Disciplina
 DisciplinaDAO->DisciplinaController: res
 DisciplinaController->Routes: res
 Routes->Frontend: res
 
 ' Armazenar disciplina
-Routes -> DisciplinaController: res = salvar(req.body): Disciplina
+autonumber inc A
+Routes -> DisciplinaController: res = inserir(req.body): Disciplina
 DisciplinaController->Disciplina: setNome(req.nome)
 DisciplinaController->Disciplina: setDescricao(req.descricao)
 DisciplinaController->Disciplina: addPreRequisitos(req.preRequisitos)
