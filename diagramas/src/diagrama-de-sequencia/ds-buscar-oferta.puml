@@ -14,18 +14,18 @@ OfertaController->Routes: res
 Routes->Frontend: res
 
 autonumber inc A
-Frontend->Routes: res = get('/api/oferta/id/{id}', req): Oferta
-Routes->OfertaController: res = buscar(req.body.oferta.id): Oferta
-OfertaController->OfertaDAO: res = buscar(id): Oferta
+Frontend->Routes: res = get('/api/oferta/{id}', req): Oferta
+Routes->OfertaController: res = buscar(req.body.oferta.id_oferta): Oferta
+OfertaController->OfertaDAO: res = buscar(id_oferta): Oferta
 OfertaDAO->OfertaController: res
 OfertaController->Routes: res
 Routes->Frontend: res
 
 
 autonumber inc A
-Frontend->Routes: res = get('/api/oferta/nome/{nome}', req): Oferta
-Routes->OfertaController: res = buscarPorNome(req.body.oferta.nome): Oferta
-OfertaController->OfertaDAO: res = buscarPorNome(nome): Oferta
+Frontend->Routes: res = get('/api/oferta/nome/{nome}', req): List<Oferta>
+Routes->OfertaController: res = buscarPorNome(req.body.oferta.nome): List<Oferta>
+OfertaController->OfertaDAO: res = buscarPorNome(nome): List<Oferta>
 OfertaDAO->OfertaController: res
 OfertaController->Routes: res
 Routes->Frontend: res
