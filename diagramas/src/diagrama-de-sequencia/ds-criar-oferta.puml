@@ -1,0 +1,29 @@
+@startuml Diagrama de Sequência - Criar - Oferta
+
+participant Frontend as Frontend
+participant "OfertaRoute(route) : IRoutes" as Routes
+participant "OfertaController(ofertaController) : IOfertaController" as OfertaController
+participant "oferta: Oferta" as Oferta
+participant "OfertaDAO(ofertaDAO) : IOfertaDAO" as OfertaDAO
+
+autonumber 1.1
+' Verificar se oferta existe
+Frontend->Routes: res = get("api/oferta/{nome}", req): Oferta
+Routes->OfertaController: res = buscarPorNome(req.params.nome): Oferta
+OfertaController->OfertaDAO: res = buscarPorNome(params.nome): Oferta
+OfertaDAO->OfertaController: res
+OfertaController->Routes: res
+Routes->Frontend: res
+
+autonumber inc A
+' Armazenar oferta
+Frontend->Routes: res = post("api/oferta/", req): Oferta
+Routes->OfertaController: res = inserir(req.body): Oferta
+OfertaController->Oferta: setPeriodo(periodo)
+OfertaController->Oferta: setHistorico(historico)
+OfertaController->Oferta: setprofessor(professor)
+OfertaController->Oferta: setdisciplina(disciplina)
+OfertaController->DAO: res = inserir(oferta): Oferta
+OfertaDAO->OfertaController: res
+OfertaController->Routes: res
+Routes->Frontend: res
