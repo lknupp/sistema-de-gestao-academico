@@ -8,9 +8,9 @@ participant "CursoDAO(cursoDAO) : ICursoDAO" as DAO
 
 autonumber 1.1
 ' Verificar se curso existe
-Frontend->Routes: res = get("api/curso/{id_curso}", req): Curso
-Routes->Controller: res = buscar(req.params.id_curso): Curso
-Controller->DAO: res = buscar(id_curso): Curso
+Frontend->Routes: res = get("api/curso/nome/{nome}", req): Curso
+Routes->Controller: res = buscar(req.params.nome): Curso
+Controller->DAO: res = buscarPorNome(nome): Curso
 DAO->Controller: res
 Controller->Routes: res
 Routes->Frontend: res
@@ -20,7 +20,6 @@ autonumber inc A
 Frontend->Routes: res = post("api/curso/", req): Curso
 Routes->Controller: res = inserir(req.body): Curso
 Controller->Curso: setNome(nome)
-Controller->Curso: setCampus(campus)
 Controller->DAO: res = inserir(curso): Curso
 DAO->Controller: res
 Controller->Routes: res

@@ -1,0 +1,31 @@
+@startuml Diagrama de Sequencia
+
+participant Frontend as Frontend
+participant "CampusRoute(route) : IRoutes" as Routes
+participant "CampusController(campusController) : ICampusController" as CampusController
+participant "CampusDAO(campusDAO) : ICampusDAO" as CampusDAO
+
+autonumber 1.1
+Frontend->Routes: res = get('/api/campus/', req): List<Campus>
+Routes->CampusController: res = buscarTodos(): List<Campus>
+CampusController->CampusDAO: res = buscarTodos(): List<Campus>
+CampusDAO->CampusController: res
+CampusController->Routes: res
+Routes->Frontend: res
+
+autonumber inc A
+Frontend->Routes: res = get('/api/campus/id/{id}', req): Campus
+Routes->CampusController: res = buscar(req.body.campus.id): Campus
+CampusController->CampusDAO: res = buscar(id): Campus
+CampusDAO->CampusController: res
+CampusController->Routes: res
+Routes->Frontend: res
+
+
+autonumber inc A
+Frontend->Routes: res = get('/api/campus/nome/{nome}', req): Campus
+Routes->CampusController: res = buscarCampusPorNome(req.body.campus.nome): Campus
+CampusController->CampusDAO: res = buscarCampusPorNome(nome): Campus
+CampusDAO->CampusController: res
+CampusController->Routes: res
+Routes->Frontend: res

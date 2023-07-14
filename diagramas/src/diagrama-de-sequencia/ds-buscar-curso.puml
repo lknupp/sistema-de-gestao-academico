@@ -1,0 +1,31 @@
+@startuml Diagrama de Sequencia
+
+participant Frontend as Frontend
+participant "CursoRoute(route) : IRoutes" as Routes
+participant "CursoController(cursoController) : ICursoController" as CursoController
+participant "CursoDAO(cursoDAO) : ICursoDAO" as CursoDAO
+
+autonumber 1.1
+Frontend->Routes: res = get('/api/curso/', req): List<Curso>
+Routes->CursoController: res = buscarTodos(): List<Curso>
+CursoController->CursoDAO: res = buscarTodos(): List<Curso>
+CursoDAO->CursoController: res
+CursoController->Routes: res
+Routes->Frontend: res
+
+autonumber inc A
+Frontend->Routes: res = get('/api/curso/id/{id}', req): Curso
+Routes->CursoController: res = buscar(req.body.curso.id): Curso
+CursoController->CursoDAO: res = buscar(id): Curso
+CursoDAO->CursoController: res
+CursoController->Routes: res
+Routes->Frontend: res
+
+
+autonumber inc A
+Frontend->Routes: res = get('/api/curso/nome/{nome}', req): Curso
+Routes->CursoController: res = buscarCursoPorNome(req.body.curso.nome): Curso
+CursoController->CursoDAO: res = buscarCursoPorNome(nome): Curso
+CursoDAO->CursoController: res
+CursoController->Routes: res
+Routes->Frontend: res
