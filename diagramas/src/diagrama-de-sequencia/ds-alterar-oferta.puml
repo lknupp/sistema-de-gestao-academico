@@ -5,19 +5,47 @@ participant "OfertaRoute(route) : IRoutes" as Routes
 participant "OfertaController(ofertaController) : IOfertaController" as OfertaController
 participant "OfertaDAO(ofertaDAO) : IOfertaDAO" as OfertaDAO
 participant "oferta: Oferta" as Oferta
+participant "PeriodoRoute(route) : IRoutes" as Routes
+participant "PeriodoController(periodoController) : IPeriodoController" as PeriodoController
+participant "PeriodoDAO(periodoDAO) : IPeriodoDAO" as PeriodoDAO
+participant "periodo: Periodo" as Periodo
 
+
+autonumber 1.1
+' Atualizar período
+Frontend->Routes: res = put("api/periodo/", req): Periodo
+Routes->PeriodoController: res = atualizar(req.body): Periodo
+PeriodoController->Periodo: setDia(dia)
+PeriodoController->Periodo: setHorarioFinal(horario)
+PeriodoController->Periodo: setHorarioInicial(horario)
+PeriodoController->PeriodoDAO: res = atualizar(periodo): Periodo
+PeriodoDAO->PeriodoController: res
+PeriodoController->Routes: res
+Routes->Frontend: res
 
 ' Atualizar oferta
-autonumber 1.1
+autonumber inc A
 Frontend->Routes: res = put("api/oferta/", req): Oferta
-Routes -> OfertaController: res = alterar(req.body): Oferta
-OfertaController->Oferta: setPeriodo(req.periodo)
-OfertaController->Oferta: setHistorico(req.historico)
-OfertaController->Oferta: setProfessor(req.Professor)
-OfertaController->Oferta: setDisciplina(req.Disciplina)
-OfertaController->OfertaDAO: res = alterar(oferta): Oferta
+Routes->OfertaController: res = atualizar(req.body): Oferta
+OfertaController->Oferta: addPeriodos(body.periodo)
+OfertaController->Oferta: setHistorico(body.historico)
+OfertaController->Oferta: setprofessor(body.professor)
+OfertaController->Oferta: setdisciplina(body.disciplina)
+OfertaController->Oferta: setSemestre(body.semestre)
+OfertaController->Oferta: setAno(body.ano)
+OfertaController->OfertaDAO: res = atualizar(oferta): Oferta
 OfertaDAO->OfertaController: res
 OfertaController->Routes: res
+Routes->Frontend: res
+
+
+' Remover período
+autonumber inc A
+Frontend->Routes: res = delete("api/periodo/", req): Periodo
+Routes -> PeriodoController: res = remover(req.body.id_periodo): Periodo
+PeriodoController->PeriodoDAO: res = remover(id_periodo): Periodo
+PeriodoDAO->PeriodoController: res
+PeriodoController->Routes: res
 Routes->Frontend: res
 
 ' Remover oferta
