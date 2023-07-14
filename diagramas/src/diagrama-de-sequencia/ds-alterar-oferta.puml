@@ -1,0 +1,30 @@
+@startuml Diagrama de Sequencia
+
+participant Frontend as Frontend
+participant "OfertaRoute(route) : IRoutes" as Routes
+participant "OfertaController(ofertaController) : IOfertaController" as OfertaController
+participant "OfertaDAO(ofertaDAO) : IOfertaDAO" as OfertaDAO
+participant "oferta: Oferta" as Oferta
+
+
+' Atualizar oferta
+autonumber 1.1
+Frontend->Routes: res = put("api/oferta/", req): Oferta
+Routes -> OfertaController: res = alterar(req.body): Oferta
+OfertaController->Oferta: setPeriodo(req.periodo)
+OfertaController->Oferta: setHistorico(req.historico)
+OfertaController->Oferta: setProfessor(req.Professor)
+OfertaController->Oferta: setDisciplina(req.Disciplina)
+OfertaController->OfertaDAO: res = alterar(oferta): Oferta
+OfertaDAO->OfertaController: res
+OfertaController->Routes: res
+Routes->Frontend: res
+
+' Remover oferta
+autonumber inc A
+Frontend->Routes: res = delete("api/oferta/", req): Oferta
+Routes -> OfertaController: res = remover(req.body.id_oferta): Oferta
+OfertaController->OfertaDAO: res = remover(id_oferta): Oferta
+OfertaDAO->OfertaController: res
+OfertaController->Routes: res
+Routes->Frontend: res
