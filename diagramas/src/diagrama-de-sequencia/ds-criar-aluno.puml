@@ -1,0 +1,61 @@
+@startuml Diagrama de Sequencia
+
+participant Frontend as Frontend
+participant "AlunoRoute(route) : IRoutes" as Routes
+participant "AlunoController(alunoController) : IAlunoController" as AlunoController
+participant "fone: Telefone" as Telefone
+participant "TelefoneDAO(telefoneDAO) : ITelefoneDAO" as TelefoneDAO
+participant "endereco: Endereco" as Endereco
+participant "EnderecoDAO(enderecoDAO) : IEnderecoDAO" as EnderecoDAO
+participant "aluno: Aluno" as Aluno
+participant "AlunoDAO(alunoDAO) : IAlunoDAO" as AlunoDAO
+
+autonumber 1.1
+' Verificar se o aluno já existe
+Frontend->Routes: res = post("api/aluno", req): Aluno
+Routes->AlunoController: res = buscarPorCPF(req.body.cpf): Aluno
+AlunoController->AlunoDAO: res = buscarPorCPF(cpf): Aluno
+AlunoDAO->AlunoController: res
+AlunoController->Routes: res
+Routes->Frontend: res
+
+' Armazenar telefone
+autonumber inc A
+Routes->AlunoController: res = salvar(req.body): Telefone
+AlunoController->Telefone: setCodPais(req.codPais)
+AlunoController->Telefone: setDdd(req.ddd)
+AlunoController->Telefone: setNumero(req.numero)
+AlunoController->TelefoneDAO: res = inserir(telefone): Telefone
+TelefoneDAO->AlunoController: res
+AlunoController->Routes: res
+Routes->Frontend: res
+
+
+' Armazenar endereço
+autonumber inc A
+AlunoController->Endereco: setLogradouro(req.logradouro)
+AlunoController->Endereco: setNumero(req.numero)
+AlunoController->Endereco: setLocal(req.local)
+AlunoController->Endereco: setCep(req.cep)
+AlunoController->Endereco: setTipo(req.tipo)
+AlunoController->EnderecoDAO: res = inserir(endereco): Endereco
+EnderecoDAO->AlunoController: res
+AlunoController->Routes: res
+Routes->Frontend: res
+
+' Armazenar aluno
+autonumber inc A
+AlunoController->Aluno: setNome(req.nome)
+AlunoController->Aluno: setSobrenome(req.sobrenome)
+AlunoController->Aluno: setCpf(req.cpf)
+AlunoController->Aluno: setSexo(req.sexo)
+AlunoController->Aluno: setRaca(req.raca)
+AlunoController->Aluno: setDataIngresso(req.dataIngresso)
+AlunoController->Aluno: setDataNascimento(req.dataNascimento)
+AlunoController->Aluno: setEndereco(req.endereco)
+AlunoController->Aluno: setTelefone(req.telefone)
+AlunoController->Aluno: setCurso(req.curso)
+AlunoController->AlunoDAO: res = inserir(aluno): Aluno
+AlunoDAO->AlunoController: res
+AlunoController->Routes: res
+Routes->Frontend: res
