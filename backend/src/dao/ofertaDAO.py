@@ -33,7 +33,7 @@ class OfertaDAO(_IOfertaDAO.IOfertaDAO):
         return db.query(_ofertaModel.Oferta).all()
 
     # def adicionar_historico():
-        
+
     # def buscar_historico():
-        
+
     # def atualizar_historico():

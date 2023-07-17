@@ -14,4 +14,6 @@ class Endereco(_database.Base):
     tipo = _sql.Column(_sql.String)
 
     aluno = _orm.relationship("Aluno", backref="endereco", cascade="all, delete")
-    professor = _orm.relationship("Professor", backref="endereco", cascade="all, delete")
+    professor = _orm.relationship(
+        "Professor", backref="endereco", cascade="all, delete"
+    )

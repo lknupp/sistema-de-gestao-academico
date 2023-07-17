@@ -11,6 +11,8 @@ class Curso(_database.Base):
     campus = _orm.relationship(
         "Campus", secondary=rl_campus_curso, back_populates="cursos"
     )
-    disciplinas = _orm.relationship("Disciplina", backref="curso", cascade="all, delete")
+    disciplinas = _orm.relationship(
+        "Disciplina", backref="curso", cascade="all, delete"
+    )
     alunos = _orm.relationship("Aluno", backref="curso", cascade="all, delete")
     professores = _orm.relationship("Professor", backref="curso", cascade="all, delete")

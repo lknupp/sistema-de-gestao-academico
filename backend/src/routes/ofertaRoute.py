@@ -64,7 +64,5 @@ class OfertaRoute(_IRoute.IRoute):
         response_model=_ofertaSchema.Oferta,
         tags=["oferta"],
     )
-    def remover(
-        id_oferta: int, db: _orm.Session = _fastapi.Depends(_database.get_db)
-    ):
+    def remover(id_oferta: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         return controller.remover(db, id_oferta)

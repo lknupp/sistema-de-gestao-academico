@@ -20,6 +20,10 @@ class Oferta(_database.Base):
     semestre = _sql.Column(_sql.Integer)
     periodo = _sql.Column(_sql.String)
 
-    historico = _orm.relationship("Aluno", secondary=rl_historico, back_populates="ofertas")
-    id_disciplina = _sql.Column(_sql.Integer, _sql.ForeignKey("disciplina.id_disciplina"))
+    historico = _orm.relationship(
+        "Aluno", secondary=rl_historico, back_populates="ofertas"
+    )
+    id_disciplina = _sql.Column(
+        _sql.Integer, _sql.ForeignKey("disciplina.id_disciplina")
+    )
     id_professor = _sql.Column(_sql.Integer, _sql.ForeignKey("professor.id_pessoa"))

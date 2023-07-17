@@ -24,15 +24,11 @@ class OfertaController(_ofertaController.IOfertaController):
         res = _ofertaModel.Oferta(**oferta.model_dump())
         return self.oferta_dao.atualizar(db, res)
 
-    def remover(
-        self, db: _orm.Session, id_oferta: int
-    ) -> _ofertaSchema.Oferta:
+    def remover(self, db: _orm.Session, id_oferta: int) -> _ofertaSchema.Oferta:
         res = self.oferta_dao.remover(db, id_oferta)
         return res
 
-    def buscar(
-        self, db: _orm.Session, id_oferta: int
-    ) -> _ofertaSchema.Oferta:
+    def buscar(self, db: _orm.Session, id_oferta: int) -> _ofertaSchema.Oferta:
         res = self.oferta_dao.buscar(db, id_oferta)
         return res
 

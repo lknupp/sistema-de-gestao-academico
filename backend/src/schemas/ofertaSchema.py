@@ -18,4 +18,3 @@ class OfertaCreate(_OfertaBase):
 
 class Oferta(_OfertaBase):
     id_oferta: int
-
