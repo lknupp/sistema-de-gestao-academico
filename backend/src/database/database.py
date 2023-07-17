@@ -39,7 +39,9 @@ def create_function():
     CREATE OR REPLACE FUNCTION remove_prerequisito()
     RETURNS TRIGGER AS $$
     BEGIN
-        DELETE FROM prerequisito p WHERE id_disciplina = OLD.id_disciplina OR disciplina_prerequisito = OLD.id_disciplina;
+        DELETE FROM prerequisito p 
+        WHERE id_disciplina = OLD.id_disciplina 
+        OR disciplina_prerequisito = OLD.id_disciplina;
         RETURN NULL;
     END;
     $$ LANGUAGE plpgsql;
@@ -53,6 +55,51 @@ def create_function():
     EXECUTE FUNCTION remove_prerequisito();
 """
 )
+
+    function_remove_aluno_info = _sql.DDL(
+    """
+    CREATE OR REPLACE FUNCTION remove_aluno_info()
+    RETURNS TRIGGER AS $$
+    BEGIN
+        DELETE FROM telefone t WHERE id_telefone = OLD.id_telefone;
+        DELETE FROM endereco a WHERE id_endereco = OLD.id_endereco;
+        DELETE FROM historico h WHERE id_historico = OLD.id_historico;
+    END;
+    $$ LANGUAGE plpgsql;
+"""
+)
+
+    trigger_remover_aluno_info = _sql.DDL(
+    """
+    CREATE OR REPLACE TRIGGER remover_aluno_info
+    BEFORE DELETE ON aluno
+    FOR EACH ROW
+    EXECUTE FUNCTION remove_aluno_info();
+"""
+)
+
+    function_remove_professor_info = _sql.DDL(
+    """
+    CREATE OR REPLACE FUNCTION remove_professor_info()
+    RETURNS TRIGGER AS $$
+    BEGIN
+        DELETE FROM telefone t WHERE id_telefone = OLD.id_telefone;
+        DELETE FROM endereco a WHERE id_endereco = OLD.id_endereco;
+        DELETE FROM historico h WHERE id_historico = OLD.id_historico;
+    END;
+    $$ LANGUAGE plpgsql;
+"""
+)
+
+    trigger_remover_professor_info = _sql.DDL(
+    """
+    CREATE OR REPLACE TRIGGER remover_professor_info
+    BEFORE DELETE ON professor
+    FOR EACH ROW
+    EXECUTE FUNCTION remove_professor_info();
+"""
+)
+
 
     with engine.connect() as conn:
         conn.execute(function_remove_prerequisito)
