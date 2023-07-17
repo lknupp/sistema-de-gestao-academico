@@ -29,15 +29,11 @@ class EnderecoController(_enderecoController.IEnderecoController):
         endereco_db = _enderecoModel.Endereco(**endereco.model_dump())
         return self.endereco_dao.atualizar(db, endereco_db)
 
-    def remover(
-        self, db: _orm.Session, endereco_id: int
-    ) -> _enderecoSchema.Endereco:
+    def remover(self, db: _orm.Session, endereco_id: int) -> _enderecoSchema.Endereco:
         try:
             res = self.endereco_dao.remover(db, endereco_id)
         except Exception as e:
-            raise _fastapi.HTTPException(
-                status_code=400, detail="{}".format(str(e))
-            )
+            raise _fastapi.HTTPException(status_code=400, detail="{}".format(str(e)))
         return res
 
     def buscar(self, db: _orm.Session, endereco_id: int) -> _enderecoSchema.Endereco:

@@ -28,7 +28,11 @@ class CampusDAO(_ICampusDAO.ICampusDAO):
         return campus_db
 
     def buscar(self, db: _orm.Session, campus_id: int) -> _campusModel.Campus:
-        return db.query(_campusModel.Campus).filter(_campusModel.Campus.id_campus == campus_id).first()
+        return (
+            db.query(_campusModel.Campus)
+            .filter(_campusModel.Campus.id_campus == campus_id)
+            .first()
+        )
 
     def buscarTodos(self, db: _orm.Session) -> List[_campusModel.Campus]:
         return db.query(_campusModel.Campus).all()
@@ -40,7 +44,9 @@ class CampusDAO(_ICampusDAO.ICampusDAO):
             .first()
         )
 
-    def adicionarCurso(self, db: _orm.Session, campus: _campusModel.Campus, curso: _cursoModel.Curso):
+    def adicionarCurso(
+        self, db: _orm.Session, campus: _campusModel.Campus, curso: _cursoModel.Curso
+    ):
         campus.cursos.append(curso)
         db.commit()
         db.refresh(campus)

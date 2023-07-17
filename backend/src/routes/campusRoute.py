@@ -19,7 +19,13 @@ tags_metadata = [
 
 
 class CampusRoute(_IRoute.IRoute):
-    @router.post("/api/campus/", response_model=_campusSchema.Campus, status_code=HTTPStatus.CREATED.value, description=HTTPStatus.CREATED.phrase, tags=['campus'])
+    @router.post(
+        "/api/campus/",
+        response_model=_campusSchema.Campus,
+        status_code=HTTPStatus.CREATED.value,
+        description=HTTPStatus.CREATED.phrase,
+        tags=["campus"],
+    )
     def criar(
         campus: _campusSchema.CampusCreate,
         db: _orm.Session = _fastapi.Depends(_database.get_db),
@@ -27,10 +33,13 @@ class CampusRoute(_IRoute.IRoute):
         db_campus = controller.buscarCampusPorNome(db, campus_nome=campus.nome)
         if db_campus:
             raise _fastapi.HTTPException(
-                status_code=400, detail="Campus já cadastrado.")
+                status_code=400, detail="Campus já cadastrado."
+            )
         return controller.inserir(db, campus)
 
-    @router.get("/api/campus/", response_model=List[_campusSchema.Campus], tags=['campus'])
+    @router.get(
+        "/api/campus/", response_model=List[_campusSchema.Campus], tags=["campus"]
+    )
     def ler_todos(db: _orm.Session = _fastapi.Depends(_database.get_db)):
         campus = controller.buscarTodos(db)
         if campus is None:
@@ -39,30 +48,51 @@ class CampusRoute(_IRoute.IRoute):
             )
         return campus
 
-    @router.get("/api/campus/id/{campus_id}", response_model=_campusSchema.Campus, tags=['campus'])
+    @router.get(
+        "/api/campus/id/{campus_id}",
+        response_model=_campusSchema.Campus,
+        tags=["campus"],
+    )
     def ler(campus_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         campus = controller.buscar(db, campus_id)
         if campus is None:
             raise _fastapi.HTTPException(
-                status_code=404, detail="Campus não encontrado")
+                status_code=404, detail="Campus não encontrado"
+            )
         return campus
 
-    @router.get("/api/campus/nome/{campus_nome}", response_model=_campusSchema.Campus, tags=['campus'])
+    @router.get(
+        "/api/campus/nome/{campus_nome}",
+        response_model=_campusSchema.Campus,
+        tags=["campus"],
+    )
     def ler(campus_nome: str, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         campus = controller.buscarCampusPorNome(db, campus_nome)
         if campus is None:
             raise _fastapi.HTTPException(
-                status_code=404, detail="Campus não encontrado")
+                status_code=404, detail="Campus não encontrado"
+            )
         return campus
 
-    @router.put("/api/campus/", response_model=_campusSchema.Campus, tags=['campus'])
-    def atualizar(campus: _campusSchema.Campus, db: _orm.Session = _fastapi.Depends(_database.get_db)):
+    @router.put("/api/campus/", response_model=_campusSchema.Campus, tags=["campus"])
+    def atualizar(
+        campus: _campusSchema.Campus,
+        db: _orm.Session = _fastapi.Depends(_database.get_db),
+    ):
         return controller.atualizar(db, campus)
 
-    @router.delete("/api/campus/", response_model=_campusSchema.Campus, tags=['campus'])
+    @router.delete("/api/campus/", response_model=_campusSchema.Campus, tags=["campus"])
     def remover(campus_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         return controller.remover(db, campus_id)
 
-    @router.post("/api/campus/adicionar/curso/", response_model=_campusSchema.Campus, tags=['campus'])
-    def adicionar_curso(campus_id: int, curso_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
+    @router.post(
+        "/api/campus/adicionar/curso/",
+        response_model=_campusSchema.Campus,
+        tags=["campus"],
+    )
+    def adicionar_curso(
+        campus_id: int,
+        curso_id: int,
+        db: _orm.Session = _fastapi.Depends(_database.get_db),
+    ):
         return controller.adicionarCurso(db, campus_id, curso_id)

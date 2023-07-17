@@ -24,9 +24,7 @@ class TelefoneController(_telefoneController.ITelefoneController):
         telefone_db = _telefoneModel.Telefone(**telefone.model_dump())
         return self.telefone_dao.atualizar(db, telefone_db)
 
-    def remover(
-        self, db: _orm.Session, telefone_id: int
-    ) -> _telefoneSchema.Telefone:
+    def remover(self, db: _orm.Session, telefone_id: int) -> _telefoneSchema.Telefone:
         return self.telefone_dao.remover(db, telefone_id)
 
     def buscar(self, db: _orm.Session, telefone_id: int) -> _telefoneSchema.Telefone:

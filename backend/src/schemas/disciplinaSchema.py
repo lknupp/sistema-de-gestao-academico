@@ -1,5 +1,6 @@
 import pydantic as _pydantic
 
+
 class _DisciplinaBase(_pydantic.BaseModel):
     nome: str
     descricao: str
@@ -11,6 +12,7 @@ class _DisciplinaBase(_pydantic.BaseModel):
 
 class DisciplinaCreate(_DisciplinaBase):
     pass
+
 
 class Disciplina(_DisciplinaBase):
     id_disciplina: int

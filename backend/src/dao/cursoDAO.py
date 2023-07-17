@@ -27,7 +27,11 @@ class CursoDAO(_ICursoDAO.ICursoDAO):
         return curso_db
 
     def buscar(self, db: _orm.Session, curso_id: int) -> _cursoModel.Curso:
-        return db.query(_cursoModel.Curso).filter(_cursoModel.Curso.id_curso == curso_id).first()
+        return (
+            db.query(_cursoModel.Curso)
+            .filter(_cursoModel.Curso.id_curso == curso_id)
+            .first()
+        )
 
     def buscarTodos(self, db: _orm.Session) -> List[_cursoModel.Curso]:
         return db.query(_cursoModel.Curso).all()

@@ -23,9 +23,7 @@ class EnderecoDAO(_IEnderecoDAO.IEnderecoDAO):
         db.refresh(endereco)
         return endereco
 
-    def remover(
-        self, db: _orm.Session, endereco_id: int
-    ) -> _enderecoModel.Endereco:
+    def remover(self, db: _orm.Session, endereco_id: int) -> _enderecoModel.Endereco:
         endereco = (
             db.query(_enderecoModel.Endereco)
             .filter(_enderecoModel.Endereco.id_endereco == endereco_id)
@@ -35,9 +33,7 @@ class EnderecoDAO(_IEnderecoDAO.IEnderecoDAO):
         db.commit()
         return endereco
 
-    def buscar(
-        self, db: _orm.Session, endereco_id: int
-    ) -> _enderecoModel.Endereco:
+    def buscar(self, db: _orm.Session, endereco_id: int) -> _enderecoModel.Endereco:
         endereco = (
             db.query(_enderecoModel.Endereco)
             .filter(_enderecoModel.Endereco.id_endereco == endereco_id)

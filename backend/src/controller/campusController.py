@@ -27,7 +27,8 @@ class CampusController(_ICampusController.ICampusController):
         campus = _campusModel.Campus(**campus.dict())
         if campus is None:
             raise _fastapi.HTTPException(
-                status_code=404, detail="Campus não encontrado")
+                status_code=404, detail="Campus não encontrado"
+            )
         try:
             campus = self.campus_dao.atualizar(db, campus)
         except Exception as e:
@@ -48,7 +49,8 @@ class CampusController(_ICampusController.ICampusController):
 
     def buscarCampusPorNome(self, db: _orm.Session, campus_nome: str):
         campus_db: _campusModel.Campus = self.campus_dao.buscarCampusPorNome(
-            db=db, campus_nome=campus_nome)
+            db=db, campus_nome=campus_nome
+        )
         # if campus_db is None:
         #     raise _fastapi.HTTPException(
         #         status_code=HTTPStatus.NO_CONTENT.value, detail=HTTPStatus.NO_CONTENT.phrase)

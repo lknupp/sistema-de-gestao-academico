@@ -11,18 +11,26 @@ class PrerequisitoController(_prerequisitoController.IPrerequisitoController):
         super().__init__()
         self.prerequisito_dao = _prerequisitoDAO.PrerequisitoDAO()
 
-    def inserir(self, db: _orm.Session, prerequisito: _prerequisitoSchema.PrerequisitoCreate) -> _prerequisitoSchema.Prerequisito:
+    def inserir(
+        self, db: _orm.Session, prerequisito: _prerequisitoSchema.PrerequisitoCreate
+    ) -> _prerequisitoSchema.Prerequisito:
         res = _prerequisitoModel.Prerequisito(**prerequisito.model_dump())
         return self.prerequisito_dao.inserir(db, res)
 
-    def atualizar(self, db: _orm.Session, prerequisito: _prerequisitoSchema.Prerequisito) -> _prerequisitoSchema.Prerequisito:
+    def atualizar(
+        self, db: _orm.Session, prerequisito: _prerequisitoSchema.Prerequisito
+    ) -> _prerequisitoSchema.Prerequisito:
         res = _prerequisitoModel.Prerequisito(**prerequisito.model_dump())
         return self.prerequisito_dao.atualizar(db, res)
 
-    def remover(self, db: _orm.Session, id_prerequisito: int) -> _prerequisitoSchema.Prerequisito:
+    def remover(
+        self, db: _orm.Session, id_prerequisito: int
+    ) -> _prerequisitoSchema.Prerequisito:
         res = self.prerequisito_dao.remover(db, id_prerequisito)
         return res
 
-    def buscar(self, db: _orm.Session, id_prerequisito: int) -> _prerequisitoSchema.Prerequisito:
+    def buscar(
+        self, db: _orm.Session, id_prerequisito: int
+    ) -> _prerequisitoSchema.Prerequisito:
         res = self.prerequisito_dao.buscar(db, id_prerequisito)
         return res

@@ -25,8 +25,7 @@ class CursoController(_ICursoController.ICursoController):
     def atualizar(self, db: _orm.Session, curso: _cursoSchema.CursoCreate):
         curso = _cursoModel.Curso(**curso.dict())
         if curso is None:
-            raise _fastapi.HTTPException(
-                status_code=404, detail="Curso não encontrado")
+            raise _fastapi.HTTPException(status_code=404, detail="Curso não encontrado")
         try:
             curso = self.curso_dao.atualizar(db, curso)
         except Exception as e:
@@ -47,7 +46,8 @@ class CursoController(_ICursoController.ICursoController):
 
     def buscarCursoPorNome(self, db: _orm.Session, curso_nome: str):
         curso_db: _cursoModel.Curso = self.curso_dao.buscarCursoPorNome(
-            db=db, curso_nome=curso_nome)
+            db=db, curso_nome=curso_nome
+        )
         # if curso_db is None:
         #     raise _fastapi.HTTPException(
         #         status_code=HTTPStatus.NO_CONTENT.value, detail=HTTPStatus.NO_CONTENT.phrase)

@@ -7,13 +7,17 @@ from ..schemas import alunoSchema as _alunoSchema
 
 
 class AlunoDAO(_IPessoaDAO.IPessoaDAO):
-    def inserir(self, db: _orm.Session, pessoa: _alunoModel.Aluno) -> _alunoSchema.Aluno:
+    def inserir(
+        self, db: _orm.Session, pessoa: _alunoModel.Aluno
+    ) -> _alunoSchema.Aluno:
         db.add(pessoa)
         db.commit()
         db.refresh(pessoa)
         return pessoa
 
-    def atualizar(self, db: _orm.Session, pessoa: _alunoModel.Aluno) -> _alunoSchema.Aluno:
+    def atualizar(
+        self, db: _orm.Session, pessoa: _alunoModel.Aluno
+    ) -> _alunoSchema.Aluno:
         db.merge(pessoa)
         db.commit()
         db.refresh(pessoa)
@@ -42,7 +46,9 @@ class AlunoDAO(_IPessoaDAO.IPessoaDAO):
         return pessoas
 
     def buscarPorCPF(self, db: _orm.Session, cpf: str) -> _alunoModel.Aluno:
-        pessoa = db.query(_alunoModel.Aluno).filter(_alunoModel.Aluno.cpf == cpf).first()
+        pessoa = (
+            db.query(_alunoModel.Aluno).filter(_alunoModel.Aluno.cpf == cpf).first()
+        )
         return pessoa
 
     def buscarAlunoPorAno(self, db: _orm.Session, ano: int) -> List[_alunoModel.Aluno]:

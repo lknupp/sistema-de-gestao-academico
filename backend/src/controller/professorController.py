@@ -12,11 +12,15 @@ class ProfessorController(_pessoaController.IPessoaController):
         super().__init__()
         self.professor_dao = _professorDAO.ProfessorDAO()
 
-    def inserir(self, db: _orm.Session, pessoa: _professorSchema.ProfessorCreate) -> _professorSchema.Professor:
+    def inserir(
+        self, db: _orm.Session, pessoa: _professorSchema.ProfessorCreate
+    ) -> _professorSchema.Professor:
         res = _professorModel.Professor(**pessoa.model_dump())
         return self.professor_dao.inserir(db, res)
 
-    def atualizar(self, db: _orm.Session, pessoa: _professorSchema.Professor) -> _professorSchema.Professor:
+    def atualizar(
+        self, db: _orm.Session, pessoa: _professorSchema.Professor
+    ) -> _professorSchema.Professor:
         res = _professorModel.Professor(**pessoa.model_dump())
         return self.professor_dao.atualizar(db, res)
 

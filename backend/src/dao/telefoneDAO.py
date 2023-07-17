@@ -7,13 +7,17 @@ from ..schemas import telefoneSchema as _telefoneSchema
 
 
 class TelefoneDAO(_ITelefoneDAO.ITelefoneDAO):
-    def inserir(self, db: _orm.Session, telefone: _telefoneModel.Telefone) -> _telefoneSchema.Telefone:
+    def inserir(
+        self, db: _orm.Session, telefone: _telefoneModel.Telefone
+    ) -> _telefoneSchema.Telefone:
         db.add(telefone)
         db.commit()
         db.refresh(telefone)
         return telefone
 
-    def atualizar(self, db: _orm.Session, telefone: _telefoneModel.Telefone) -> _telefoneModel.Telefone:
+    def atualizar(
+        self, db: _orm.Session, telefone: _telefoneModel.Telefone
+    ) -> _telefoneModel.Telefone:
         db.merge(telefone)
         db.commit()
         db.refresh(telefone)
