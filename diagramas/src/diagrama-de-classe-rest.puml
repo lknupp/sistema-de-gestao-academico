@@ -1,0 +1,107 @@
+@startuml trabalho_engenharia_routes
+
+package "Service" {
+    interface IRoute {
+        + criar(objeto: Object): Object
+        + atualizar(objeto: Object): Object
+        + deletar(objeto_id: int): Object
+        + ler(objeto_id: int): Object
+        + ler_todos(): List<Object>
+    }
+
+    class AlunoRoute implements IRoute {
+        + criar(aluno: Aluno): Mensagem
+        + ler(aluno_id: int): Aluno
+        + ler_todos(): List<Aluno>
+        + atualizar(aluno: Aluno): Mensagem
+        + deletar(aluno_id: int): Mensagem
+    }
+
+    class ProfessorRoute implements IRoute {
+        + criar(professor: Professor): Mensagem
+        + atualizar(professor: Professor): Mensagem
+        + deletar(professor_id: int): Mensagem
+        + ler(professor_id: int): Professor
+        + ler_todos(): List<Professor>
+    }
+
+    class DisciplinaRoute implements IRoute {
+        + criar(disciplina: Disciplina): Mensagem
+        + atualizar(disciplina: Disciplina): Mensagem
+        + deletar(disciplina_id: int): Mensagem
+        + ler(disciplina_id: int): Disciplina
+        + ler_todos(): List<Disciplina>
+    }
+
+    class EnderecoRoute implements IRoute {
+        + criar(endereco: Endereco): Mensagem
+        + atualizar(endereco: Endereco): Mensagem
+        + deletar(endereco_id: int): Mensagem
+        + ler(endereco_id: int): Endereco
+        + ler_todos(): List<Endereco>
+    }
+
+    class TelefoneRoute implements IRoute {
+        + criar(telefone: Telefone): Mensagem
+        + atualizar(telefone: Telefone): Mensagem
+        + deletar(telefone_id: int): Mensagem
+        + ler(telefone_id: int): Telefone
+        + ler_todos(): List<Telefone>
+    }
+
+    class CursoRoute implements IRoute {
+        + criar(curso: Curso): Mensagem
+        + atualizar(curso: Curso): Mensagem
+        + deletar(curso_id: int): Mensagem
+        + ler(curso_id: int): Curso
+        + ler_todos(): List<Curso>
+    }
+
+    class OfertaRoute implements IRoute {
+        + criar(oferta: Oferta): Mensagem
+        + atualizar(oferta: Oferta): Mensagem
+        + deletar(oferta_id: int): Mensagem
+        + ler(oferta_id: int): Oferta
+        + ler_todos(): List<Oferta>
+    }
+
+    class HorarioRoute implements IRoute {
+        + criar(horario: Horario): Mensagem
+        + atualizar(horario: Horario): Mensagem
+        + deletar(horario_id: int): Mensagem
+        + ler(horario_id: int): Horario
+        + ler_todos(): List<Horario>
+    }
+
+    class PeriodoRoute implements IRoute {
+        + criar(periodo: Periodo): Mensagem
+        + atualizar(periodo: Periodo): Mensagem
+        + deletar(periodo_id: int): Mensagem
+        + ler(periodo_id: int): Periodo
+        + ler_todos(): List<Periodo>
+    }
+
+    class SalaRoute implements IRoute {
+        + criar(sala: Sala): Mensagem
+        + atualizar(sala: Sala): Mensagem
+        + deletar(sala_id: int): Mensagem
+        + ler(sala_id: int): Sala
+        + ler_todos(): List<Sala>
+    }
+
+    class ModeloEquipamentoRoute implements IRoute {
+        + criar(modelo_equipamento: ModeloEquipamento): Mensagem
+        + atualizar(modelo_equipamento: ModeloEquipamento): Mensagem
+        + deletar(modelo_equipamento_id: int): Mensagem
+        + ler(modelo_equipamento_id: int): ModeloEquipamento
+        + ler_todos(): List<ModeloEquipamento>
+    }
+
+    class EquipamentoRoute implements IRoute {
+        + criar(equipamento: Equipamento): Mensagem
+        + atualizar(equipamento: Equipamento): Mensagem
+        + deletar(equipamento_id: int): Mensagem
+        + ler(equipamento_id: int): Equipamento
+        + ler_todos(): List<Equipamento>
+    }
+}

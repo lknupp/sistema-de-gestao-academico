@@ -1,0 +1,27 @@
+@startuml Diagrama de Sequencia
+
+participant Frontend as Frontend
+participant "CursoRoute(route) : IRoutes" as Routes
+participant "CursoController(cursoController) : ICursoController" as CursoController
+participant "CursoDAO(cursoDAO) : ICursoDAO" as CursoDAO
+participant "curso: Curso" as Curso
+
+
+' Atualizar curso
+autonumber 1.1
+Frontend->Routes: res = put("api/curso/", req): Curso
+Routes -> CursoController: res = alterar(req.body): Curso
+CursoController->Curso: setNome(req.nome)
+CursoController->CursoDAO: res = alterar(curso): Curso
+CursoDAO->CursoController: res
+CursoController->Routes: res
+Routes->Frontend: res
+
+' Remover curso
+autonumber inc A
+Frontend->Routes: res = delete("api/curso/", req): Curso
+Routes -> CursoController: res = remover(req.body.id_curso): Curso
+CursoController->CursoDAO: res = remover(id_curso): Curso
+CursoDAO->CursoController: res
+CursoController->Routes: res
+Routes->Frontend: res

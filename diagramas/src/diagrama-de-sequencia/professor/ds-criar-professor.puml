@@ -1,0 +1,59 @@
+@startuml Diagrama de Sequencia
+
+participant Frontend as Frontend
+participant "ProfessorRoute(route) : IRoutes" as Routes
+participant "ProfessorController(professorController) : IProfessorController" as ProfessorController
+participant "fone: Telefone" as Telefone
+participant "TelefoneDAO(telefoneDAO) : ITelefoneDAO" as TelefoneDAO
+participant "endereco: Endereco" as Endereco
+participant "EnderecoDAO(enderecoDAO) : IEnderecoDAO" as EnderecoDAO
+participant "professor: Professor" as Professor
+participant "ProfessorDAO(professorDAO) : IProfessorDAO" as ProfessorDAO
+
+autonumber 1.1
+' Verificar se o professor já existe
+Frontend->Routes: res = post("api/professor", req): Professor
+Routes->ProfessorController: res = buscarPorCPF(req.body.cpf): Professor
+ProfessorController->ProfessorDAO: res = buscarPorCPF(cpf): Professor
+ProfessorDAO->ProfessorController: res
+ProfessorController->Routes: res
+Routes->Frontend: res
+
+' Armazenar telefone
+Routes->ProfessorController: res = salvar(req.body): Telefone
+ProfessorController->Telefone: setCodPais(req.codPais)
+ProfessorController->Telefone: setDdd(req.ddd)
+ProfessorController->Telefone: setNumero(req.numero)
+ProfessorController->TelefoneDAO: res = inserir(telefone): Telefone
+TelefoneDAO->ProfessorController: res
+ProfessorController->Routes: res
+Routes->Frontend: res
+
+' Armazenar endereço
+ProfessorController->Endereco: setLogradouro(req.logradouro)
+ProfessorController->Endereco: setNumero(req.numero)
+ProfessorController->Endereco: setLocal(req.local)
+ProfessorController->Endereco: setCep(req.cep)
+ProfessorController->Endereco: setTipo(req.tipo)
+ProfessorController->EnderecoDAO: res = inserir(endereco): Endereco
+EnderecoDAO->ProfessorController: res
+ProfessorController->Routes: res
+Routes->Frontend: res
+
+
+' Armazenar professor
+ProfessorController->Professor: setNome(req.nome)
+ProfessorController->Professor: setSobrenome(req.sobrenome)
+ProfessorController->Professor: setCpf(req.cpf)
+ProfessorController->Professor: setSexo(req.sexo)
+ProfessorController->Professor: setRaca(req.raca)
+ProfessorController->Professor: setDataContratacao(req.dataContratacao)
+ProfessorController->Professor: setDepartamento(req.departamento)
+ProfessorController->Professor: setSalario(req.salario)
+ProfessorController->Professor: setEndereco(reqendereco)
+ProfessorController->Professor: setTelefone(reqtelefone)
+ProfessorController->Professor: setCurso(req.curso)
+ProfessorController->ProfessorDAO: res = inserir(professor): Object
+ProfessorDAO->ProfessorController: res
+ProfessorController->Routes: res
+Routes->Frontend: res

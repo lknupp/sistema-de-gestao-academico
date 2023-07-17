@@ -1,0 +1,152 @@
+@startuml trabalho_engenharia_controller
+
+package "Controller" {
+    interface IPessoaController << interface >>{
+        + inserir(pessoa: Pessoa): Object
+        + atualizar(pessoa: Pessoa): Object
+        + remover(pessoa_id: int): Object
+        + buscar(pessoa_id: int): Pessoa
+        + buscarPorCPF(cpf: string): Pessoa
+    }
+
+    interface IEnderecoController << interface >>{
+        + inserir(endereco: Endereco): Mensagem
+        + atualizar(endereco: Endereco): Mensagem
+        + remover(endereco_id: int): Mensagem
+        + buscar(endereco_id: int): Endereco
+        + buscarTodos(): List<Endereco>
+        + buscarPorLogradouro(logradouro: string): Endereco
+    }
+
+    interface ICursoController << interface >>{
+        + inserir(curso: Curso): Object
+        + atualizar(curso: Curso): Object
+        + remover(curso_id: int): Object
+        + verificarCurso(nome: string): Curso
+        + buscar(curso_id: int): Curso
+    }
+
+    interface IDisciplinaController << interface >>{
+        + inserir(disciplina: Disciplina): Object
+        + atualizar(disciplina: Disciplina): Object
+        + remover(disciplina_id: int): Object
+        + buscar(disciplina_id: int): Disciplina
+        + verificarDisciplina(nome: string): Disciplina
+        + buscarDisciplinaPorPreRequisito(disciplina_id: int): Disciplina
+    }
+
+    interface IOfertaController << interface >> {
+        + inserir(oferta: Oferta): Object
+        + atualizar(oferta: Oferta): Object
+        + remover(oferta_id: int): Object
+        + buscar(oferta_id: int): Oferta
+        + buscarPorSemestre(semestre: int, ano: int): Oferta
+    }
+
+    interface IPeriodoController << interface >> {
+        + inserir(periodo: Periodo): Object
+        + atualizar(periodo: Periodo): Object
+        + remover(periodo_id: int): Object
+        + buscar(periodo_id: int): Periodo
+    }
+
+    interface ISalaController << interface >> {
+        + inserir(sala: Sala): Object
+        + atualizar(sala: Sala): Object
+        + remover(sala_id: int): Object
+        + buscar(sala_id: int): Sala
+    }
+
+    interface IEquipamentoController << interface >> {
+        + inserir(equipamento: Equipamento): Object
+        + atualizar(equipamento: Equipamento): Object
+        + remover(equipamento_id: int): Object
+        + buscar(equipamento_id: int): Equipamento
+    }
+
+    interface IModeloEquipamentoController << interface >> {
+        + inserir(modelo: ModeloEquipamento): Object
+        + atualizar(modelo: ModeloEquipamento): Object
+        + remover(modelo_id: int): Object
+        + buscar(modelo_id: int): ModeloEquipamento
+    }
+
+    class AlunoController implements IPessoaController {
+        + inserir(pessoa: Aluno): Object
+        + atualizar(pessoa: Aluno): Object
+        + remover(pessoa_id: int): Object
+        + buscar(pessoa_id: int): Aluno
+        + buscarTodos(): List<Aluno>
+        + buscarPorCPF(cpf: string): Aluno
+    }
+
+    class ProfessorController implements IPessoaController {
+        + inserir(pessoa: Professor): Object
+        + atualizar(pessoa: Professor): Object
+        + remover(pessoa_id: int): Object
+        + buscar(pessoa_id: int): Professor
+        + buscarPorCPF(cpf: string): Professor
+    }
+
+    class EnderecoController implements IEnderecoController{
+        + inserir(endereco: Endereco): Mensagem
+        + atualizar(endereco: Endereco): Mensagem
+        + remover(endereco_id: int): Mensagem
+        + buscar(endereco_id: int): Endereco
+        + buscarTodos(): List<Endereco>
+        + buscarPorLogradouro(logradouro: string): Endereco
+    }
+
+    class CursoController implements ICursoController {
+        + inserir(curso: Curso): Object
+        + atualizar(curso: Curso): Object
+        + remover(curso_id: int): Object
+        + verificarCurso(nome: string): Curso
+        + buscar(curso_id: int): Curso
+    }
+
+    class DisciplinaController implements IDisciplinaController {
+        + inserir(disciplina: Disciplina): Object
+        + atualizar(disciplina: Disciplina): Object
+        + remover(disciplina_id: int): Object
+        + buscar(disciplina_id: int): Disciplina
+        + verificarDisciplina(nome: string): Disciplina
+        + buscarPorPreRequisito(disciplina_id: int): Disciplina
+    }
+
+    class OfertaController implements IOfertaController {
+        + inserir(oferta: Oferta): Object
+        + atualizar(oferta: Oferta): Object
+        + remover(oferta_id: int): Object
+        + buscar(oferta_id: int): Oferta
+        + buscarPorSemestre(semestre: int, ano: int): Oferta
+    }
+
+    class PeriodoController implements IPeriodoController {
+        + inserir(periodo: Periodo): Object
+        + atualizar(periodo: Periodo): Object
+        + remover(periodo_id: int): Object
+        + buscar(periodo_id: int): Periodo
+    }
+
+    class SalaController implements ISalaController {
+        + inserir(sala: Sala): Object
+        + atualizar(sala: Sala): Object
+        + remover(sala_id: int): Object
+        + buscar(sala_id: int): Sala
+    }
+
+    class EquipamentoController implements IEquipamentoController {
+        + inserir(equipamento: Equipamento): Object
+        + atualizar(equipamento: Equipamento): Object
+        + remover(equipamento_id: int): Object
+        + buscar(equipamento_id: int): Equipamento
+    }
+
+    class ModeloEquipamentoController implements IModeloEquipamentoController {
+        + inserir(modelo: ModeloEquipamento): Object
+        + atualizar(modelo: ModeloEquipamento): Object
+        + remover(modelo_id: int): Object
+        + buscar(modelo_id: int): ModeloEquipamento
+    }
+}

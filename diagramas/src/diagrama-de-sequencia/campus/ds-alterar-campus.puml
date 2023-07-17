@@ -1,0 +1,38 @@
+@startuml Diagrama de Sequencia
+
+participant Frontend as Frontend
+participant "CampusRoute(route) : IRoutes" as Routes
+participant "CampusController(campusController) : ICampusController" as CampusController
+participant "CampusDAO(campusDAO) : ICampusDAO" as CampusDAO
+participant "campus: Campus" as Campus
+
+
+' Atualizar campus
+autonumber 1.1
+Frontend->Routes: res = put("api/campus/", req): Campus
+Routes -> CampusController: res = alterar(req.body): Campus
+CampusController->Campus: setNome(req.nome)
+CampusController->CampusDAO: res = alterar(campus): Campus
+CampusDAO->CampusController: res
+CampusController->Routes: res
+Routes->Frontend: res
+
+autonumber inc A
+CampusController->Endereco: setLogradouro(req.logradouro)
+CampusController->Endereco: setNumero(req.numero)
+CampusController->Endereco: setLocal(req.local)
+CampusController->Endereco: setCep(req.cep)
+CampusController->Endereco: setTipo(req.tipo)
+CampusController->EnderecoDAO: res = inserir(endereco): Endereco
+EnderecoDAO->CampusController: res
+CampusController->Routes: res
+Routes->Frontend: res
+
+' Remover campus
+autonumber inc A
+Frontend->Routes: res = delete("api/campus/", req): Campus
+Routes -> CampusController: res = remover(req.body.campus): Campus
+CampusController->CampusDAO: res = remover(id_campus): Campus
+CampusDAO->CampusController: res
+CampusController->Routes: res
+Routes->Frontend: res

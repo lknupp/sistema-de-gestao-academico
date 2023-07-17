@@ -1,0 +1,39 @@
+@startuml Diagrama de Sequencia
+
+participant Frontend as Frontend
+participant "CampusRoute(route) : IRoutes" as Routes
+participant "CampusController(campusController) : ICampusController" as CampusController
+participant "campus: Campus" as Campus
+participant "CampusDAO(campusDAO) : ICampusDAO" as CampusDAO
+participant "endereco: Endereco" as Endereco
+participant "EnderecoDAO(enderecoDAO) : IEnderecoDAO" as EnderecoDAO
+autonumber 1.1
+' Verificar se campus existe
+Frontend->Routes: res = get("api/campus/nome/{nome}", req): Campus
+Routes->CampusController: res = buscar(req.params.nome): Campus
+CampusController->CampusDAO: res = buscarPorNome(nome): Campus
+CampusDAO->CampusController: res
+CampusController->Routes: res
+Routes->Frontend: res
+
+' Armazenar endereço
+autonumber inc A
+CampusController->Endereco: setLogradouro(req.logradouro)
+CampusController->Endereco: setNumero(req.numero)
+CampusController->Endereco: setLocal(req.local)
+CampusController->Endereco: setCep(req.cep)
+CampusController->Endereco: setTipo(req.tipo)
+CampusController->EnderecoDAO: res = inserir(endereco): Endereco
+EnderecoDAO->CampusController: res
+CampusController->Routes: res
+Routes->Frontend: res
+
+autonumber inc A
+' Armazenar campus
+Frontend->Routes: res = post("api/campus/", req): Campus
+Routes->Controller: res = inserir(req.body): Campus
+Controller->Campus: setNome(nome)
+Controller->DAO: res = inserir(campus): Campus
+DAO->Controller: res
+Controller->Routes: res
+Routes->Frontend: res

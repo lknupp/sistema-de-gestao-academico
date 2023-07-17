@@ -1,0 +1,224 @@
+@startuml trabalho_engenharia_dao
+
+package "DAO" {
+    interface IPessoaDAO << interface >>{
+        + inserir(pessoa: Pessoa): Object
+        + atualizar(pessoa: Pessoa): Object
+        + remover(pessoa_id: int): Object
+        + buscar(pessoa_id: int): Pessoa
+    }
+
+    IPessoaDAO <|-- AlunoDAO
+    class AlunoDAO {
+        + inserir(aluno: Aluno): Object
+        + atualizarDados(aluno: Aluno): Object
+        + remover(aluno_id: int): Object
+        + buscar(aluno_id: int): Aluno
+        + buscarTodos(): List<Aluno>
+        + buscarPorCPF(cpf: String): Aluno
+        + buscarAlunoPorAno(ano: int): List<Aluno>
+    }
+
+    IPessoaDAO <|-- ProfessorDAO
+    class ProfessorDAO {
+        + inserir(professor: Professor): Object
+        + atualizarDados(professor: Professor): Object
+        + remover(professor_id: int): Object
+        + buscar(professor_id: int): Professor
+        + buscarTodos(): List<Professor>
+    }
+
+    IEnderecoDAO <|-- EnderecoDAO
+    interface IEnderecoDAO <<interface>>{
+        + inserir(endereco: Endereco): Object
+        + atualizar(endereco: Endereco): Object
+        + remover(endereco_id: int): Object
+        + buscarTodosEnderecos(): List<Endereco>
+        + buscarEnderecoPorCidade(cidade: String): List<Endereco>
+    }
+
+    class EnderecoDAO {
+        + inserir(endereco: Endereco): Object
+        + atualizar(endereco: Endereco): Object
+        + remover(endereco_id: int): Object
+        + buscarTodosEnderecos(): List<Endereco>
+        + buscarEnderecoPorCidade(cidade: String): List<Endereco>
+    }
+
+    ITelefoneDAO <|-- TelefoneDAO
+    interface ITelefoneDAO <<interface>> {
+        + inserir(telefone: Telefone): Object
+        + atualizar(telefone: Telefone): Object
+        + remover(telefone_id: int): Object
+        + buscarTelefonesPorDDD(ddd: int): List<Telefone>
+        + buscarTodos(): List<Telefone>
+    }
+
+    class TelefoneDAO {
+        + inserir(telefone: Telefone): Object
+        + atualizar(telefone: Telefone): Object
+        + remover(telefone_id: int): Object
+        + buscar(telefone_id: int): Telefone
+        + buscarTodos(): List<Telefone>
+        + buscarTelefonesPorDDD(ddd: int): List<Telefone>
+    }
+
+    IDisciplinaDAO <|-- DisciplinaDAO
+    interface IDisciplinaDAO <<interface>> {
+        + inserir(disciplina: Disciplina): Object
+        + atualizar(disciplina: Disciplina): Object
+        + remover(disciplina_id: int): Object
+        + buscar(disciplina_id: int): Disciplina
+        + buscarPorNome(nome: String): Disciplina
+        + buscarTodas(): List<Disciplina>
+    }
+
+    class DisciplinaDAO {
+        + inserir(disciplina: Disciplina): Object
+        + atualizar(disciplina: Disciplina): Object
+        + remover(disciplina_id: int): Object
+        + buscar(disciplina_id: int): Disciplina
+        + buscarPorNome(nome: String): Disciplina
+        + buscarTodas(): List<Disciplina>
+    }
+
+    IHorarioDAO <|-- HorarioDAO
+    interface IHorarioDAO <<interface>>{
+        + inserir(horario: Horario): Object
+        + atualizar(horario: Horario): Object
+        + remover(horario_id: int): Object
+        + buscar(horario_id: int): Horario
+        + buscarTodos(): List<Horario>
+    }
+
+    class HorarioDAO {
+        + inserir(horario: Horario): Object
+        + atualizar(horario: Horario): Object
+        + remover(horario_id: int): Object
+        + buscar(horario_id: int): Horario
+        + buscarTodos(): List<Horario>
+    }
+
+    ISalaDAO <|-- SalaDAO
+    interface ISalaDAO <<interface>> {
+        + inserir(sala: Sala): Object
+        + atualizar(sala: Sala): Object
+        + remover(sala_id: int): Object
+        + buscarSalaPorEquipamento(equipamento: Equipamento): List<Sala>
+        + buscarTodas(): List<Sala>
+    }
+
+    class SalaDAO {
+        + inserir(sala: Sala): Object
+        + atualizar(sala: Sala): Object
+        + remover(sala_id: int): Object
+        + buscarSalaPorEquipamento(equipamento: Equipamento): List<Sala>
+        + buscarTodas(): List<Sala>
+    }
+
+    IOfertaDAO <|-- OfertaDAO
+    interface IOfertaDAO <<interface>> {
+        + inserir(oferta: Oferta): Object
+        + atualizar(oferta: Oferta): Object
+        + remover(oferta_id: int): Object
+        + buscar(oferta_id: int): Oferta
+        + buscarOfertaPorData(semestre: int, ano: int): List<Oferta>
+        + buscarTodas(): List<Oferta>
+    }
+
+    class OfertaDAO {
+        + inserir(oferta: Oferta): Object
+        + atualizar(oferta: Oferta): Object
+        + remover(oferta_id: int): Object
+        + buscar(oferta_id: int): Oferta
+        + buscarOfertaPorData(semestre: int, ano: int): List<Oferta>
+        + buscarTodas(): List<Oferta>
+    }
+
+    IHistoricoDAO <|-- HistoricoDAO
+    interface IHistoricoOfertaDAO <<interface>>{
+        + inserir(HistoricoOferta: HistoricoOferta): Object
+        + atualizar(HistoricoOferta: HistoricoOferta): Object
+        + remover(historico_id: int): Object
+        + buscar(historico_id: int): HistoricoOferta
+    }
+
+    class HistoricoDAO {
+        + inserir(HistoricoOferta: HistoricoOferta): Object
+        + atualizar(HistoricoOferta: HistoricoOferta): Object
+        + remover(historico_id: int): Object
+        + buscar(historico_id: int): HistoricoOferta
+    }
+
+    IEquipamentoDAO <|-- EquipamentoDAO
+    interface IEquipamentoDAO <<interface>>{
+        + inserir(equipamento: Equipamento): Object
+        + atualizar(equipamento: Equipamento): Object
+        + remover(equipamento_id: int): Object
+        + buscar(equipamento_id: int): Equipamento
+        + buscarTodosEquipamentos(): List<Equipamento>
+        + buscarEquipamentoPorModelo(modelo: Modelo): List<Equipamento>
+    }
+
+    class EquipamentoDAO {
+        + inserir(equipamento: Equipamento): Object
+        + atualizar(equipamento: Equipamento): Object
+        + remover(equipamento_id: int): Object
+        + buscar(equipamento_id: int): Equipamento
+        + buscarTodosEquipamentos(): List<Equipamento>
+        + buscarEquipamentoPorModelo(modelo: Modelo): List<Equipamento>
+    }
+
+    ICursoDAO <|-- CursoDAO
+    interface ICursoDAO <<interface>>{
+        + inserir(curso: Curso): Object
+        + atualizar(curso: Curso): Object
+        + remover(curso_id: int): Object
+        + buscar(curso_id: int): Curso
+        + buscarCursoPorNome(nome: String): Curso
+        + buscarTodos(): List<Curso>
+    }
+
+    class CursoDAO {
+        + inserir(curso: Curso): Object
+        + atualizar(curso: Curso): Object
+        + remover(curso_id: int): Object
+        + buscar(curso_id: int): Curso
+        + buscarCursoPorNome(nome: String): Curso
+        + buscarTodos(): List<Curso>
+    }
+
+    IPeriodoDAO <|-- PeriodoDAO
+    interface IPeriodoDAO <<interface>>{
+        + inserir(periodo: Periodo): Object
+        + atualizar(periodo: Periodo): Object
+        + remover(periodo_id: int): Object
+        + buscar(periodo_id: int): Periodo
+    }
+
+    class PeriodoDAO {
+        + inserir(periodo: Periodo): Object
+        + atualizar(periodo: Periodo): Object
+        + remover(periodo_id: int): Object
+        + buscar(periodo_id: int): Periodo
+    }
+
+    IModeloDAO <|-- ModeloDAO
+    interface IModeloDAO {
+        + inserir(modelo: Modelo): Object
+        + atualizar(modelo: Modelo): Object
+        + remover(modelo_id: int): Object
+        + buscar(modelo_id: int): Modelo
+        + buscarTodos(): List<Modelo>
+    }
+
+    class ModeloDAO {
+        + inserir(modelo: Modelo): Object
+        + atualizar(modelo: Modelo): Object
+        + remover(modelo_id: int): Object
+        + buscar(modelo_id: int): Modelo
+        + buscarTodos(): List<Modelo>
+    }
+}
+
+@enduml
