@@ -14,5 +14,5 @@ class Disciplina(_database.Base):
     nome = _sql.Column(_sql.String)
     descricao = _sql.Column(_sql.String)
 
-    prerequisitos = _orm.relationship("Prerequisito", backref="disciplina")
+    prerequisitos = _orm.relationship("Prerequisito", backref="disciplina", cascade="all, delete")
     id_curso = _sql.Column(_sql.Integer, _sql.ForeignKey("curso.id_curso"))

@@ -1,5 +1,4 @@
 import sqlalchemy as _sql
-import sqlalchemy.orm as _orm
 from ..database import database as _database
 
 
@@ -9,5 +8,5 @@ class Prerequisito(_database.Base):
     disciplina_prerequisito = _sql.Column(_sql.Integer)
 
     id_disciplina = _sql.Column(
-        _sql.Integer, _sql.ForeignKey("disciplina.id_disciplina")
+        _sql.Integer, _sql.ForeignKey("disciplina.id_disciplina", ondelete="CASCADE")
     )
