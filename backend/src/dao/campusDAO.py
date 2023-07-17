@@ -1,4 +1,3 @@
-import sqlalchemy as _sql
 import sqlalchemy.orm as _orm
 from typing import List
 from ..models import campus as _campusModel, curso as _cursoModel

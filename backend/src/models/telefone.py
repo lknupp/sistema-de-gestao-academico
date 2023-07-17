@@ -10,5 +10,5 @@ class Telefone(_database.Base):
     ddd = _sql.Column(_sql.Integer)
     number = _sql.Column(_sql.Integer)
 
-    aluno = _orm.relationship("Aluno", backref="telefone")
-    professor = _orm.relationship("Professor", backref="telefone")
+    aluno = _orm.relationship("Aluno", backref="telefone", cascade="all, delete")
+    professor = _orm.relationship("Professor", backref="telefone", cascade="all, delete")
