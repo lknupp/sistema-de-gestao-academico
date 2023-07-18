@@ -79,3 +79,11 @@ class CursoRoute(_IRoute.IRoute):
     )
     def remover(curso_id: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
         return controller.remover(db, curso_id)
+
+    @router.get("/api/curso/campus-curso/{campus_nome}", response_model=List[_cursoSchema.Curso], tags=['curso'])
+    def ler(campus_nome: str, db: _orm.Session = _fastapi.Depends(_database.get_db)):
+        cursos = controller.buscarCursoPorCampus(db, campus_nome)
+        if not len(cursos):
+            raise _fastapi.HTTPException(
+                status_code=HTTPStatus.NO_CONTENT, detail="Este campus não ofertou nenhum curso.")
+        return cursos
