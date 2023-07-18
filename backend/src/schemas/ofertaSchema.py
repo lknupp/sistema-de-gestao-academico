@@ -6,7 +6,7 @@ class _OfertaBase(_pydantic.BaseModel):
     ano: int
     id_professor: int
     id_disciplina: int
-    periodo: int
+    periodo: str
 
     class Config:
         orm_mode = True
