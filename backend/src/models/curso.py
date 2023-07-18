@@ -1,7 +1,7 @@
 import sqlalchemy as _sql
 import sqlalchemy.orm as _orm
 from ..database import database as _database
-from .campus import rl_campus_curso
+from .rl_campus_curso import rl_campus_curso
 
 
 class Curso(_database.Base):
