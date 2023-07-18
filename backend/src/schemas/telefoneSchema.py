@@ -4,7 +4,7 @@ import pydantic as _pydantic
 class _TelefoneBase(_pydantic.BaseModel):
     cod_pais: int
     ddd: int
-    number: int
+    numero: int
 
     class Config:
         orm_mode = True
