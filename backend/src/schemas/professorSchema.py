@@ -4,7 +4,7 @@ from . import pessoaSchema as _pessoa_schemas
 
 
 class _ProfessorBase(_pessoa_schemas._PessoaBase):
-    dataContratacao: _dt.date
+    data_contratacao: _dt.date
     departamento: str
     salario: float
 
