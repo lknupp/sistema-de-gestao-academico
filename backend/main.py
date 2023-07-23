@@ -27,4 +27,4 @@ app.include_router(_telRoute.router)
 app.include_router(_campusRoute.router)
 app.include_router(_ofertaRoute.router)
 
-_database.create_function()
+# _database.create_function()
