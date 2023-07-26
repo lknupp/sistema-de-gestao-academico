@@ -17,7 +17,7 @@ DB_NAME = os.getenv("DB_NAME")
 postgres = f"{DATABASE}://{USER}:{PASSWORD}@{HOST}:{PORT}/{DB_NAME}"
 sqlite = "sqlite:///./src/database/college.db"
 
-json_file = open("database.json", "r")
+json_file = open("./src/database/database.json", "r")
 json_data = json.load(json_file)
 if json_data["database"] == "sqlite":
     SQLALCHEMY_DATABASE_URL = sqlite
