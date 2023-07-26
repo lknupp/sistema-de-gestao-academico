@@ -41,13 +41,23 @@ class AlunoRoute(_IRoute.IRoute):
         "/api/aluno/id/{id_aluno}", response_model=_alunoSchema.Aluno, tags=["aluno"]
     )
     def ler(id_aluno: int, db: _orm.Session = _fastapi.Depends(_database.get_db)):
-        return controller.buscar(db, id_aluno)
+        aluno = controller.buscar(db, id_aluno)
+        if aluno is None:
+            raise _fastapi.HTTPException(
+                status_code=404, detail="Aluno não encontrado"
+            )
+        return aluno
 
     @router.get(
         "/api/aluno/cpf/{cpf}", response_model=_alunoSchema.Aluno, tags=["aluno"]
     )
     def ler_por_cpf(cpf: str, db: _orm.Session = _fastapi.Depends(_database.get_db)):
-        return controller.buscarPorCPF(db, cpf)
+        aluno = controller.buscarPorCPF(db, cpf)
+        if aluno is None:
+            raise _fastapi.HTTPException(
+                status_code=404, detail="Aluno não encontrado"
+            )
+        return aluno
 
     @router.put("/api/aluno/", response_model=_alunoSchema.Aluno, tags=["aluno"])
     def atualizar(

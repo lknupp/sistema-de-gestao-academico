@@ -1,7 +1,7 @@
-import sqlalchemy as _sql
 import sqlalchemy.orm as _orm
 from typing import List
 from ..models import curso as _cursoModel
+from ..models import campus as _campusModel
 from .interface import ICursoDAO as _ICursoDAO
 
 
@@ -42,3 +42,9 @@ class CursoDAO(_ICursoDAO.ICursoDAO):
             .filter(_cursoModel.Curso.nome == curso_nome)
             .first()
         )
+
+    def buscarCursoPorCampus(self, db: _orm.Session, campus_nome: str):
+        db_campus = (db.query(_campusModel.Campus)
+                     .filter(_campusModel.Campus.nome == campus_nome)
+                     .first())
+        return db_campus.cursos

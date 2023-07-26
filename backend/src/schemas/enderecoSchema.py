@@ -4,7 +4,7 @@ import pydantic as _pydantic
 class _EnderecoBase(_pydantic.BaseModel):
     logradouro: str
     numero: str
-    local: str
+    bairro: str
     cep: str
     tipo: str
 

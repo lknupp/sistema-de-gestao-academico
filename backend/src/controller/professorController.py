@@ -15,13 +15,13 @@ class ProfessorController(_pessoaController.IPessoaController):
     def inserir(
         self, db: _orm.Session, pessoa: _professorSchema.ProfessorCreate
     ) -> _professorSchema.Professor:
-        res = _professorModel.Professor(**pessoa.model_dump())
+        res = _professorModel.Professor(**pessoa.dict())
         return self.professor_dao.inserir(db, res)
 
     def atualizar(
         self, db: _orm.Session, pessoa: _professorSchema.Professor
     ) -> _professorSchema.Professor:
-        res = _professorModel.Professor(**pessoa.model_dump())
+        res = _professorModel.Professor(**pessoa.dict())
         return self.professor_dao.atualizar(db, res)
 
     def remover(self, db: _orm.Session, id_pessoa: int) -> _professorSchema.Professor:

@@ -8,6 +8,7 @@ from src.routes import cursoRoute as _cursoRoute
 from src.routes import disciplinaRoute as _disciplinaRoute
 from src.routes import prerequisitoRoute as _prerequisitoRoute
 from src.routes import campusRoute as _campusRoute
+from src.routes import ofertaRoute as _ofertaRoute
 
 description = "Sistema de gerenciamento que visa auxiliar o gerenciamento de uma unidade de ensino"
 app = _fastapi.FastAPI(
@@ -24,5 +25,6 @@ app.include_router(_profRoute.router)
 app.include_router(_enderecoRoute.router)
 app.include_router(_telRoute.router)
 app.include_router(_campusRoute.router)
+app.include_router(_ofertaRoute.router)
 
-_database.create_function()
+# _database.create_function()
