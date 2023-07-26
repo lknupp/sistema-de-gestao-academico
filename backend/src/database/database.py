@@ -3,6 +3,7 @@ import sqlalchemy.ext.declarative as _declarative
 import sqlalchemy.orm as _orm
 from dotenv import load_dotenv
 import os
+import json
 
 load_dotenv()
 
@@ -13,7 +14,17 @@ HOST = os.getenv("DB_HOST")
 PORT = os.getenv("DB_PORT")
 DB_NAME = os.getenv("DB_NAME")
 
-SQLALCHEMY_DATABASE_URL = f"{DATABASE}://{USER}:{PASSWORD}@{HOST}:{PORT}/{DB_NAME}"
+postgres = f"{DATABASE}://{USER}:{PASSWORD}@{HOST}:{PORT}/{DB_NAME}"
+sqlite = "sqlite:///./src/database/college.db"
+
+json_file = open("database.json", "r")
+json_data = json.load(json_file)
+if json_data["database"] == "sqlite":
+    SQLALCHEMY_DATABASE_URL = sqlite
+else:
+    SQLALCHEMY_DATABASE_URL = postgres
+
+
 
 engine = _sql.create_engine(SQLALCHEMY_DATABASE_URL)
 
