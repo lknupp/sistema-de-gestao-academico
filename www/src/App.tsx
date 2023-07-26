@@ -40,6 +40,14 @@ function Sidebar() {
     {
       name: 'disciplina',
       icon: <LiaBookOpenSolid />
+    },
+    {
+      name: 'campus',
+      icon: <LiaBookOpenSolid />
+    },
+    {
+      name: 'oferta',
+      icon: <LiaGraduationCapSolid />
     }
   ];
 

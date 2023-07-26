@@ -8,6 +8,7 @@ import { Student, StudentCreate, Students } from './components/student.tsx'
 import { Professor, ProfessorCreate, Professors } from './components/professor.tsx'
 import { Course, CourseCreate, Courses } from './components/course.tsx'
 import { Discipline, DisciplineCreate, Disciplines } from './components/discipline.tsx'
+import { Campuss, Campus, CampusCreate } from './components/campus.tsx'
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,18 @@ const router = createBrowserRouter([
       {
         path: "disciplina/create",
         element: <DisciplineCreate />,
+      },
+      {
+        path: "campus",
+        element: <Campuss />,
+      },
+      {
+        path: "campus/:id",
+        element: <Campus />,
+      },
+      {
+        path: "campus/create",
+        element: <CampusCreate />,
       }
     ]
   }
