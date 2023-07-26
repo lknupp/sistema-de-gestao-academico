@@ -13,11 +13,11 @@ participant "ProfessorDAO(professorDAO) : IProfessorDAO" as ProfessorDAO
 autonumber 1.1
 ' Armazenar telefone
 Frontend->Routes: res = put("api/professor", req): Professor
-Routes->ProfessorController: res = alterar(req.body): Professor
+Routes->ProfessorController: res = atualizar(req.body): Professor
 ProfessorController->Telefone: setCodPais(req.codPais)
 ProfessorController->Telefone: setDdd(req.ddd)
 ProfessorController->Telefone: setNumero(req.numero)
-ProfessorController->TelefoneDAO: res = alterar(telefone): Telefone
+ProfessorController->TelefoneDAO: res = atualizar(telefone): Telefone
 TelefoneDAO->ProfessorController: res
 ProfessorController->Routes: res
 Routes->Frontend: res
@@ -30,7 +30,7 @@ ProfessorController->Endereco: setNumero(req.numero)
 ProfessorController->Endereco: setLocal(req.local)
 ProfessorController->Endereco: setCep(req.cep)
 ProfessorController->Endereco: setTipo(req.tipo)
-ProfessorController->EnderecoDAO: res = alterar(endereco): Endereco
+ProfessorController->EnderecoDAO: res = atualizar(endereco): Endereco
 EnderecoDAO->ProfessorController: res
 ProfessorController->Routes: res
 Routes->Frontend: res
@@ -47,7 +47,7 @@ ProfessorController->Professor: setDataNascimento(req.dataNascimento)
 ProfessorController->Professor: setEndereco(req.endereco)
 ProfessorController->Professor: setTelefone(req.telefone)
 ProfessorController->Professor: setCurso(req.curso)
-ProfessorController->ProfessorDAO: res = alterar(professor): Professor
+ProfessorController->ProfessorDAO: res = atualizar(professor): Professor
 ProfessorDAO->ProfessorController: res
 ProfessorController->Routes: res
 Routes->Frontend: res
