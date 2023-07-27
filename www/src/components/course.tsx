@@ -26,7 +26,7 @@ export function Courses() {
     <>
       <div className="flex items-center justify-between">
         <h1 className="text-3xl">cursos</h1>
-        <Link to="/curso/create" className="p-2 mt-2 text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">+ adicionar</Link>
+        <Link to="/curso/create" className="p-2 mt-2 transition ease-in-out rounded-sm text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">+ adicionar</Link>
       </div>
 
       <div className="flex flex-col">
@@ -72,7 +72,7 @@ export function Course() {
     <>
       <div className="flex items-center justify-between mb-5">
         <h1 className="text-3xl">curso</h1>
-        <Link to="/curso" className="p-2 mt-2 text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
+        <Link to="/curso" className="p-2 mt-2 transition ease-in-out rounded-sm text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
       </div>
 
       <div className="flex justify-around gap-10">
@@ -112,7 +112,7 @@ export function CourseCreate() {
     <>
       <div className="flex items-center justify-between mb-5">
         <h1 className="text-3xl">adicionar curso</h1>
-        <Link to="/curso" className="p-2 mt-2 text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
+        <Link to="/curso" className="p-2 mt-2 transition ease-in-out rounded-sm text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
       </div>
 
       <form className="grid grid-cols-2 gap-4 mt-5" onSubmit={handleSubmit}>

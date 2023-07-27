@@ -30,7 +30,7 @@ export function Disciplines() {
     <>
       <div className="flex items-center justify-between">
         <h1 className="text-3xl">disciplinas</h1>
-        <Link to="/disciplina/create" className="p-2 mt-2 text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">+ adicionar</Link>
+        <Link to="/disciplina/create" className="p-2 mt-2 transition ease-in-out rounded-sm text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">+ adicionar</Link>
       </div>
 
       <div className="flex flex-col">
@@ -81,7 +81,7 @@ export function Discipline() {
     <>
       <div className="flex items-center justify-between mb-5">
         <h1 className="text-3xl">disciplina</h1>
-        <Link to="/disciplina" className="p-2 mt-2 text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
+        <Link to="/disciplina" className="p-2 mt-2 transition ease-in-out rounded-sm text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
       </div>
 
       <div className="flex justify-around gap-10">
@@ -123,7 +123,7 @@ export function DisciplineCreate() {
     <>
       <div className="flex items-center justify-between mb-5">
         <h1 className="text-3xl">adicionar disciplina</h1>
-        <Link to="/disciplina" className="p-2 mt-2 text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
+        <Link to="/disciplina" className="p-2 mt-2 transition ease-in-out rounded-sm text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
       </div>
 
       <form className="grid grid-cols-2 gap-4 mt-5" onSubmit={handleSubmit}>
