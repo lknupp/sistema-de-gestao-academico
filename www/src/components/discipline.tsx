@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Input } from "../App";
 import { useState } from "react";
+import { LiaFileAltSolid, LiaTrashAltSolid } from "react-icons/lia";
 
 export function Disciplines() {
   const disciplines = [
@@ -41,7 +42,8 @@ export function Disciplines() {
                   <tr>
                     <th scope="col" className="px-6 py-4">nome</th>
                     <th scope="col" className="px-6 py-4">curso</th>
-                    <th scope="col" className="px-6 py-4">#</th>
+                    <th scope="col" className="px-6 py-4"></th>
+                    <th scope="col" className="px-6 py-4"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -50,7 +52,10 @@ export function Disciplines() {
                       <td className="px-6 py-4 whitespace-nowrap">{discipline.nome}</td>
                       <td className="px-6 py-4 whitespace-nowrap">{discipline.id_curso}</td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <Link to={`/disciplina/${discipline.id}`} className="underline">detalhes</Link>
+                        <Link to={`/disciplina/${discipline.id}`} className="flex items-center underline"><LiaFileAltSolid />detalhes</Link>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <a className="flex items-center text-red-700 underline"><LiaTrashAltSolid />excluir</a>
                       </td>
                     </tr>
                   ))}

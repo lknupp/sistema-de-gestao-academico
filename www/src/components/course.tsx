@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Input } from "../App";
 import { useState } from "react";
+import { LiaFileAltSolid, LiaTrashAltSolid } from "react-icons/lia";
 
 export function Courses() {
   const courses = [
@@ -36,15 +37,18 @@ export function Courses() {
                 <thead className="font-medium border-b dark:border-stone-200">
                   <tr>
                     <th scope="col" className="px-6 py-4">nome</th>
-                    <th scope="col" className="px-6 py-4">#</th>
+                    <th scope="col" className="px-6 py-4"></th>
+                    <th scope="col" className="px-6 py-4"></th>
                   </tr>
                 </thead>
                 <tbody>
                   {courses.map((course) => (
                     <tr key={course.id} className="border-b dark:border-stone-200">
-                      <td className="px-6 py-4 whitespace-nowrap">{course.nome}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">{course.nome}</td><td className="px-6 py-4 whitespace-nowrap">
+                        <Link to={`/curso/${course.id}`} className="flex items-center underline"><LiaFileAltSolid />detalhes</Link>
+                      </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <Link to={`/curso/${course.id}`} className="underline">detalhes</Link>
+                        <a className="flex items-center text-red-700 underline"><LiaTrashAltSolid />excluir</a>
                       </td>
                     </tr>
                   ))}

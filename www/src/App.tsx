@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { LiaBookOpenSolid, LiaChalkboardTeacherSolid, LiaGraduationCapSolid, LiaUserGraduateSolid } from 'react-icons/lia';
+import { LiaBookOpenSolid, LiaBookSolid, LiaBuilding, LiaChalkboardTeacherSolid, LiaGraduationCapSolid, LiaUserGraduateSolid } from 'react-icons/lia';
 import { IconContext } from 'react-icons';
 import { Outlet, Link } from 'react-router-dom';
 
@@ -43,11 +43,11 @@ function Sidebar() {
     },
     {
       name: 'campus',
-      icon: <LiaBookOpenSolid />
+      icon: <LiaBuilding />
     },
     {
       name: 'oferta',
-      icon: <LiaGraduationCapSolid />
+      icon: <LiaBookSolid />
     }
   ];
 
