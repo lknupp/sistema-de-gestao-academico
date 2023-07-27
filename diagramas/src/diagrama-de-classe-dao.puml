@@ -188,6 +188,25 @@ package "DAO" {
         + buscarTodos(): List<Curso>
     }
 
+    ICampusDAO <|-- CampusDAO
+    interface ICampusDAO <<interface>>{
+        + inserir(curso: Campus): Object
+        + atualizar(curso: Campus): Object
+        + remover(curso_id: int): Object
+        + buscar(curso_id: int): Campus
+        + buscarCampusPorNome(nome: String): Campus
+        + buscarTodos(): List<Campus>
+    }
+
+    class CampusDAO {
+        + inserir(curso: Campus): Object
+        + atualizar(curso: Campus): Object
+        + remover(curso_id: int): Object
+        + buscar(curso_id: int): Campus
+        + buscarCampusPorNome(nome: String): Campus
+        + buscarTodos(): List<Campus>
+    }
+
     IPeriodoDAO <|-- PeriodoDAO
     interface IPeriodoDAO <<interface>>{
         + inserir(periodo: Periodo): Object

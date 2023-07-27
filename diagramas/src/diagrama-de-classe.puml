@@ -120,14 +120,22 @@ package "persistence" {
         + setNumber(number: int): boolean
     }
 
-    class Curso{
+    class Curso {
         - nome: String
-        - campus: String
 
         + getNomeCurso(): String
         + setNomeCurso(nome: String): boolean
-        + getCampus(): String
-        + setCampus(campus: String): boolean
+    }
+
+    Campus "1..*" -- "1..*" Curso
+    class Campus {
+        - nome: String
+        - endereco: Endereco
+
+        + getNomeCurso(): String
+        + setNomeCurso(nome: String): boolean
+        + getEndereco(): Endereco
+        + setEndereco(endereco: Endereco): boolean
     }
 
     ' A relação é de muitos para muitos para as duas classes. 
