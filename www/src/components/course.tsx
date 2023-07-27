@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Input } from "../App";
+import { Input, Search } from "../App";
 import { useState } from "react";
 import { LiaFileAltSolid, LiaTrashAltSolid } from "react-icons/lia";
 
@@ -28,6 +28,8 @@ export function Courses() {
         <h1 className="text-3xl">cursos</h1>
         <Link to="/curso/create" className="p-2 mt-2 transition ease-in-out rounded-sm text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">+ adicionar</Link>
       </div>
+
+      <Search />
 
       <div className="flex flex-col">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">

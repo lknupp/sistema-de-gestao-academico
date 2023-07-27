@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { LiaBookOpenSolid, LiaBookSolid, LiaBuilding, LiaChalkboardTeacherSolid, LiaGraduationCapSolid, LiaUserGraduateSolid } from 'react-icons/lia';
 import { IconContext } from 'react-icons';
 import { Outlet, Link } from 'react-router-dom';
+import {SearchField, Label, Input as AriaInput, Button} from 'react-aria-components';
 
 export function App() {
   return (
@@ -11,6 +12,15 @@ export function App() {
         <Outlet />
       </main>
     </div>
+  )
+}
+
+export function Search() {
+  return (
+    <SearchField>
+      <AriaInput />
+      <Button>✕</Button>
+    </SearchField>
   )
 }
 
