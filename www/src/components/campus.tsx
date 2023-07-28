@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { Input } from "../App";
+import { Input, Search } from "../App";
 import { useState } from "react";
+import { LiaFileAltSolid, LiaTrashAltSolid } from "react-icons/lia";
 
 export function Campuss() {
   const campuss = [
@@ -25,8 +26,10 @@ export function Campuss() {
     <>
       <div className="flex items-center justify-between">
         <h1 className="text-3xl">campus</h1>
-        <Link to="/campus/create" className="p-2 mt-2 text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">+ adicionar</Link>
+        <Link to="/campus/create" className="p-2 mt-2 transition ease-in-out rounded-sm text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">+ adicionar</Link>
       </div>
+
+      <Search />
 
       <div className="flex flex-col">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -36,7 +39,8 @@ export function Campuss() {
                 <thead className="font-medium border-b dark:border-stone-200">
                   <tr>
                     <th scope="col" className="px-6 py-4">nome</th>
-                    <th scope="col" className="px-6 py-4">#</th>
+                    <th scope="col" className="px-6 py-4"></th>
+                    <th scope="col" className="px-6 py-4"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -44,7 +48,10 @@ export function Campuss() {
                     <tr key={campus.id} className="border-b dark:border-stone-200">
                       <td className="px-6 py-4 whitespace-nowrap">{campus.nome}</td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <Link to={`/campus/${campus.id}`} className="underline">detalhes</Link>
+                        <Link to={`/campus/${campus.id}`} className="flex items-center underline"><LiaFileAltSolid />detalhes</Link>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <a className="flex items-center text-red-700 underline"><LiaTrashAltSolid />excluir</a>
                       </td>
                     </tr>
                   ))}
@@ -68,7 +75,7 @@ export function Campus() {
     <>
       <div className="flex items-center justify-between mb-5">
         <h1 className="text-3xl">campus</h1>
-        <Link to="/campus" className="p-2 mt-2 text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
+        <Link to="/campus" className="p-2 mt-2 transition ease-in-out rounded-sm text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
       </div>
 
       <div className="flex justify-around gap-10">
@@ -108,7 +115,7 @@ export function CampusCreate() {
     <>
       <div className="flex items-center justify-between mb-5">
         <h1 className="text-3xl">adicionar campus</h1>
-        <Link to="/campus" className="p-2 mt-2 text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
+        <Link to="/campus" className="p-2 mt-2 transition ease-in-out rounded-sm text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
       </div>
 
       <form className="grid grid-cols-2 gap-4 mt-5" onSubmit={handleSubmit}>

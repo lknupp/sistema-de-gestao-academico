@@ -1,16 +1,26 @@
 import { useEffect, useState } from 'react';
-import { LiaBookOpenSolid, LiaChalkboardTeacherSolid, LiaGraduationCapSolid, LiaUserGraduateSolid } from 'react-icons/lia';
+import { LiaBookOpenSolid, LiaBookSolid, LiaBuilding, LiaChalkboardTeacherSolid, LiaGraduationCapSolid, LiaUserGraduateSolid } from 'react-icons/lia';
 import { IconContext } from 'react-icons';
 import { Outlet, Link } from 'react-router-dom';
+import {SearchField, Label, Input as AriaInput, Button} from 'react-aria-components';
 
 export function App() {
   return (
     <div className="flex h-screen">
       <Sidebar />
-      <main className="w-1/2 m-5">
+      <main className="m-5 full">
         <Outlet />
       </main>
     </div>
+  )
+}
+
+export function Search() {
+  return (
+    <SearchField>
+      <AriaInput />
+      <Button>✕</Button>
+    </SearchField>
   )
 }
 
@@ -43,11 +53,11 @@ function Sidebar() {
     },
     {
       name: 'campus',
-      icon: <LiaBookOpenSolid />
+      icon: <LiaBuilding />
     },
     {
       name: 'oferta',
-      icon: <LiaGraduationCapSolid />
+      icon: <LiaBookSolid />
     }
   ];
 
@@ -64,7 +74,7 @@ function Sidebar() {
 function SidebarItem({ name, icon }: { name: string, icon: JSX.Element }) {
   return (
     <li key={name}>
-      <Link className="relative flex items-center w-full gap-2 py-1 pl-2 transition ease-in-out cursor-pointer hover:bg-zinc-300 hover:text-stone-800" to={`/${name}`}>
+      <Link className="relative flex items-center w-full gap-2 py-1 pl-2 transition ease-in-out rounded-sm cursor-pointer hover:bg-zinc-300 hover:text-stone-800" to={`/${name}`}>
         <IconContext.Provider value={{ size: '1.5em' }}>
           {icon}
         </IconContext.Provider>

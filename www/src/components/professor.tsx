@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { Input } from "../App";
+import { Input, Search } from "../App";
 import { useState } from "react";
+import { LiaFileAltSolid, LiaTrashAltSolid } from "react-icons/lia";
 
 export function Professors() {
   const professors = [
@@ -45,8 +46,10 @@ export function Professors() {
     <>
       <div className="flex items-center justify-between">
         <h1 className="text-3xl">professores</h1>
-        <Link to="/professor/create" className="p-2 mt-2 text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">+ adicionar</Link>
+        <Link to="/professor/create" className="p-2 mt-2 transition ease-in-out rounded-sm text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">+ adicionar</Link>
       </div>
+
+      <Search />
 
       <div className="flex flex-col">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -58,7 +61,8 @@ export function Professors() {
                     <th scope="col" className="px-6 py-4">nome</th>
                     <th scope="col" className="px-6 py-4">departamento</th>
                     <th scope="col" className="px-6 py-4">data de contratação</th>
-                    <th scope="col" className="px-6 py-4">#</th>
+                    <th scope="col" className="px-6 py-4"></th>
+                    <th scope="col" className="px-6 py-4"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -68,7 +72,10 @@ export function Professors() {
                       <td className="px-6 py-4 whitespace-nowrap">{professor.departamento}</td>
                       <td className="px-6 py-4 whitespace-nowrap">{professor.dataContratacao}</td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <Link to={`/professor/${professor.id}`} className="underline">detalhes</Link>
+                        <Link to={`/professor/${professor.id}`} className="flex items-center underline"><LiaFileAltSolid />detalhes</Link>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <a className="flex items-center text-red-700 underline"><LiaTrashAltSolid />excluir</a>
                       </td>
                     </tr>
                   ))}
@@ -103,7 +110,7 @@ export function Professor() {
     <>
       <div className="flex items-center justify-between mb-5">
         <h1 className="text-3xl">professor</h1>
-        <Link to="/professor" className="p-2 mt-2 text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
+        <Link to="/professor" className="p-2 mt-2 transition ease-in-out rounded-sm text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
       </div>
 
       <div className="flex justify-around gap-10">
@@ -153,7 +160,7 @@ export function ProfessorCreate() {
     <>
       <div className="flex items-center justify-between mb-5">
         <h1 className="text-3xl">adicionar professor</h1>
-        <Link to="/professor" className="p-2 mt-2 text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
+        <Link to="/professor" className="p-2 mt-2 transition ease-in-out rounded-sm text-stone-200 w-fit bg-zinc-900 hover:bg-zinc-700">voltar</Link>
       </div>
 
       <form className="grid grid-cols-2 gap-4 mt-5" onSubmit={handleSubmit}>
