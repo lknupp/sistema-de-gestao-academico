@@ -57,6 +57,14 @@ package "Service" {
         + ler_todos(): List<Curso>
     }
 
+    class CampusRoute implements IRoute {
+        + criar(campus: Campus): Mensagem
+        + atualizar(campus: Campus): Mensagem
+        + deletar(campus_id: int): Mensagem
+        + ler(campus_id: int): Campus
+        + ler_todos(): List<Campus>
+    }
+
     class OfertaRoute implements IRoute {
         + criar(oferta: Oferta): Mensagem
         + atualizar(oferta: Oferta): Mensagem

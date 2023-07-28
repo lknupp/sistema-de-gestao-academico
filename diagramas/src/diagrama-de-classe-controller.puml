@@ -26,6 +26,14 @@ package "Controller" {
         + buscar(curso_id: int): Curso
     }
 
+    interface ICampusController << interface >>{
+        + inserir(campus: Campus): Object
+        + atualizar(campus: Campus): Object
+        + remover(campus_id: int): Object
+        + verificarCampus(nome: string): Campus
+        + buscar(campus_id: int): Campus
+    }
+
     interface IDisciplinaController << interface >>{
         + inserir(disciplina: Disciplina): Object
         + atualizar(disciplina: Disciplina): Object
@@ -103,6 +111,14 @@ package "Controller" {
         + remover(curso_id: int): Object
         + verificarCurso(nome: string): Curso
         + buscar(curso_id: int): Curso
+    }
+
+    class CampusController implements ICampusController{
+        + inserir(campus: Campus): Object
+        + atualizar(campus: Campus): Object
+        + remover(campus_id: int): Object
+        + verificarCampus(nome: string): Campus
+        + buscar(campus_id: int): Campus
     }
 
     class DisciplinaController implements IDisciplinaController {
